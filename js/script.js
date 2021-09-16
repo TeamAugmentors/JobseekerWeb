@@ -47,10 +47,12 @@ else if (document.URL.includes("explore.html")) {
     if (!isToggleBudget) {
       budgetIconTriangle.style.transform = 'rotate(90deg)';
       budgetContainer.style.maxHeight = '0';
+      budgetContainer.style.opacity = '0';
       isToggleBudget = true;
     } else {
       budgetIconTriangle.style.transform = 'rotate(0deg)';
       budgetContainer.style.maxHeight = budgetContainer.scrollHeight + "px";
+      budgetContainer.style.opacity = '1';
       isToggleBudget = false;
     }
   })
@@ -59,10 +61,12 @@ else if (document.URL.includes("explore.html")) {
     if (!isToggleCatagory) {
       catagoryIconTriangle.style.transform = 'rotate(90deg)';
       catagoryItems.style.maxHeight = '0';
+      catagoryItems.style.opacity = '0';
       isToggleCatagory = true;
     } else {
       catagoryIconTriangle.style.transform = 'rotate(0deg)';
       catagoryItems.style.maxHeight = catagoryItems.scrollHeight + "px";
+      catagoryItems.style.opacity = '1';
       isToggleCatagory = false;
     }
   })
