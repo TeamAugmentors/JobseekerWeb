@@ -34,3 +34,36 @@ else if (document.URL.includes("signup.html")) {
     history.back();
   });
 }
+else if (document.URL.includes("explore.html")) {
+  const catagoryIconTriangle = document.querySelector(".catagory-div .icon-triangle");
+  const catagoryItems = document.querySelector(".explore-container .left .choose-catagory");
+  const budgetIconTriangle = document.querySelector(".budget-div .icon-triangle");
+  const budgetContainer = document.querySelector(".budget-div .content");
+  // console.log(budgetContainer);
+  isToggleCatagory = false;
+  isToggleBudget = false;
+
+  budgetIconTriangle.addEventListener('click', () => {
+    if (!isToggleBudget) {
+      budgetIconTriangle.style.transform = 'rotate(90deg)';
+      budgetContainer.style.maxHeight = '0';
+      isToggleBudget = true;
+    } else {
+      budgetIconTriangle.style.transform = 'rotate(0deg)';
+      budgetContainer.style.maxHeight = budgetContainer.scrollHeight + "px";
+      isToggleBudget = false;
+    }
+  })
+
+  catagoryIconTriangle.addEventListener("click", () => {
+    if (!isToggleCatagory) {
+      catagoryIconTriangle.style.transform = 'rotate(90deg)';
+      catagoryItems.style.maxHeight = '0';
+      isToggleCatagory = true;
+    } else {
+      catagoryIconTriangle.style.transform = 'rotate(0deg)';
+      catagoryItems.style.maxHeight = catagoryItems.scrollHeight + "px";
+      isToggleCatagory = false;
+    }
+  })
+}

@@ -1234,6 +1234,11 @@ input[type='checkbox']:checked:after {
     height: 25px;
     border-radius: 50%;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.explore-container .left .budget-div .content{
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
 }
 .explore-container .left .budget-div .input-amount{
     display: flex;
@@ -1294,6 +1299,7 @@ input[type='checkbox']:checked:after {
     width: 25px;
     height: 25px;
     cursor: pointer;
+    transition:  transform 0.2s ease-in-out;
 }
 .explore-container .left .heading{
     display: flex;
@@ -1302,6 +1308,8 @@ input[type='checkbox']:checked:after {
 .explore-container .left .choose-catagory{
     max-width: 85%;
     margin: 0 auto;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
 }
 .explore-container .left .choose-catagory .radio-item label{
     font-size: 2.7rem;
@@ -1312,10 +1320,11 @@ input[type='checkbox']:checked:after {
 .explore-container .left .choose-catagory label {
     display: flex;
     align-items: center;
+    position: relative;
 }
 .explore-container .left .choose-catagory input[type="radio"] {
     display: none;
-  }
+}
   
 .explore-container .left .choose-catagory input[type="radio"]+label:before {
     content: "";
@@ -1339,7 +1348,9 @@ input[type='checkbox']:checked:after {
     transform: translateX(25%);
     background-color: var(--dark_green);
 }
-
+.explore-container .left .accordion-items{
+    background-color: limegreen;
+}
 /*MOBILE*/
 
 @media (max-width: 450px) {
