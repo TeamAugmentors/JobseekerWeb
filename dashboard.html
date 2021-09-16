@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
+    <!-- Boxicon CSS  -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
 
     <link rel="stylesheet" href="css/styles.css">
     <title>Dashboard</title>
@@ -19,13 +22,104 @@
 
 <body>
     <header class="dashboard">
-        
+        <nav class="navbar navbar-expand-lg navbar-dark common-nav__bg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <div class="d-flex">
+                        <img src="images/tie2.png" height="auto" width="auto">
+                        <div class=" d-flex flex-column justify-content-center">
+                            <h1 class="header-logo job">
+                                JOB
+                            </h1>
+                            <h1 class="header-logo seeker">
+                                seeker
+                            </h1>
+                        </div>
+                    </div>
+                </a>
+
+                <form class="flex align-items-center custom-search">
+                    <i class='bx bx-search custom-search-icon'></i>
+                    <input class="form-control custom-search-field shadow-none" type="search" placeholder="Search for work..." aria-label="Search">
+                    <button class="btn custom-search-btn shadow-none" type="submit">Search</button>
+                </form>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse navbar-margin-top" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Explore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Inbox</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link switch-to-hirer" href="#">Switch to Hirer</a>
+                        </li>
+    
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
     <main>
-        <div class="container">
+        <div class="custom--container flex">
+            <div class="dashboard__profile">
+                <div class="profile__pic flex">
+                    <img src="./images/JS.png" alt="profile picture">
+                </div>
+                <div class="profile__name">
+                   <h1>Lorem, ipsum dolor.</h1> 
+                </div>
+                <div class="profile__mail">
+                    <h2>Lorem, ipsum.</h2>
+                </div> 
+                <div class="profile__job-info flex">
+                    <div class="job-info earned">
+                        <h2>Earned</h2>
+                        <h3>lorem</h3>
+                        <h4>TAKA</h4>
+                    </div>
+                    <div class="info-divider"></div>
+                    <div class="job-info completed">
+                        <h2>Completed</h2>
+                        <h3>lorem</h3>
+                        <h4>JOBS</h4>
+                    </div>
+                    <div class="info-divider"></div>
+                    <div class="job-info rated">
+                        <h2>Rated</h2>
+                        <h3>lorem</h3>
+                        <h4>STARS</h4>
+                    </div>
+                </div>
+                <div class="profile__details">
+                    <h2>Details</h2>
+                    <div class="profile__account-details">
+                        <h3>Account Details</h3>
 
+                    </div>
+                    <div class="profile__billing">
+                        <h3>Billing Information</h3>
+
+                    </div>
+                </div>
+                <div class="profile__statistics">
+                    <h2>Statistics</h2>
+                </div>
+            </div>
+            <div class="profile-divider"></div>
+            <div class="dashboard__status">
+                <ul class="status-bar flex">
+                    <li><a href="#" class="status-bar__items">Overview</a></li>
+                    <li><a href="#" class="status-bar__items">History</a></li>
+                </ul>
+            </div>
         </div>
-
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"

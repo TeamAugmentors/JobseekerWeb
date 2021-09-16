@@ -13,6 +13,12 @@
 
     --youtube_red: #c60000;
 
+    --darker_green: rgb(5, 73, 38);
+
+    --light_green: rgb(15, 197, 103);
+
+    --light-green-tint: rgb(247, 255, 250);
+
 /* ---------------Font sizes for sign in and sign up page------------------ */
     --fs-signup-reminder: clamp(0.6rem, 20vw - 5rem, 2rem);
     --fs-job: clamp(2rem, 8vw + 1rem, 6.3rem);
@@ -112,7 +118,7 @@ a.nav-link {
     padding-bottom: 12px;
 }
 
-a.nav-link.custom-link {
+a .nav-link .custom-link {
     padding-left: 0 !important;
     padding-right: 0 !important;
     margin: 0;
@@ -388,8 +394,8 @@ h2.hero-subtext {
     height: 100vh;
 }
 
-.team--container {
-    margin: 12em calc(8% - .5em);
+.custom--container {
+    margin: 5em calc(8% - .5em);
 }
 
 .team--hero-text {
@@ -416,17 +422,6 @@ h2.hero-subtext {
     animation: fadein 1000ms forwards;
     animation-delay: 1400ms;
 }
-
-/* .team--hero-text span::after {
-    content: "";
-    background-color: var(--dark_green);
-    height: 3px;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: -30%;
-} */
-
 
 .m-center {
     margin: 0 auto;
@@ -534,15 +529,171 @@ h2.hero-subtext {
             dashboard 
 ============================================================= */
 
-.dashboard .custom-nav{
-    background-image: linear-gradient(to right, rgba(40,131,65), rgba(34,141,68) 20%, rgba(19,155,73), rgba(28,115,96) );
-    margin: 0;
-    width: 100vw;
-    padding: 2.8em 12em;
+.flex{
+    display: flex;
 }
 
+main .custom--container{
+    margin-top: 0;
+    height: 87.4vh;
+    margin-bottom: 0;
+    padding-top: 5em;
+}
+.custom-search{
+    background: #ffff;
+    border-radius: .8em;
+    margin-left: 15em;
+    width: 50%;
+    margin-right: auto;
+}
 
+.custom-search:focus-within{
+    box-shadow:  0 0 5px 5px rgba(150, 255, 159, 0.3) !important;
+}
 
+.custom-search .custom-search-icon{
+    margin-left: 1em;
+    flex-grow: 1;
+    font-size: 20px;
+}
+
+.custom-search .custom-search-field{
+    margin-right: 1em;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+}
+
+.dashboard .custom-search-btn{
+    margin-right: 0;
+    color: white;
+    background: var(--darker_green);
+    border-radius: 0 .25em .25em 0;
+    font-size: 16px;
+}
+
+.dashboard .nav-item{
+    font-size: 2rem;
+}
+
+.dashboard .switch-to-hirer{
+    background: var(--darker_green);
+    padding: .5em 1em;
+    border-radius: 2em;
+}
+
+.dashboard .switch-to-hirer:hover{
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--dark_green) !important;
+    box-shadow: 1px 13px 5px -6px rgba(0, 0, 0, 0.23);
+    transform: translateY(-5px);
+}
+
+main{
+    background-color: var(--light-green-tint);
+}
+
+.dashboard__profile{
+    height: 70vh;
+    width: 25%;
+    margin-right: 3em;
+}
+
+.dashboard__profile .profile__pic{
+    background-color: darkgreen;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.dashboard__profile .profile__pic img{
+    width: 100%;
+}
+
+.dashboard__profile .profile__name, .dashboard__profile .profile__mail{
+    text-align: center;
+}
+
+.dashboard__profile .profile__job-info{
+    background-color: white;
+    /* width: fit-content; */
+    height: 80px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px 3px rgb(128, 128, 128, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.job-info h2, .job-info h3, .job-info h4{
+    margin: 0;
+    text-align: center;
+}
+
+.job-info h2{
+    color: grey;
+    font-size: 1.5rem;
+}
+
+.job-info h3{
+    color: var(--dark_green);
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.job-info h4{
+    font-size: 1rem;
+}
+
+.profile__job-info .job-info{
+    padding: 1em;
+    margin: 0 auto;
+}
+
+.profile__job-info .info-divider{
+    height: 80%;
+    width: 2px;
+    background: rgb(128, 128, 128,0.2);
+}
+
+.dashboard__profile .profile__details{
+    margin: 5em auto;
+    
+}
+
+.dashboard__profile .profile__name, .profile__mail{
+    text-align: center;
+}
+
+.profile-divider{
+    height: 100%;
+    width: 2px;
+    background: green;
+}
+.dashboard__status{
+    height: 75vh;
+    width: 60%;
+    padding-left: 2em;
+    /* background: yellow; */
+}
+
+.dashboard__status .status-bar li{
+    list-style: none;
+}
+
+.dashboard__status .status-bar{
+    padding-bottom: 3em;
+    border-bottom: 1px solid rgb(128, 128, 128, 0.3);
+}
+
+.dashboard__status .status-bar__items{
+    text-decoration: none;
+    font-size: 2rem;
+    color: var(--dark_green);
+    margin-left: 3em;
+}
 /*-----------------*/
 
 /* =============================================================
@@ -1194,5 +1345,11 @@ input[type='checkbox']:checked:after {
     .signin-page .right .form-custom-button,
     .signup-page .right .form-custom-button{
         margin-bottom: 4rem;
+    }
+}
+
+@media (min-width: 992px){
+    .dashboard .switch-to-hirer{
+        padding: .5em 1em !important;
     }
 }
