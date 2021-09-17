@@ -1606,14 +1606,14 @@ input[type='checkbox']:checked:after {
 
 .explore-container .wrapper .left {
     grid-column: 1 / 4;
-    background-color: rgb(191, 223, 206);
+    /* background-color: rgb(191, 223, 206); */
     height: 100%;
     padding: 1rem 0.7rem;
 }
 
 .explore-container .wrapper .right {
     grid-column: 4 / -1;
-    background-color: rgb(179, 179, 179);
+    /* background-color: rgb(179, 179, 179); */
     height: 100%;
 }
 
@@ -1719,6 +1719,11 @@ input[type='checkbox']:checked:after {
     height: 25px;
     border-radius: 50%;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.explore-container .left .budget-div .content{
+    overflow: hidden;
+    transition: all 0.25s ease-out;
 }
 
 .explore-container .left .budget-div .input-amount {
@@ -1790,6 +1795,7 @@ input[type='checkbox']:checked:after {
     width: 25px;
     height: 25px;
     cursor: pointer;
+    transition:  transform 0.2s ease-in-out;
 }
 
 .explore-container .left .heading {
@@ -1800,6 +1806,8 @@ input[type='checkbox']:checked:after {
 .explore-container .left .choose-catagory {
     max-width: 85%;
     margin: 0 auto;
+    overflow: hidden;
+    transition: all 0.25s ease-out;
 }
 
 .explore-container .left .choose-catagory .radio-item label {
@@ -1811,12 +1819,17 @@ input[type='checkbox']:checked:after {
 .explore-container .left .choose-catagory label {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .explore-container .left .choose-catagory input[type="radio"] {
     display: none;
 }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 89a30ec95253207421c15f13a30daf05bdea33a2
 .explore-container .left .choose-catagory input[type="radio"]+label:before {
     content: "";
     display: inline-block;
@@ -1839,7 +1852,106 @@ input[type='checkbox']:checked:after {
     transform: translateX(25%);
     background-color: var(--dark_green);
 }
-
+.explore-container .left .accordion-items{
+    background-color: limegreen;
+}
+.explore-container .right .custom-container{
+    background-color: rgba(72, 189, 224, 0.26);
+    width: 94%;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 1rem 0;
+}
+.explore-container .right .header h1{
+    color: var(--dark_green);
+    font-size: 7.5rem;
+    font-family: Roboto, 'sans-serif';
+    font-weight: bold;
+    margin-left: 15px;
+}
+.explore-container .right .header .line{
+    height: 1px;
+    background-color: var(--dark_green);
+    width: 100%;
+}
+.explore-container .right .job-card-container{
+    padding: 2rem 0;
+    background-color: red;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+.explore-container .right h1,h2,p{
+    margin: 0;
+    padding: 0;
+}
+.explore-container .right .job-card{
+    background-color: white;
+    max-width: 320px;
+    border-radius: 15px;
+}
+.explore-container .right .job-card .job-card-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.explore-container .right .job-card .catagory{
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.7);
+    font-family: Roboto, 'sans-serif';
+    margin-top: 10px;
+}
+.explore-container .right .job-card .job-name{
+    font-size: 3.7rem;
+    color: var(--dark_green);
+    font-family: Roboto, 'sans-serif';
+    margin-top: 4px;
+}
+.explore-container .right .job-card .amount-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.explore-container .right .job-card .amount-div .tk-icon{
+    width: 45px;
+    height: 45px;
+ }
+.explore-container .right .job-card .amount-div img{
+   max-width: 100%;
+}
+.explore-container .right .job-card .amount-div .amount{
+    color: var(--dark_green);
+    font-size: 4.5rem;
+    text-shadow: 2px 2px rgba(0, 111, 54, 0.2);
+ }
+ .explore-container .right .job-card .line{
+     height: 2px;
+     width: 90%;
+     margin: 0 auto;
+     margin-top: 1.5rem;
+     background-color: var(--dark_green);
+ }
+ .explore-container .right .details{
+     /* background-color: rgb(96, 144, 90); */
+     width: 90%;
+     margin: 1.5rem 0;
+ }
+ .explore-container .right .details > div{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     font-size: 2rem;
+     font-family: Roboto, 'sans-serif';
+     color: var(--dark_green);
+ }
+ .explore-container .right .details .left{
+     padding: 0.4rem 0;
+ }
+ .explore-container .right .details .right{
+     text-align: end;
+     padding: 0;
+ }
+ 
 /*MOBILE*/
 
 @media (max-width: 450px) {
