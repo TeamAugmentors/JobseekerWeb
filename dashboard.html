@@ -40,15 +40,16 @@
 
                 <form class="flex align-items-center custom-search">
                     <i class='bx bx-search custom-search-icon'></i>
-                    <input class="form-control custom-search-field shadow-none" type="search" placeholder="Search for work..." aria-label="Search">
+                    <input class="form-control custom-search-field shadow-none" type="search"
+                        placeholder="Search for work..." aria-label="Search">
                     <button class="btn custom-search-btn shadow-none" type="submit">Search</button>
                 </form>
-                
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse navbar-margin-top" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -60,7 +61,7 @@
                         <li class="nav-item">
                             <a class="nav-link switch-to-hirer" href="#">Switch to Hirer</a>
                         </li>
-    
+
                     </ul>
                 </div>
             </div>
@@ -73,11 +74,11 @@
                     <img src="./images/JS.png" alt="profile picture">
                 </div>
                 <div class="profile__name">
-                   <h1>Lorem, ipsum dolor.</h1> 
+                    <h1>Lorem, ipsum dolor.</h1>
                 </div>
                 <div class="profile__mail">
                     <h2>Lorem, ipsum.</h2>
-                </div> 
+                </div>
                 <div class="profile__job-info flex">
                     <div class="job-info earned">
                         <h2>Earned</h2>
@@ -97,26 +98,136 @@
                         <h4>STARS</h4>
                     </div>
                 </div>
+
                 <div class="profile__details">
-                    <h2>Details</h2>
-                    <div class="profile__account-details">
-                        <h3>Account Details</h3>
+                    <div>
+                        <input type="checkbox" name="details-accordion" id="acc-details" class="accordion__input">
 
-                    </div>
-                    <div class="profile__billing">
-                        <h3>Billing Information</h3>
+                        <div class="details flex">
+                            <i class='bx bxs-right-arrow'></i>
+                            <label for="acc-details" class="accordion__label">Details</label>
+                        </div>
 
+                        <div class="accordion-content">
+                            <div class="profile__details-item profile__account-details">
+                                <h3>Account Details</h3>
+                                <h4>name</h4>
+                                <h4>mail</h4>
+                                <h4>phone</h4>
+                            </div>
+                            <div class="profile__details-item profile__billing">
+                                <h3>Billing Information</h3>
+                                <h4>bkash no</h4>
+                            </div>
+                        </div>
                     </div>
+
+                    <div>
+                        <input type="checkbox" name="details-accordion" id="acc-statistics" class="accordion__input">
+
+                        <div class="details flex">
+                            <i class='bx bxs-right-arrow'></i>
+                            <label for="acc-statistics" class="accordion__label">Statistics</label>
+                        </div>
+
+                        <div class="accordion-content">
+                            <div class="profile__details-item profile__account-details">
+                                <h4>Inbox response rate</h4>
+                                <h4>Inbox response time</h4>
+                                <h4>Order completion rate</h4>
+                                <h4>Timely Delivery</h4>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="profile__statistics">
-                    <h2>Statistics</h2>
-                </div>
+
             </div>
+
             <div class="profile-divider"></div>
+
             <div class="dashboard__status">
                 <ul class="status-bar flex">
-                    <li><a href="#" class="status-bar__items">Overview</a></li>
-                    <li><a href="#" class="status-bar__items">History</a></li>
+                    <li id="dashboard__overview">
+                        <a href="#dashboard__overview" id="user-overview" class="status-bar__items">Overview</a>
+                        <div class="overview-content">
+                            <div>
+                                <div class="overview-content__bg">
+                                    <input type="checkbox" name="status-accordion" id="active-orders"
+                                        class="accordion__input">
+                                    <div class="overview-label flex">
+                                        <label for="active-orders" class="accordion__label flex">Active Orders</label>
+                                        <i class='bx bxs-right-arrow'></i>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <!-- nested accordion -->
+                                        <div>
+                                            <div class="overview-nested-content__bg">
+                                                <input type="checkbox" name="status-nested-accordion" id="order1"
+                                                    class="accordion__input">
+                                                <div class="overview-label flex">
+                                                    <label for="order1" class="accordion__label flex">Logo Design</label>
+                                                    <i class='bx bxs-right-arrow'></i>
+                                                </div>
+                                                <div class="accordion-content">
+                                                    wat an egg!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="overview-nested-content__bg">
+                                                <input type="checkbox" name="status-nested-accordion" id="order2"
+                                                    class="accordion__input">
+                                                <div class="overview-label flex">
+                                                    <label for="order2" class="accordion__label flex">Banner Design</label>
+                                                    <i class='bx bxs-right-arrow'></i>
+                                                </div>
+                                                <div class="accordion-content">
+                                                    wat an egg!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="overview-content__bg">
+                                    <input type="checkbox" name="status-accordion" id="current-skills"
+                                        class="accordion__input">
+                                    <div class="overview-label flex">
+                                        <label for="current-skills" class="accordion__label flex">Current Skills</label>
+                                        <i class='bx bxs-right-arrow'></i>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <!-- nested accordion -->
+                                        <div>
+                                            <div class="overview-nested-content__bg">
+                                                <input type="checkbox" name="status-nested-accordion" id="skill1"
+                                                    class="accordion__input">
+                                                <div class="overview-label flex">
+                                                    <label for="skill1" class="accordion__label flex">E.</label>
+                                                    <i class='bx bxs-right-arrow'></i>
+                                                </div>
+                                                <div class="accordion-content">
+                                                    E.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li id="dashboard__history">
+                        <a href="#dashboard__history" id="transaction-history" class="status-bar__items">History</a>
+                        <div class="history-content">
+                            hello
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
