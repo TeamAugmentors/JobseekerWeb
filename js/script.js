@@ -39,12 +39,16 @@ else if (document.URL.includes("explore.html")) {
   const catagoryItems = document.querySelector(".explore-container .left .choose-catagory");
   const budgetIconTriangle = document.querySelector(".budget-div .icon-triangle");
   const budgetContainer = document.querySelector(".budget-div .content");
-  // console.log(budgetContainer);
+  const minTk = document.querySelector("#min-tk");
+  const maxTk = document.querySelector("#max-tk");
+  const thumbLeft = document.querySelector(".amount-slider .slider .thumb.left-indicator");
+  const thumbRight = document.querySelector(".amount-slider .slider .thumb.right-indicator");
+  const range = document.querySelector(".amount-slider .slider .range");
+  console.log(thumbLeft);
+  console.log(thumbRight);
+  console.log(range);
 
   const jobCardContainer = document.querySelector(".explore-container .right .job-card-container");
-  // const jobCard = document.querySelector(".explore-container .right .job-card");
-  // const jobCard = document.createElement('div');
-  // jobCard.classList.add(".job-card")
   const jobCard = `<div class="job-card">
   <div class="job-card-header">
       <h1 class="catagory">Graphics & design</h1>
@@ -78,11 +82,37 @@ else if (document.URL.includes("explore.html")) {
       </div>
       <button class="card-button">See More</button>
   </div>
-</div>`
-  console.log(jobCard);
+</div>`;
+  // console.log(jobCard);
   for (let i = 1; i <= 6; i++) {
     jobCardContainer.innerHTML += jobCard;
   }
+
+  function setLeftThumb() {
+    let min = parseInt(minTk.min);
+    let max = parseInt(minTk.max);
+    minTk.value = Math.min(parseInt(minTk.value), parseInt(maxTk.value));
+    let percent = ((minTk.value - min) / (max - min)) * 100;
+    // console.log(percent);
+    thumbLeft.style.left = percent + "%";
+    range.style.left = percent + "%";
+  }
+  function setRightThumb() {
+    let min = parseInt(maxTk.min);
+    let max = parseInt(maxTk.max);
+    maxTk.value = Math.max(parseInt(maxTk.value), parseInt(minTk.value));
+    let percent = ((maxTk.value - min) / (max - min)) * 100;
+    thumbRight.style.right = (100 - percent) + "%";
+    range.style.right = (100 - percent) + "%";
+  }
+  minTk.addEventListener("input", () => {
+    setLeftThumb();
+  });
+  maxTk.addEventListener("input", () => {
+    setRightThumb();
+  });
+  setLeftThumb();
+  setRightThumb();
 
   isToggleCatagory = false;
   isToggleBudget = false;
