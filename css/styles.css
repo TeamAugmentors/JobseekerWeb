@@ -1943,7 +1943,6 @@ input[type='checkbox']:checked:after {
     margin: 1rem 0;
 }
 .explore-container .right .job-card-container{
-    /* background-color: red; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     justify-items: center;
