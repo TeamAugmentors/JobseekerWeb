@@ -40,12 +40,56 @@ else if (document.URL.includes("explore.html")) {
   const budgetIconTriangle = document.querySelector(".budget-div .icon-triangle");
   const budgetContainer = document.querySelector(".budget-div .content");
   // console.log(budgetContainer);
+
+  const jobCardContainer = document.querySelector(".explore-container .right .job-card-container");
+  // const jobCard = document.querySelector(".explore-container .right .job-card");
+  // const jobCard = document.createElement('div');
+  // jobCard.classList.add(".job-card")
+  const jobCard = `<div class="job-card">
+  <div class="job-card-header">
+      <h1 class="catagory">Graphics & design</h1>
+      <h1 class="job-name">Illustration</h1>
+      <div class="amount-div">
+          <div class="tk-icon">
+              <img src="images/taka3.svg" alt="">
+          </div>
+          <h1 class="amount">3000</h1>
+      </div>
+      <div class="line"></div>
+      <div class="details">
+          <div class="duration">
+              <div class="details-left">Duration</div>
+              <div class="details-right">2 Days</div>
+          </div>
+          <div class="revisions">
+              <div class="details-left">revisions</div>
+              <div class="details-right">4</div>
+          </div>
+          <div class="negotiable">
+              <div class="details-left">Negotiable</div>
+              <div class="details-right">No</div>
+          </div>
+      </div>
+      <div class="description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident ipsum
+              perferendis autem, aliquid eos voluptatibus id suscipit, odio temporibus sed et
+              nam
+              repellendus eaque numquam cum reprehenderit nemo repudiandae rerum!</p>
+      </div>
+      <button class="card-button">See More</button>
+  </div>
+</div>`
+  console.log(jobCard);
+  for (let i = 1; i <= 6; i++) {
+    jobCardContainer.innerHTML += jobCard;
+  }
+
   isToggleCatagory = false;
   isToggleBudget = false;
 
   budgetIconTriangle.addEventListener('click', () => {
     if (!isToggleBudget) {
-      budgetIconTriangle.style.transform = 'rotate(90deg)';
+      budgetIconTriangle.style.transform = 'rotate(-90deg)';
       budgetContainer.style.maxHeight = '0';
       budgetContainer.style.opacity = '0';
       isToggleBudget = true;
@@ -59,7 +103,7 @@ else if (document.URL.includes("explore.html")) {
 
   catagoryIconTriangle.addEventListener("click", () => {
     if (!isToggleCatagory) {
-      catagoryIconTriangle.style.transform = 'rotate(90deg)';
+      catagoryIconTriangle.style.transform = 'rotate(-90deg)';
       catagoryItems.style.maxHeight = '0';
       catagoryItems.style.opacity = '0';
       isToggleCatagory = true;
@@ -70,4 +114,5 @@ else if (document.URL.includes("explore.html")) {
       isToggleCatagory = false;
     }
   })
+
 }
