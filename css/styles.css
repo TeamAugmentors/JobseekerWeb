@@ -1719,6 +1719,8 @@ input[type='checkbox']:checked:after {
 .explore-container .left .budget-div .content{
     /* overflow: hidden; */
     transition: all 0.25s ease-out;
+    /* background-color: red; */
+    padding-bottom: 3rem;
 }
 
 .explore-container .left .budget-div .input-amount {
@@ -1742,97 +1744,91 @@ input[type='checkbox']:checked:after {
     font-size: 2rem;
 }
 
-.explore-container .left .budget-div .amount-slider {
+/* .explore-container .left .budget-div .amount-slider {
     margin-top: 2rem;
     background-color: rgba(0, 0, 0, 0.1);
     display: flex;
-    align-items: center;
     border-radius: 5px;
-}
+} */
+/* .explore-container .left .budget-div .amount-slider .tk-min{
+    text-align: start;
+    margin: 0;
+} */
 /* --------------------------------Slider------------------------------- */
 /* .explore-container .left .budget-div .budget-slider {
     background-color: var(--dark_green);
     padding: 1.7rem 0;
     flex-grow: 1;
 } */
-.explore-container .left .budget-div .budget-slider{
-    position: relative;
+.slider-container{
+    display: flex;
+    margin-top: 2rem;
+    /* background-color: rgba(0, 0, 0, 0.1); */
+    border-radius: 5px;
+}
+.slider-container .tk-min,
+.slider-container .tk-max{
+    font-size: 2rem;
+    padding: 0 1.3rem;
+    max-height: 30px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.slider-container .tk-min{
+    border-radius: 5px 0 0 5px;
+}
+.slider-container .tk-max{
+    border-radius: 0 5px 5px 0;
+}
+.amount-slider{
     flex-grow: 1;
 }
-.explore-container .left .budget-div .budget-slider .slider{
+  .amount-slider .track{
+    width: 100%;
+    height: 30px;
     position: relative;
-    z-index: 1;
-    height: 25px;
-}
-.explore-container .left .budget-div .budget-slider .slider .track{
-    content: "";
+    /* background: red; */
+  }
+  .amount-slider .track-bg{
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 30px;
+    width: 100%;
+  }
+  .amount-slider .track-selected{
     position: absolute;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
+    top:0;
+    left: 0%;
+    right: 25%;
+    height: 30px;
     background-color: var(--dark_green);
-}
-.explore-container .left .budget-div .budget-slider .slider .range{
-    content: "";
+  }
+  .amount-slider .thumbs{
+    position: relative;
+    /* background-color: rgba(16, 29, 218, 0.712); */
+    background-color: white;
+    height: 20px;
+  }
+  .amount-slider .left-thumb{
     position: absolute;
-    z-index: 2;
-    top: 0;
-    bottom: 0;
-    background-color: var(--darker_green);
-}
-.explore-container .left .budget-div .budget-slider .slider .thumb{
-    content: "";
-    position: absolute;
-    z-index: 3;
-}
-.explore-container .left .budget-div .budget-slider .slider .thumb.left-indicator{
-    left: 25%;
     width: 0;
     height: 0;
-    top: 100%;
+    top: 0;
+    left: 0;
     border-top: 10px solid transparent;
-    border-right: 10px solid var(--dark_green);;
+    border-right: 10px solid var(--dark_green);
     border-bottom: 10px solid transparent;
     transform: translateX(-10px);
-}
-.explore-container .left .budget-div .budget-slider .slider .thumb.right-indicator{
-    right: 25%;
+  }
+  .amount-slider .right-thumb{
+    position: absolute;
     width: 0;
     height: 0;
-    top: 100%;
+    top: 0;
+    right: 25%;
     border-top: 10px solid transparent;
     border-left: 10px solid var(--dark_green);
     border-bottom: 10px solid transparent;
-    transform: translateX(10px);
-}
-.explore-container .left .budget-div .budget-slider input[type=range]{
-    position: absolute;
-    z-index: 2;
-    height: 10px;
-    width: 100%;
-    pointer-events: none;
-    -webkit-appearance: none;
-    opacity: 0;
-}
-.explore-container .left .budget-div .budget-slider input[type=range]::-webkit-slider-thumb{
-    pointer-events: all;
-    width: 25px;
-    height: 35px;
-    border: 0 none;
-    /* border-radius: 50%; */
-    /* background-color: red; */
-    /* -webkit-appearance: none; */
-}
-#min-tk{
-    bottom: -60%;
-    transform: translateX(-5px);
-}
-#max-tk{
-    bottom: -60%;
-    transform: translateX(5px);
-}
+    /* transform: translateX(10px); */
+  }
 /* ------------------------------Slider------------------------------ */
 .explore-container .left .budget-div .amount-slider .tk-min,
 .explore-container .left .budget-div .amount-slider .tk-max {
