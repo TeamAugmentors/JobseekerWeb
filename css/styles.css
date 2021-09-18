@@ -48,6 +48,10 @@
     font-family: Fresh-Eaters;
 }
 
+.grid{
+    display: grid;
+}
+
 /*-----------*/
 
 /*NAV BAR*/
@@ -1825,11 +1829,7 @@ input[type='checkbox']:checked:after {
 .explore-container .left .choose-catagory input[type="radio"] {
     display: none;
 }
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 89a30ec95253207421c15f13a30daf05bdea33a2
 .explore-container .left .choose-catagory input[type="radio"]+label:before {
     content: "";
     display: inline-block;
