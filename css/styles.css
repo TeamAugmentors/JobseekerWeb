@@ -1602,22 +1602,17 @@ input[type='checkbox']:checked:after {
 .explore-container .wrapper {
     margin: 0 auto;
     width: 99%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(150px, 1fr));
-    grid-template-rows: 1fr;
+    display: flex;
 }
 
 .explore-container .wrapper .left {
-    grid-column: 1 / 4;
-    /* background-color: rgb(191, 223, 206); */
-    height: 100%;
+    max-width: 50rem;
+    min-height: 100%;
     padding: 1rem 0.7rem;
 }
 
 .explore-container .wrapper .right {
-    grid-column: 4 / -1;
-    /* background-color: rgb(179, 179, 179); */
+    flex-grow: 1;
     height: 100%;
 }
 
@@ -1726,7 +1721,7 @@ input[type='checkbox']:checked:after {
     transition: all 0.2s ease-in-out;
 }
 .explore-container .left .budget-div .content{
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: all 0.25s ease-out;
 }
 
@@ -1758,13 +1753,91 @@ input[type='checkbox']:checked:after {
     align-items: center;
     border-radius: 5px;
 }
-
-.explore-container .left .budget-div .slider {
+/* --------------------------------Slider------------------------------- */
+/* .explore-container .left .budget-div .budget-slider {
     background-color: var(--dark_green);
     padding: 1.7rem 0;
     flex-grow: 1;
+} */
+.explore-container .left .budget-div .budget-slider{
+    position: relative;
+    flex-grow: 1;
 }
-
+.explore-container .left .budget-div .budget-slider .slider{
+    position: relative;
+    z-index: 1;
+    height: 25px;
+}
+.explore-container .left .budget-div .budget-slider .slider .track{
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: var(--dark_green);
+}
+.explore-container .left .budget-div .budget-slider .slider .range{
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    background-color: var(--darker_green);
+}
+.explore-container .left .budget-div .budget-slider .slider .thumb{
+    content: "";
+    position: absolute;
+    z-index: 3;
+}
+.explore-container .left .budget-div .budget-slider .slider .thumb.left-indicator{
+    left: 25%;
+    width: 0;
+    height: 0;
+    top: 100%;
+    border-top: 10px solid transparent;
+    border-right: 10px solid var(--dark_green);;
+    border-bottom: 10px solid transparent;
+    transform: translateX(-10px);
+}
+.explore-container .left .budget-div .budget-slider .slider .thumb.right-indicator{
+    right: 25%;
+    width: 0;
+    height: 0;
+    top: 100%;
+    border-top: 10px solid transparent;
+    border-left: 10px solid var(--dark_green);
+    border-bottom: 10px solid transparent;
+    transform: translateX(10px);
+}
+.explore-container .left .budget-div .budget-slider input[type=range]{
+    position: absolute;
+    z-index: 2;
+    height: 10px;
+    width: 100%;
+    pointer-events: none;
+    -webkit-appearance: none;
+    opacity: 0;
+}
+.explore-container .left .budget-div .budget-slider input[type=range]::-webkit-slider-thumb{
+    pointer-events: all;
+    width: 25px;
+    height: 35px;
+    border: 0 none;
+    /* border-radius: 50%; */
+    /* background-color: red; */
+    /* -webkit-appearance: none; */
+}
+#min-tk{
+    bottom: -60%;
+    transform: translateX(-5px);
+}
+#max-tk{
+    bottom: -60%;
+    transform: translateX(5px);
+}
+/* ------------------------------Slider------------------------------ */
 .explore-container .left .budget-div .amount-slider .tk-min,
 .explore-container .left .budget-div .amount-slider .tk-max {
     font-size: 1.8rem;
@@ -1812,6 +1885,7 @@ input[type='checkbox']:checked:after {
     margin: 0 auto;
     overflow: hidden;
     transition: all 0.25s ease-out;
+    padding-bottom: 2.5rem;
 }
 
 .explore-container .left .choose-catagory .radio-item label {
@@ -1852,11 +1926,8 @@ input[type='checkbox']:checked:after {
     transform: translateX(25%);
     background-color: var(--dark_green);
 }
-.explore-container .left .accordion-items{
-    background-color: limegreen;
-}
 .explore-container .right .custom-container{
-    background-color: rgba(72, 189, 224, 0.26);
+    /* background-color: rgba(72, 189, 224, 0.26); */
     width: 94%;
     margin: 0 auto;
     min-height: 100vh;
@@ -1870,15 +1941,17 @@ input[type='checkbox']:checked:after {
     margin-left: 15px;
 }
 .explore-container .right .header .line{
-    height: 1px;
+    height: 2px;
     background-color: var(--dark_green);
     width: 100%;
+    margin: 1rem 0;
 }
 .explore-container .right .job-card-container{
-    padding: 2rem 0;
-    background-color: red;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    justify-items: center;
+    align-items: center;
+    /* gap: 2rem; */
 }
 .explore-container .right h1,h2,p{
     margin: 0;
@@ -1888,6 +1961,8 @@ input[type='checkbox']:checked:after {
     background-color: white;
     max-width: 320px;
     border-radius: 15px;
+    margin-top: 2rem;
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
 }
 .explore-container .right .job-card .job-card-header{
     display: flex;
@@ -1930,6 +2005,7 @@ input[type='checkbox']:checked:after {
      margin: 0 auto;
      margin-top: 1.5rem;
      background-color: var(--dark_green);
+     box-shadow: 0px 0px rgba(150, 255, 159, 0.3);
  }
  .explore-container .right .details{
      /* background-color: rgb(96, 144, 90); */
@@ -1944,14 +2020,36 @@ input[type='checkbox']:checked:after {
      font-family: Roboto, 'sans-serif';
      color: var(--dark_green);
  }
- .explore-container .right .details .left{
+ .explore-container .right .details .details-left{
      padding: 0.4rem 0;
  }
- .explore-container .right .details .right{
+ .explore-container .right .details .details-right{
      text-align: end;
      padding: 0;
  }
- 
+.explore-container .right .description{
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 93%;
+    margin: 0 auto;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    padding: 1rem 1.4rem;
+    font-family: Roboto, 'sans-serif';
+ }
+ .explore-container .right .job-card .card-button{
+     border: none;
+     background: var(--dark_green);
+     color: white;
+     font-family: Roboto, 'sans-serif';
+     font-size: 1.6rem;
+     font-weight: lighter;
+     padding: 0.7rem 1.8rem;
+     border-radius: 5px;
+     margin: 1rem 0;
+ }
+
+
+
 /*MOBILE*/
 
 @media (max-width: 450px) {
@@ -2006,6 +2104,9 @@ input[type='checkbox']:checked:after {
     .explore-container .wrapper {
         grid-template-columns: 1fr;
     }
+    .explore-container .right .job-card{
+        min-width: 100%;
+    }
 }
 
 /* sign in and sign up page */
@@ -2041,6 +2142,12 @@ input[type='checkbox']:checked:after {
     .signin-page .right .form-custom-button,
     .signup-page .right .form-custom-button {
         margin-bottom: 4rem;
+    }
+    .explore-container .wrapper{
+        flex-direction: column;
+    }
+    .explore-container .wrapper .left{
+        min-width: 100%;
     }
 }
 

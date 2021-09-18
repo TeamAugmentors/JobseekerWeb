@@ -39,13 +39,87 @@ else if (document.URL.includes("explore.html")) {
   const catagoryItems = document.querySelector(".explore-container .left .choose-catagory");
   const budgetIconTriangle = document.querySelector(".budget-div .icon-triangle");
   const budgetContainer = document.querySelector(".budget-div .content");
-  // console.log(budgetContainer);
+  const minTk = document.querySelector("#min-tk");
+  const maxTk = document.querySelector("#max-tk");
+  const thumbLeft = document.querySelector(".amount-slider .slider .thumb.left-indicator");
+  const thumbRight = document.querySelector(".amount-slider .slider .thumb.right-indicator");
+  const range = document.querySelector(".amount-slider .slider .range");
+  console.log(thumbLeft);
+  console.log(thumbRight);
+  console.log(range);
+
+  const jobCardContainer = document.querySelector(".explore-container .right .job-card-container");
+  const jobCard = `<div class="job-card">
+  <div class="job-card-header">
+      <h1 class="catagory">Graphics & design</h1>
+      <h1 class="job-name">Illustration</h1>
+      <div class="amount-div">
+          <div class="tk-icon">
+              <img src="images/taka3.svg" alt="">
+          </div>
+          <h1 class="amount">3000</h1>
+      </div>
+      <div class="line"></div>
+      <div class="details">
+          <div class="duration">
+              <div class="details-left">Duration</div>
+              <div class="details-right">2 Days</div>
+          </div>
+          <div class="revisions">
+              <div class="details-left">revisions</div>
+              <div class="details-right">4</div>
+          </div>
+          <div class="negotiable">
+              <div class="details-left">Negotiable</div>
+              <div class="details-right">No</div>
+          </div>
+      </div>
+      <div class="description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident ipsum
+              perferendis autem, aliquid eos voluptatibus id suscipit, odio temporibus sed et
+              nam
+              repellendus eaque numquam cum reprehenderit nemo repudiandae rerum!</p>
+      </div>
+      <button class="card-button">See More</button>
+  </div>
+</div>`;
+  // console.log(jobCard);
+  for (let i = 1; i <= 6; i++) {
+    jobCardContainer.innerHTML += jobCard;
+  }
+
+  function setLeftThumb() {
+    let min = parseInt(minTk.min);
+    let max = parseInt(minTk.max);
+    minTk.value = Math.min(parseInt(minTk.value), parseInt(maxTk.value));
+    let percent = ((minTk.value - min) / (max - min)) * 100;
+    // console.log(percent);
+    thumbLeft.style.left = percent + "%";
+    range.style.left = percent + "%";
+  }
+  function setRightThumb() {
+    let min = parseInt(maxTk.min);
+    let max = parseInt(maxTk.max);
+    maxTk.value = Math.max(parseInt(maxTk.value), parseInt(minTk.value));
+    let percent = ((maxTk.value - min) / (max - min)) * 100;
+    thumbRight.style.right = (100 - percent) + "%";
+    range.style.right = (100 - percent) + "%";
+  }
+  minTk.addEventListener("input", () => {
+    setLeftThumb();
+  });
+  maxTk.addEventListener("input", () => {
+    setRightThumb();
+  });
+  setLeftThumb();
+  setRightThumb();
+
   isToggleCatagory = false;
   isToggleBudget = false;
 
   budgetIconTriangle.addEventListener('click', () => {
     if (!isToggleBudget) {
-      budgetIconTriangle.style.transform = 'rotate(90deg)';
+      budgetIconTriangle.style.transform = 'rotate(-90deg)';
       budgetContainer.style.maxHeight = '0';
       budgetContainer.style.opacity = '0';
       isToggleBudget = true;
@@ -59,7 +133,7 @@ else if (document.URL.includes("explore.html")) {
 
   catagoryIconTriangle.addEventListener("click", () => {
     if (!isToggleCatagory) {
-      catagoryIconTriangle.style.transform = 'rotate(90deg)';
+      catagoryIconTriangle.style.transform = 'rotate(-90deg)';
       catagoryItems.style.maxHeight = '0';
       catagoryItems.style.opacity = '0';
       isToggleCatagory = true;
@@ -70,4 +144,5 @@ else if (document.URL.includes("explore.html")) {
       isToggleCatagory = false;
     }
   })
+
 }
