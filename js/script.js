@@ -47,6 +47,12 @@ else if (document.URL.includes("explore.html")) {
   const leftThumb = document.querySelector(".amount-slider .left-thumb");
   const rightThumb = document.querySelector(".amount-slider .right-thumb");
   const selectedTrack = document.querySelector(".amount-slider .track-selected");
+  const tkMin = document.querySelector(".slider-container .tk-min");
+  const tkMax = document.querySelector(".slider-container .tk-max");
+  const inputTkMin = document.querySelector(".input-amount .input-tk-min");
+  const inputTkMax = document.querySelector(".input-amount .input-tk-max");
+  console.log(inputTkMin);
+  console.log(inputTkMax);
   const jobCard = `<div class="job-card">
   <div class="job-card-header">
       <h1 class="catagory">Graphics & design</h1>
@@ -86,13 +92,17 @@ else if (document.URL.includes("explore.html")) {
   }
   let isLeftThumb = false;
   let isRightThumb = false;
-  let thumbposLeft = 25;
-  let thumbposRight = 75;
+  let thumbposLeft = 10;
+  let thumbposRight = 90;
   function initSliders() {
     leftThumb.style.left = `${thumbposLeft}%`;
     selectedTrack.style.left = `${thumbposLeft}%`;
     rightThumb.style.left = `${thumbposRight}%`;
     selectedTrack.style.right = `${100 - thumbposRight}%`;
+    inputTkMin.value = parseInt(map(thumbposLeft, 0, 100, 0, 50000));
+    inputTkMax.value = parseInt(map(thumbposRight, 0, 100, 0, 50000));
+    tkMin.innerText = inputTkMin.value / 1000 + 'k';
+    tkMax.innerText = inputTkMax.value / 1000 + 'k';
   }
 
   initSliders();
@@ -126,6 +136,8 @@ else if (document.URL.includes("explore.html")) {
       // prnt(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
       leftThumb.style.left = `${thumbposLeft}%`;
       selectedTrack.style.left = `${thumbposLeft}%`;
+      inputTkMin.value = parseInt(map(thumbposLeft, 0, 100, 0, 50000));
+      tkMin.innerText = parseInt(inputTkMin.value / 1000) + 'k';
     } else if (rightThumb) {
       let dx = e.clientX;
       let rect = thumbsContainer.getBoundingClientRect();
@@ -141,6 +153,8 @@ else if (document.URL.includes("explore.html")) {
       // prnt(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
       rightThumb.style.left = `${thumbposRight}%`;
       selectedTrack.style.right = `${100 - thumbposRight}%`;
+      inputTkMax.value = parseInt(map(thumbposRight, 0, 100, 0, 50000));
+      tkMax.innerText = parseInt(inputTkMax.value / 1000) + 'k';
     }
   }
   function mouseUpHandler() {
@@ -156,7 +170,6 @@ else if (document.URL.includes("explore.html")) {
 
   rightThumb.addEventListener('mousedown', mouseDownHandler);
   rightThumb.addEventListener('mouseup', mouseMoveHandler);
-
 
   isToggleCatagory = false;
   isToggleBudget = false;
