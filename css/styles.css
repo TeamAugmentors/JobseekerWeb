@@ -751,7 +751,6 @@ main {
 }
 
 /* dashboard accordion */
-
 .accordion__input:checked ~ .accordion-content{
     display: block;
     animation: fade-in-down 1000ms ease;
