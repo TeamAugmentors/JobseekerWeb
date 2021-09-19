@@ -944,6 +944,7 @@ main {
 
 /*-----------------*/
 
+
 /* =============================================================
             about us page 
 ============================================================= */
@@ -954,43 +955,47 @@ main {
 .about-container {
     max-width: 85%;
     margin: 0 auto;
-    min-height: 100vh;
 }
-
 .left,
 .right {
-    flex-grow: 1;
+    min-width: 50%;
 }
-
+.section-1 .about-container{
+    padding: 20rem 0 10rem 0;
+}
 .section-1 .left {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     flex-direction: column;
 }
 
 .section-1 .left .about-js {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1;
 }
-
 .section-1 .left .about-text {
-    font-size: 8rem;
+    font-size: clamp(1rem, 2rem + 6vw, 10rem);
     font-weight: bolder;
     font-family: 'Roboto', sans-serif;
 }
-
 .section-1 .left .js {
     position: relative;
-    font-size: 12.8rem;
+    font-size: clamp(1rem, 3rem + 6vw, 13.8rem);
     font-weight: bolder;
     font-family: 'Roboto', sans-serif;
     color: white;
     margin-left: 10px;
     background: var(--dark_green);
-    padding: 10px 20px;
+    padding: 0.03em 0.15em;
     border-radius: 10px;
-    margin-left: 30px;
+    margin-left: 0.2em;
 }
 
 .section-1 .left .js::after {
-    font-size: 13.5rem;
+    font-size: clamp(1rem, 3rem + 6vw, 14.1rem);
     font-weight: bolder;
     font-family: 'Roboto', sans-serif;
     position: absolute;
@@ -1001,104 +1006,42 @@ main {
     right: 0;
     left: 0;
     bottom: 0;
-    transform: rotate(90deg) translate(-90%, -15%);
+    transform: rotate(90deg) translate(-88%, -20%);
 }
 
 .section-1 .left .description {
-    font-size: 4.8rem;
+    font-size: clamp(1rem, 1rem + 2.3vw, 4.1rem);
     color: rgba(0, 0, 0, 0.4);
     font-family: 'Roboto', sans-serif;
     line-height: 1.2;
     z-index: 1;
 }
-
+.section-1 .right{
+    display: flex;
+    align-items: center;
+}
+.section-1 .right .img-div{
+    transform: translateY(-10%);
+}
 .section-1 .right .img-div img {
     width: 100%;
     height: 100%;
-    margin-top: 8rem;
 }
-
-.section-2,
-.section-3,
-.section-4,
-.footer-section {
-    z-index: 1;
-    position: relative;
+.section-2{
+    padding-bottom: 10rem;
 }
-
-.bg-circle,
-.bg-thick-square,
-.bg-rotated-square,
-.bg-white-circle,
-.bg-light-square {
-    position: absolute;
-    opacity: 0.11;
-    z-index: -1;
+.section-2 .about-container{
+    display: flex;
 }
-
-.bg-square {
-    position: absolute;
-    z-index: -1;
-}
-
-.bg-circle {
-    width: 700px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 15px solid var(--dark_green);
-}
-
-.bg-thick-square,
-.bg-light-square {
-    position: absolute;
-    width: 300px;
-    aspect-ratio: 1;
-    border: 80px solid var(--dark_green);
-    opacity: 0.1;
-    z-index: -1;
-}
-
-.bg-rotated-square {
-    width: 300px;
-    aspect-ratio: 1;
-    border: 40px solid var(--dark_green);
-    transform: rotate(45deg);
-}
-
-.bg-light-square {
-    border: 60px solid var(--dark_green);
-    transform: rotate(20deg);
-}
-
-.circle-position-2 {
-    left: 5%;
-    bottom: 1%;
-}
-
-.square-position-2 {
-    top: 5%;
-    right: 20%;
-}
-
-.thick-square-position-2 {
-    right: 3%;
-    bottom: 5%;
-}
-
-.rotated-square-position-2 {
-    left: 55%;
-    bottom: -10%;
-}
-
 .section-2 .left {
-    flex: 1.8;
-    padding: 4.8rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .section-2 .left .img-div {
-    width: 70%;
-    height: 85%;
-    transform: translateX(-10%);
+    width: 80%;
+    min-height: 100%;
 }
 
 .section-2 .left .img-div img {
@@ -1111,61 +1054,44 @@ main {
 
 .section-2 .right {
     flex: 1;
-    padding: 3rem;
 }
 
 .section-2 .right .text {
-    min-height: 85%;
+    width: 80%;
+    margin-right: 0;
+    margin-left: auto;
+    min-height: 100%;
     text-align: end;
 }
 
 .section-2 .right .future {
-    font-size: 12.8rem;
+    font-size: clamp(6.5rem, 1rem + 7vw, 12.8rem);
     color: rgba(0, 0, 0, 0.4);
     font-family: "Fresh-Eaters", sans-serif;
 }
 
 .section-2 .right .talents {
     font-family: "Fresh-Eaters", sans-serif;
-    font-size: 7.2rem;
-    margin-top: 45px;
+    font-size: clamp(4rem, 1rem + 3.9vw, 7.2rem);
+    margin-top: 0.8em;
 }
 
 .section-2 .right p {
     font-family: 'Roboto', sans-serif;
-    font-size: 2.88rem;
+    font-size: clamp(1.8rem, 1rem + 1vw, 2.88rem);
     text-align: end;
-    margin-top: 90px;
+    margin-top: 4em;
 }
-
-.bg-white-circle {
-    width: 700px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 15px solid white;
-    opacity: .5;
-    transform: scale(0.85);
+.section-3 .about-container{
+    display: flex;
 }
-
-.circle-position-3,
-.white-circle-position-3 {
-    bottom: 7%;
-    right: 5%
+.section-3 .left{
+    padding-right: 4rem;
 }
-
-.light-square-position-3 {
-    bottom: 30%;
-    left: 10%;
-}
-
-.thick-square-position-3 {
-    bottom: 10%;
-    left: 33%;
-    transform: rotate(45deg);
-}
-
 .section-3 .right {
-    padding-left: 4.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .section-3 .img-div img {
@@ -1175,130 +1101,115 @@ main {
 }
 
 .section-3 .left .text .mtt {
-    font-size: 7rem;
+    font-size: 13rem;
+    font-size: clamp(5rem, 1rem + 6vw, 13rem);
     font-family: 'Fresh-Eaters', sans-serif;
-    margin-top: 1.5em;
+    margin-top: 1.2em;
     color: rgba(0, 0, 0, 0.4);
 }
 
 .section-3 .left .text .all-reward {
     margin-top: 0.8em;
-    font-size: 8rem;
+    font-size: clamp(1rem, 1rem + 7vw, 8rem);
     font-family: 'Fresh-Eaters', sans-serif;
 }
 
 .section-3 .right .img-div {
     height: 80%;
-    padding-left: 4.8em;
+    padding-left: 3rem;
 }
 
 .section-3 .right .img-div img {
     aspect-ratio: 1 / 1.2;
 }
-
-
-.section-4 .left,
-.section-4 .right {
-    width: 100%;
+.section-4 .about-container{
+    display: flex;
 }
-
-.square-position-4 {
-    bottom: 5%;
-    left: 45%;
-    transform: rotate(-45deg);
+.section-4 .left .text{
+    margin-top: 3em;
+    max-width: 65%;
 }
-
-.section-4 .about-container {
-    min-height: 0;
-}
-
 .section-4 .left .text p {
-    font-size: 4rem;
-    padding-right: 8em;
-    margin-top: 1em;
+    font-size: clamp(1rem, 1rem + 2vw, 4rem);
     font-family: 'Roboto', sans-serif;
 }
-
 .section-4 .right {
     text-align: end;
-    padding-right: 4.8rem;
 }
-
 .section-4 .right .heading-1 {
     font-family: 'Fresh-Eaters', sans-serif;
-    font-size: 12rem;
+    font-size: clamp(6.5rem, 1rem + 9vw, 12rem);
     color: rgba(0, 0, 0, 0.4);
 }
-
 .section-4 .right .heading-2 {
     font-family: 'Fresh-Eaters', sans-serif;
-    font-size: 6.56rem;
+    font-size: clamp(2rem, 1rem + 4.5vw, 6.56rem);
     font-weight: bolder;
 }
 
 .section-4 .right p {
-    font-size: 3.52rem;
-    margin-top: 40px;
+    /* font-size: 3.52rem; */
+    font-size: clamp(1.2rem, 1rem + 2vw, 3.52rem);
+    margin-top: 1.5em;
     font-family: 'Roboto', sans-serif;
 }
 
+.footer-section .about-container{
+    display: flex;
+    /* background-color: mediumblue; */
+}
 .footer-section .left {
+    margin-top: 15rem;
+    display: flex;
     flex-direction: column;
+    margin: auto 0 4rem 0;
 }
-
-.square-position-footer {
-    left: 5%;
-    top: 10%;
-    transform: rotate(10deg);
+.footer-section .footer-right img{
+    height: 100%;
+    width: 100%;
 }
-
 .footer-section .left .text .heading-1 {
-    font-size: 12.8rem;
+    font-size: clamp(1rem, 1rem + 8vw, 12.8rem);
     font-family: 'Fresh-Eaters', sans-serif;
     color: rgba(0, 0, 0, 0.4);
 }
-
 .footer-section .left .text .heading-2 {
     font-size: 6.56rem;
+    font-size: clamp(1rem, 1rem + 6vw, 6.56rem);
     font-family: 'Fresh-Eaters', sans-serif;
 }
-
 .footer-section .left .social-link {
-    width: 100%;
-    margin-top: 3.2rem;
+    margin-top: 7rem;
+    display: flex;
+    gap: 2.5%;
 }
-
 .footer-section .left .social {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 220px;
+    min-width: 29%;
     aspect-ratio: 1;
     background-color: rgba(255, 255, 255, 0.97);
-    padding: 20px;
-    border-radius: 20px;
+    padding: 1.6em 5em;
+    border-radius: 13%;
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
-    margin-right: 2rem;
     transition: all 0.2s ease;
 }
-
+.footer-section .social-link .icon-custom-bg{
+    font-size: clamp(0.1rem, 1rem + 6vw, 12rem);
+}
 .footer-section .social-link span {
-    margin-top: 40px;
-    font-size: 1.92rem;
+    margin-top: 1em;
+    font-size: clamp(0.15rem, 1.4vw, 15rem);
     color: rgba(0, 0, 0, 0.4);
     font-family: 'Fresh-Eaters', sans-serif;
-    letter-spacing: 5px;
+    letter-spacing: 4px;
 }
 
 .footer-section .social-link .icon-custom-bg {
     color: rgba(0, 0, 0, 0.65);
 }
-
-.google-play {
-    width: 250px;
-}
-
 .footer-section .left .social:hover {
     cursor: pointer;
     background-color: #179D49;
@@ -1312,7 +1223,16 @@ main {
 .footer-section .left .social:hover .icon-custom-bg {
     color: white;
 }
-
+.google-play-div{
+    /* background-color: maroon; */
+    width: 85%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.google-play {
+    width: 27%;
+    transform: translateY(-30%);
+}
 /* =============================================================
                     Sign in and sign up page
 ============================================================= */
@@ -2068,18 +1988,6 @@ input[type='checkbox']:checked:after {
     }
 }
 
-@media (max-width: 990px) {
-
-    /* .navbar-expand-lg .navbar-collapse {
-        display: flex !important;
-        flex-basis: auto;
-        min-width: 628px;
-    } */
-    .navbar-margin-top {
-        margin-top: 1rem;
-    }
-}
-
 @media (max-width: 770px) {
     .hero-image img {
         display: none;
@@ -2103,6 +2011,98 @@ input[type='checkbox']:checked:after {
     }
     .explore-container .right .job-card{
         min-width: 100%;
+    }
+
+    /* -----------------About Page---------------- */
+    .section-1 .about-container{
+        min-height: 70vh;
+    }
+    .section-1 .right{
+        display: none;
+    }
+    .section-1 .left{
+        /* min-width: 100%; */
+        flex-grow: 1;
+        text-align: center;
+        align-items: center;
+    }
+    .section-1 .left .about-text {
+        font-size: clamp(1rem, 2rem + 10vw, 10rem);
+    }
+    .section-1 .left .js {
+        font-size: clamp(1rem, 3rem + 10vw, 13.8rem);
+    }
+    .section-1 .left .js::after {
+        font-size: clamp(1rem, 3rem + 10vw, 14.1rem);
+    }   
+    .section-1 .left .description {
+        font-size: clamp(1rem, 1rem + 10vw, 4.1rem);
+    }
+    .section-2 .about-container .left{
+        /* background-color: red; */
+        display: none;
+    }
+    .section-2 .about-container .right{
+        flex-grow: 1;
+        /* background-color: red; */
+    }
+    .section-2 .about-container .right .text{
+        margin: 0 auto;
+        text-align: center;
+    }
+    .section-2 .about-container .right .text .talents{
+        margin-top: 15px;
+    }
+    .section-2 .about-container .right .text p{
+        text-align: center;
+        margin-top: 10px;
+    }
+    .section-3 .right,
+    .section-3 .left .img-div{
+        display: none;
+    }
+    .section-3 .left{
+        /* background-color: green; */
+        flex-grow: 1;
+        padding: 0;
+    }
+    .section-3 .left .text .mtt {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 7rem;
+    }
+    .section-3 .left .text .all-reward{
+        text-align: center;
+    }
+    .section-4 .about-container{
+        flex-direction: column;
+    }
+    .section-4 .about-container .text{
+        text-align: center;
+        min-width: 100%;
+    }
+    .section-4 .right{
+        margin-top: 6rem;
+    }
+    .footer-section .footer-right{
+        display: none;
+    }
+    .footer-section .left{
+        margin-top: 10rem;
+        text-align: center;
+    }
+
+}
+
+@media (max-width: 990px) {
+
+    /* .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+        min-width: 628px;
+    } */
+    .navbar-margin-top {
+        margin-top: 1rem;
     }
 }
 
