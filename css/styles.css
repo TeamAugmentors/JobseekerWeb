@@ -762,6 +762,11 @@ main {
     transition: transform 500ms ease;
 }
 
+.profile__details .details i{
+    transform: rotate(0deg);
+    transition: transform 500ms ease;
+}
+
 @keyframes fade-in-down {
     from {
         opacity: 0;
@@ -884,6 +889,11 @@ main {
 
 
 /* overview accordion exclusive*/
+
+.overview-label i{
+    transform: rotate(0deg);
+    transition: transform 500ms ease;
+}
 
 .accordion__input:checked ~ .overview-label i{
     transform: rotate(90deg);    
