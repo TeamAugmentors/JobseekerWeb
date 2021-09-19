@@ -1307,6 +1307,7 @@ main {
 .signup-page {
     display: flex;
     font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
 }
 
 .signin-page .signup-reminder,
@@ -1327,7 +1328,7 @@ main {
 .signin-page .left,
 .signup-page .left {
     position: relative;
-    min-height: 100vh;
+    min-height: 100%;
     min-width: 45%;
     background-color: rgb(7, 111, 57);
     display: flex;
@@ -1743,6 +1744,7 @@ input[type='checkbox']:checked:after {
     border-radius: 5px;
     text-align: center;
     font-size: 2rem;
+    font-family: Roboto, 'sans-serif';
 }
 .input-amount input[type=number]::-webkit-inner-spin-button, 
 .input-amount input[type=number]::-webkit-outer-spin-button { 
@@ -1752,17 +1754,15 @@ input[type='checkbox']:checked:after {
 .slider-container{
     display: flex;
     margin-top: 2rem;
-    /* background-color: rgba(0, 0, 0, 0.1); */
     border-radius: 5px;
 }
 .slider-container .tk-min,
 .slider-container .tk-max{
     font-size: 2rem;
-    /* padding: 0 1.3rem; */
     max-height: 30px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.1);
-    /* background-color: red; */
+    font-family: Roboto, 'sans-serif';
     width: 70px;
     
 }
@@ -1810,6 +1810,7 @@ input[type='checkbox']:checked:after {
     border-right: 10px solid var(--dark_green);
     border-bottom: 10px solid transparent;
     transform: translateX(-10px);
+    cursor: pointer;
   }
   .amount-slider .right-thumb{
     position: absolute;
@@ -1820,6 +1821,7 @@ input[type='checkbox']:checked:after {
     border-top: 10px solid transparent;
     border-left: 10px solid var(--dark_green);
     border-bottom: 10px solid transparent;
+    cursor: pointer;
     /* transform: translateX(10px); */
   }
 /* ------------------------------Slider------------------------------ */
@@ -1877,6 +1879,7 @@ input[type='checkbox']:checked:after {
     font-size: 2.7rem;
     font-family: Roboto, 'sans-serif';
     margin-left: 1.2em;
+    cursor: pointer;
 }
 
 .explore-container .left .choose-catagory label {

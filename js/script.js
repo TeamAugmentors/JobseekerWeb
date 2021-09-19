@@ -124,7 +124,7 @@ else if (document.URL.includes("explore.html")) {
       let dx = e.clientX;
       let rect = thumbsContainer.getBoundingClientRect();
       let thumbsContainerLeft = rect.left;
-      let thumbContainerWidth = thumbsContainer.getBoundingClientRect().width;
+      let thumbContainerWidth = rect.width;
       thumbposLeft = (dx - thumbsContainerLeft) / thumbContainerWidth * 100;
       console.log(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
       if (thumbposLeft > thumbposRight) {
@@ -137,12 +137,13 @@ else if (document.URL.includes("explore.html")) {
       leftThumb.style.left = `${thumbposLeft}%`;
       selectedTrack.style.left = `${thumbposLeft}%`;
       inputTkMin.value = parseInt(map(thumbposLeft, 0, 100, 0, 50000));
-      tkMin.innerText = parseInt(inputTkMin.value / 1000) + 'k';
+      tkMin.innerText = parseInt(inputTkMin.value / 1000) > 0 ? parseInt(inputTkMin.value / 1000) + 'k' : 0;
+
     } else if (rightThumb) {
       let dx = e.clientX;
       let rect = thumbsContainer.getBoundingClientRect();
       let thumbsContainerLeft = rect.left;
-      let thumbContainerWidth = thumbsContainer.getBoundingClientRect().width;
+      let thumbContainerWidth = rect.width;
       thumbposRight = (dx - thumbsContainerLeft) / thumbContainerWidth * 100;
       if (thumbposRight < thumbposLeft) {
         thumbposRight = thumbposLeft;
@@ -154,7 +155,7 @@ else if (document.URL.includes("explore.html")) {
       rightThumb.style.left = `${thumbposRight}%`;
       selectedTrack.style.right = `${100 - thumbposRight}%`;
       inputTkMax.value = parseInt(map(thumbposRight, 0, 100, 0, 50000));
-      tkMax.innerText = parseInt(inputTkMax.value / 1000) + 'k';
+      tkMax.innerText = parseInt(inputTkMax.value / 1000) > 0 ? parseInt(inputTkMax.value / 1000) + 'k' : 0;
     }
   }
   function mouseUpHandler() {
