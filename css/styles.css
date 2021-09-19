@@ -956,8 +956,8 @@ main {
     max-width: 85%;
     margin: 0 auto;
 }
-.left,
-.right {
+.about-container .left,
+.about-container .right {
     min-width: 50%;
 }
 .section-1 .about-container{
@@ -1539,6 +1539,7 @@ input[type='checkbox']:checked:after {
     max-width: 50rem;
     min-height: 100%;
     padding: 1rem 0.7rem;
+    /* background-color: mediumblue; */
 }
 
 .explore-container .wrapper .right {
