@@ -175,6 +175,12 @@ else if (document.URL.includes("explore.html")) {
   isToggleCatagory = false;
   isToggleBudget = false;
 
+  // ------------------This is for setting the opacity and height after loading the page----------------
+  budgetContainer.style.maxHeight = budgetContainer.scrollHeight + "px";;
+  budgetContainer.style.opacity = '1';
+  catagoryItems.style.maxHeight = catagoryItems.scrollHeight + "px";
+  catagoryItems.style.opacity = '1';
+
   budgetIconTriangle.addEventListener('click', () => {
     if (!isToggleBudget) {
       budgetIconTriangle.style.transform = 'rotate(-90deg)';

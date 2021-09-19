@@ -1623,7 +1623,6 @@ input[type='checkbox']:checked:after {
 .explore-container .wrapper .left .freelancer-info {
     padding: 2rem 2rem;
     width: 100%;
-    /* background-color: red; */
 }
 
 .explore-container .wrapper .left .freelancer-dashboard .freelancer-info {
@@ -1646,7 +1645,6 @@ input[type='checkbox']:checked:after {
 
 .explore-container .wrapper .left .text-section {
     flex-grow: 1;
-    /* background-color: limegreen; */
     padding-left: 2rem;
 }
 
@@ -1687,7 +1685,6 @@ input[type='checkbox']:checked:after {
 .explore-container .left .budget-div {
     margin-top: 4rem;
     max-width: 85%;
-    /* background-color: red; */
     margin: 2rem auto;
 }
 
@@ -1720,7 +1717,6 @@ input[type='checkbox']:checked:after {
 .explore-container .left .budget-div .content{
     overflow: hidden;
     transition: all 0.25s ease-out;
-    /* background-color: red; */
     padding-bottom: 3rem;
 }
 
