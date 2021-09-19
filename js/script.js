@@ -1,7 +1,10 @@
-// =================================================
-// team page Animation
-// =================================================
+function map(x, in_min, in_max, out_min, out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 if (document.URL.includes("team.html")) {
+  // =================================================
+  // team page Animation
+  // =================================================
   new fullpage('#team-fullpage', {
     anchors: ['intro', 'sanjid', 'atikur', 'tanim'],
     navigation: true,
@@ -39,16 +42,17 @@ else if (document.URL.includes("explore.html")) {
   const catagoryItems = document.querySelector(".explore-container .left .choose-catagory");
   const budgetIconTriangle = document.querySelector(".budget-div .icon-triangle");
   const budgetContainer = document.querySelector(".budget-div .content");
-  const minTk = document.querySelector("#min-tk");
-  const maxTk = document.querySelector("#max-tk");
-  const thumbLeft = document.querySelector(".amount-slider .slider .thumb.left-indicator");
-  const thumbRight = document.querySelector(".amount-slider .slider .thumb.right-indicator");
-  const range = document.querySelector(".amount-slider .slider .range");
-  console.log(thumbLeft);
-  console.log(thumbRight);
-  console.log(range);
-
   const jobCardContainer = document.querySelector(".explore-container .right .job-card-container");
+  const thumbsContainer = document.querySelector(".amount-slider .thumbs");
+  const leftThumb = document.querySelector(".amount-slider .left-thumb");
+  const rightThumb = document.querySelector(".amount-slider .right-thumb");
+  const selectedTrack = document.querySelector(".amount-slider .track-selected");
+  const tkMin = document.querySelector(".slider-container .tk-min");
+  const tkMax = document.querySelector(".slider-container .tk-max");
+  const inputTkMin = document.querySelector(".input-amount .input-tk-min");
+  const inputTkMax = document.querySelector(".input-amount .input-tk-max");
+  console.log(inputTkMin);
+  console.log(inputTkMax);
   const jobCard = `<div class="job-card">
   <div class="job-card-header">
       <h1 class="catagory">Graphics & design</h1>
@@ -83,39 +87,99 @@ else if (document.URL.includes("explore.html")) {
       <button class="card-button">See More</button>
   </div>
 </div>`;
-  // console.log(jobCard);
   for (let i = 1; i <= 6; i++) {
     jobCardContainer.innerHTML += jobCard;
   }
+  let isLeftThumb = false;
+  let isRightThumb = false;
+  let thumbposLeft = 10;
+  let thumbposRight = 90;
+  function initSliders() {
+    leftThumb.style.left = `${thumbposLeft}%`;
+    selectedTrack.style.left = `${thumbposLeft}%`;
+    rightThumb.style.left = `${thumbposRight}%`;
+    selectedTrack.style.right = `${100 - thumbposRight}%`;
+    inputTkMin.value = parseInt(map(thumbposLeft, 0, 100, 0, 50000));
+    inputTkMax.value = parseInt(map(thumbposRight, 0, 100, 0, 50000));
+    tkMin.innerText = inputTkMin.value / 1000 + 'k';
+    tkMax.innerText = inputTkMax.value / 1000 + 'k';
+  }
 
-  function setLeftThumb() {
-    let min = parseInt(minTk.min);
-    let max = parseInt(minTk.max);
-    minTk.value = Math.min(parseInt(minTk.value), parseInt(maxTk.value));
-    let percent = ((minTk.value - min) / (max - min)) * 100;
-    // console.log(percent);
-    thumbLeft.style.left = percent + "%";
-    range.style.left = percent + "%";
+  initSliders();
+
+  function mouseDownHandler(e) {
+    console.log("Mouse Down");
+    if (e.target == leftThumb) {
+      isLeftThumb = true;
+    } else if (e.target == rightThumb) {
+      isRightThumb = true;
+    }
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
   }
-  function setRightThumb() {
-    let min = parseInt(maxTk.min);
-    let max = parseInt(maxTk.max);
-    maxTk.value = Math.max(parseInt(maxTk.value), parseInt(minTk.value));
-    let percent = ((maxTk.value - min) / (max - min)) * 100;
-    thumbRight.style.right = (100 - percent) + "%";
-    range.style.right = (100 - percent) + "%";
+
+  function mouseMoveHandler(e) {
+    // prnt("Mouse move");
+    if (isLeftThumb) {
+      let dx = e.clientX;
+      let rect = thumbsContainer.getBoundingClientRect();
+      let thumbsContainerLeft = rect.left;
+      let thumbContainerWidth = rect.width;
+      thumbposLeft = (dx - thumbsContainerLeft) / thumbContainerWidth * 100;
+      console.log(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
+      if (thumbposLeft > thumbposRight) {
+        thumbposLeft = thumbposRight;
+      }
+      else if (thumbposLeft < 0) {
+        thumbposLeft = 0;
+      }
+      // prnt(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
+      leftThumb.style.left = `${thumbposLeft}%`;
+      selectedTrack.style.left = `${thumbposLeft}%`;
+      inputTkMin.value = parseInt(map(thumbposLeft, 0, 100, 0, 50000));
+      tkMin.innerText = parseInt(inputTkMin.value / 1000) > 0 ? parseInt(inputTkMin.value / 1000) + 'k' : 0;
+
+    } else if (rightThumb) {
+      let dx = e.clientX;
+      let rect = thumbsContainer.getBoundingClientRect();
+      let thumbsContainerLeft = rect.left;
+      let thumbContainerWidth = rect.width;
+      thumbposRight = (dx - thumbsContainerLeft) / thumbContainerWidth * 100;
+      if (thumbposRight < thumbposLeft) {
+        thumbposRight = thumbposLeft;
+      }
+      else if (thumbposRight > 100) {
+        thumbposRight = 100;
+      }
+      // prnt(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
+      rightThumb.style.left = `${thumbposRight}%`;
+      selectedTrack.style.right = `${100 - thumbposRight}%`;
+      inputTkMax.value = parseInt(map(thumbposRight, 0, 100, 0, 50000));
+      tkMax.innerText = parseInt(inputTkMax.value / 1000) > 0 ? parseInt(inputTkMax.value / 1000) + 'k' : 0;
+    }
   }
-  minTk.addEventListener("input", () => {
-    setLeftThumb();
-  });
-  maxTk.addEventListener("input", () => {
-    setRightThumb();
-  });
-  setLeftThumb();
-  setRightThumb();
+  function mouseUpHandler() {
+    console.log("Mouse Up");
+    isLeftThumb = false;
+    isRightThumb = false;
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+  };
+
+  leftThumb.addEventListener('mousedown', mouseDownHandler);
+  leftThumb.addEventListener('mouseup', mouseMoveHandler);
+
+  rightThumb.addEventListener('mousedown', mouseDownHandler);
+  rightThumb.addEventListener('mouseup', mouseMoveHandler);
 
   isToggleCatagory = false;
   isToggleBudget = false;
+
+  // ------------------This is for setting the opacity and height after loading the page----------------
+  budgetContainer.style.maxHeight = budgetContainer.scrollHeight + "px";;
+  budgetContainer.style.opacity = '1';
+  catagoryItems.style.maxHeight = catagoryItems.scrollHeight + "px";
+  catagoryItems.style.opacity = '1';
 
   budgetIconTriangle.addEventListener('click', () => {
     if (!isToggleBudget) {
@@ -144,5 +208,4 @@ else if (document.URL.includes("explore.html")) {
       isToggleCatagory = false;
     }
   })
-
 }

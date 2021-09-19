@@ -1311,6 +1311,7 @@ main {
 .signup-page {
     display: flex;
     font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
 }
 
 .signin-page .signup-reminder,
@@ -1331,7 +1332,7 @@ main {
 .signin-page .left,
 .signup-page .left {
     position: relative;
-    min-height: 100vh;
+    min-height: 100%;
     min-width: 45%;
     background-color: rgb(7, 111, 57);
     display: flex;
@@ -1626,7 +1627,6 @@ input[type='checkbox']:checked:after {
 .explore-container .wrapper .left .freelancer-info {
     padding: 2rem 2rem;
     width: 100%;
-    /* background-color: red; */
 }
 
 .explore-container .wrapper .left .freelancer-dashboard .freelancer-info {
@@ -1649,7 +1649,6 @@ input[type='checkbox']:checked:after {
 
 .explore-container .wrapper .left .text-section {
     flex-grow: 1;
-    /* background-color: limegreen; */
     padding-left: 2rem;
 }
 
@@ -1690,7 +1689,6 @@ input[type='checkbox']:checked:after {
 .explore-container .left .budget-div {
     margin-top: 4rem;
     max-width: 85%;
-    /* background-color: red; */
     margin: 2rem auto;
 }
 
@@ -1721,8 +1719,9 @@ input[type='checkbox']:checked:after {
     transition: all 0.2s ease-in-out;
 }
 .explore-container .left .budget-div .content{
-    /* overflow: hidden; */
+    overflow: hidden;
     transition: all 0.25s ease-out;
+    padding-bottom: 3rem;
 }
 
 .explore-container .left .budget-div .input-amount {
@@ -1740,103 +1739,91 @@ input[type='checkbox']:checked:after {
 .explore-container .left .budget-div .input-amount input {
     width: 70px;
     height: 30px;
-    border: 1px solid black;
+    outline: none;
+    border: 2px solid var(--dark_green);
     border-radius: 5px;
     text-align: center;
     font-size: 2rem;
+    font-family: Roboto, 'sans-serif';
 }
-
-.explore-container .left .budget-div .amount-slider {
-    margin-top: 2rem;
-    background-color: rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
+.input-amount input[type=number]::-webkit-inner-spin-button, 
+.input-amount input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
 }
 /* --------------------------------Slider------------------------------- */
-/* .explore-container .left .budget-div .budget-slider {
-    background-color: var(--dark_green);
-    padding: 1.7rem 0;
+.slider-container{
+    display: flex;
+    margin-top: 2rem;
+    border-radius: 5px;
+}
+.slider-container .tk-min,
+.slider-container .tk-max{
+    font-size: 2rem;
+    max-height: 30px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    font-family: Roboto, 'sans-serif';
+    width: 70px;
+    
+}
+.slider-container .tk-min{
+    border-radius: 5px 0 0 5px;
+}
+.slider-container .tk-max{
+    border-radius: 0 5px 5px 0;
+}
+.amount-slider{
     flex-grow: 1;
-} */
-.explore-container .left .budget-div .budget-slider{
-    position: relative;
-    flex-grow: 1;
 }
-.explore-container .left .budget-div .budget-slider .slider{
+  .amount-slider .track{
+    width: 100%;
+    height: 30px;
     position: relative;
-    z-index: 1;
-    height: 25px;
-}
-.explore-container .left .budget-div .budget-slider .slider .track{
-    content: "";
+    /* background: red; */
+  }
+  .amount-slider .track-bg{
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 30px;
+    width: 100%;
+  }
+  .amount-slider .track-selected{
     position: absolute;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
+    top:0;
+    left: 0%;
+    right: 25%;
+    height: 30px;
     background-color: var(--dark_green);
-}
-.explore-container .left .budget-div .budget-slider .slider .range{
-    content: "";
+  }
+  .amount-slider .thumbs{
+    position: relative;
+    /* background-color: rgba(16, 29, 218, 0.712); */
+    background-color: white;
+    height: 20px;
+  }
+  .amount-slider .left-thumb{
     position: absolute;
-    z-index: 2;
-    top: 0;
-    bottom: 0;
-    background-color: var(--darker_green);
-}
-.explore-container .left .budget-div .budget-slider .slider .thumb{
-    content: "";
-    position: absolute;
-    z-index: 3;
-}
-.explore-container .left .budget-div .budget-slider .slider .thumb.left-indicator{
-    left: 25%;
     width: 0;
     height: 0;
-    top: 100%;
+    top: 0;
+    left: 0;
     border-top: 10px solid transparent;
-    border-right: 10px solid var(--dark_green);;
+    border-right: 10px solid var(--dark_green);
     border-bottom: 10px solid transparent;
     transform: translateX(-10px);
-}
-.explore-container .left .budget-div .budget-slider .slider .thumb.right-indicator{
-    right: 25%;
+    cursor: pointer;
+  }
+  .amount-slider .right-thumb{
+    position: absolute;
     width: 0;
     height: 0;
-    top: 100%;
+    top: 0;
+    right: 25%;
     border-top: 10px solid transparent;
     border-left: 10px solid var(--dark_green);
     border-bottom: 10px solid transparent;
-    transform: translateX(10px);
-}
-.explore-container .left .budget-div .budget-slider input[type=range]{
-    position: absolute;
-    z-index: 2;
-    height: 10px;
-    width: 100%;
-    pointer-events: none;
-    -webkit-appearance: none;
-    opacity: 0;
-}
-.explore-container .left .budget-div .budget-slider input[type=range]::-webkit-slider-thumb{
-    pointer-events: all;
-    width: 25px;
-    height: 35px;
-    border: 0 none;
-    /* border-radius: 50%; */
-    /* background-color: red; */
-    /* -webkit-appearance: none; */
-}
-#min-tk{
-    bottom: -60%;
-    transform: translateX(-5px);
-}
-#max-tk{
-    bottom: -60%;
-    transform: translateX(5px);
-}
+    cursor: pointer;
+    /* transform: translateX(10px); */
+  }
 /* ------------------------------Slider------------------------------ */
 .explore-container .left .budget-div .amount-slider .tk-min,
 .explore-container .left .budget-div .amount-slider .tk-max {
@@ -1846,7 +1833,7 @@ input[type='checkbox']:checked:after {
 
 .explore-container .left .catagory-div {
     max-width: 85%;
-    margin: 6rem auto 1rem auto;
+    margin: 5rem auto 1rem auto;
 }
 
 .explore-container .left .catagory-div .heading {
@@ -1892,6 +1879,7 @@ input[type='checkbox']:checked:after {
     font-size: 2.7rem;
     font-family: Roboto, 'sans-serif';
     margin-left: 1.2em;
+    cursor: pointer;
 }
 
 .explore-container .left .choose-catagory label {
