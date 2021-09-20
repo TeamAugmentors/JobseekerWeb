@@ -92,8 +92,8 @@ else if (document.URL.includes("explore.html")) {
   }
   let isLeftThumb = false;
   let isRightThumb = false;
-  let thumbposLeft = 10;
-  let thumbposRight = 90;
+  let thumbposLeft = 20;
+  let thumbposRight = 80;
   function initSliders() {
     leftThumb.style.left = `${thumbposLeft}%`;
     selectedTrack.style.left = `${thumbposLeft}%`;
@@ -183,7 +183,8 @@ else if (document.URL.includes("explore.html")) {
     thumbposLeft = parseInt(map(minTk, 0, 50000, 0, 100));
     leftThumb.style.left = `${thumbposLeft}%`;
     selectedTrack.style.left = `${thumbposLeft}%`;
-    tkMin.innerText = parseInt(inputTkMin.value / 1000) > 0 ? parseInt(inputTkMin.value / 1000) + 'k' : 0;
+    let tkMinText = parseInt(inputTkMin.value / 1000)
+    tkMin.innerText = tkMinText > 0 ? tkMinText + 'k' : 0;
   });
   inputTkMax.addEventListener('change', () => {
     let minTk = parseInt(inputTkMin.value);
@@ -197,7 +198,8 @@ else if (document.URL.includes("explore.html")) {
     rightThumb.style.left = `${thumbposRight}%`;
     // console.log(thumbposRight);
     selectedTrack.style.right = `${100 - thumbposRight}%`;
-    tkMax.innerText = parseInt(inputTkMax.value / 1000) > 0 ? parseInt(inputTkMax.value / 1000) + 'k' : 0;
+    tkMaxText = parseInt(inputTkMax.value / 1000);
+    tkMax.innerText = tkMaxText > 0 ? tkMaxText + 'k' : 0;
   });
 
   isToggleCatagory = false;
