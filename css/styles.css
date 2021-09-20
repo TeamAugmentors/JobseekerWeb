@@ -945,6 +945,70 @@ main {
 /*-----------------*/
 
 /* =============================================================
+            Product Details Page
+============================================================= */
+
+.product-details h1{
+    color: rgb(128, 128, 128,0.6);
+}
+.product__title-section{
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid rgb(0, 128, 0,0.3);
+}
+
+.product__title-section h2, .product__title-section .taka-amount{
+    margin: 0;
+    color: var(--dark_green);
+    font-size: 6rem;
+    font-weight: 700;
+}
+
+.product__title-section .taka-logo{
+    padding-top: 1.3em;
+    padding-right: 1em;
+    height: 80px;
+    width: 80px;
+}
+
+
+
+.job-info-section{
+    /* padding: 0; */
+    padding-top: 1.5rem;
+    background-color: white;
+}
+
+.job-info__details{
+    width: 60%;
+    background-color: red;
+}
+
+.job-info__hirer{
+    background-color: yellow;
+    width: 40%;
+    justify-content: center;
+}
+
+.hirer-card{
+    background-color: white;
+    padding: 1.2rem;
+    margin: 2rem;
+}
+
+.hirer__pic, .hirer__pic img{
+    border-radius: 50%;
+    width: 50%;
+    height: auto;
+}
+.hirer__pic img{
+    box-shadow: 0 0 0 2px white, 0 0 0 4px green;
+}
+
+/*--------------------*/
+
+/* =============================================================
             about us page 
 ============================================================= */
 .main-section {
