@@ -1130,7 +1130,7 @@ main {
     max-width: 65%;
 }
 .section-4 .left .text p {
-    font-size: clamp(1rem, 1rem + 2vw, 4rem);
+    font-size: clamp(1rem, 1rem + 1.5vw, 4rem);
     font-family: 'Roboto', sans-serif;
 }
 .section-4 .right {
@@ -1148,7 +1148,6 @@ main {
 }
 
 .section-4 .right p {
-    /* font-size: 3.52rem; */
     font-size: clamp(1.2rem, 1rem + 2vw, 3.52rem);
     margin-top: 1.5em;
     font-family: 'Roboto', sans-serif;
@@ -1156,7 +1155,6 @@ main {
 
 .footer-section .about-container{
     display: flex;
-    /* background-color: mediumblue; */
 }
 .footer-section .left {
     margin-top: 15rem;
@@ -2089,8 +2087,17 @@ input[type='checkbox']:checked:after {
         display: none;
     }
     .footer-section .left{
-        margin-top: 10rem;
+        margin: 10rem auto 0 auto;
         text-align: center;
+        /* background-color: blueviolet; */
+        /* width: 100%; */
+    }
+    .footer-section .left .social-link{
+        /* margin: 0 auto; */
+        display: flex;
+    }
+    .footer-section .google-play-div{
+        margin-top: 2rem;
     }
 
 }

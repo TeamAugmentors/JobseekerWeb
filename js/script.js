@@ -172,6 +172,34 @@ else if (document.URL.includes("explore.html")) {
   rightThumb.addEventListener('mousedown', mouseDownHandler);
   rightThumb.addEventListener('mouseup', mouseMoveHandler);
 
+  inputTkMin.addEventListener('change', () => {
+    let minTk = parseInt(inputTkMin.value);
+    let maxTk = parseInt(inputTkMax.value);
+    if (minTk > maxTk) {
+      minTk = maxTk;
+    }
+    minTk = Math.min(minTk, 50000);
+    inputTkMin.value = minTk;
+    thumbposLeft = parseInt(map(minTk, 0, 50000, 0, 100));
+    leftThumb.style.left = `${thumbposLeft}%`;
+    selectedTrack.style.left = `${thumbposLeft}%`;
+    tkMin.innerText = parseInt(inputTkMin.value / 1000) > 0 ? parseInt(inputTkMin.value / 1000) + 'k' : 0;
+  });
+  inputTkMax.addEventListener('change', () => {
+    let minTk = parseInt(inputTkMin.value);
+    let maxTk = parseInt(inputTkMax.value);
+    if (maxTk < minTk) {
+      maxTk = minTk;
+    }
+    maxTk = Math.min(maxTk, 50000);
+    inputTkMax.value = maxTk;
+    thumbposRight = parseInt(map(maxTk, 0, 50000, 0, 100));
+    rightThumb.style.left = `${thumbposRight}%`;
+    // console.log(thumbposRight);
+    selectedTrack.style.right = `${100 - thumbposRight}%`;
+    tkMax.innerText = parseInt(inputTkMax.value / 1000) > 0 ? parseInt(inputTkMax.value / 1000) + 'k' : 0;
+  });
+
   isToggleCatagory = false;
   isToggleBudget = false;
 
