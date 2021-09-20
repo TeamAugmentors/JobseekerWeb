@@ -1531,20 +1531,19 @@ input[type='checkbox']:checked:after {
     margin: 0 auto;
     width: 99%;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .explore-container .wrapper .left {
     max-width: 50rem;
+    flex: 1 1 50rem;
     min-height: 100%;
     padding: 1rem 0.7rem;
-    /* background-color: mediumblue; */
 }
-
 .explore-container .wrapper .right {
     flex-grow: 1;
-    height: 100%;
+    min-height: 100%;
 }
-
 .explore-container .wrapper .left .freelancer-dashboard {
     background-color: white;
     min-height: 100%;
@@ -2147,10 +2146,7 @@ input[type='checkbox']:checked:after {
     .signin-page .right .form-custom-button,
     .signup-page .right .form-custom-button {
         margin-bottom: 4rem;
-    }
-    .explore-container .wrapper{
-        flex-direction: column;
-    }
+    } 
     .explore-container .wrapper .left{
         min-width: 100%;
     }
