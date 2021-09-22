@@ -87,7 +87,7 @@ else if (document.URL.includes("explore.html")) {
       <button class="card-button">See More</button>
   </div>
 </div>`;
-  for (let i = 1; i <= 6; i++) {
+  for (let i = 1; i <= 10; i++) {
     jobCardContainer.innerHTML += jobCard;
   }
   let isLeftThumb = false;
@@ -210,6 +210,7 @@ else if (document.URL.includes("explore.html")) {
   budgetContainer.style.opacity = '1';
   catagoryItems.style.maxHeight = catagoryItems.scrollHeight + "px";
   catagoryItems.style.opacity = '1';
+  catagoryItems.style.marginBottom = '2rem';
 
   budgetIconTriangle.addEventListener('click', () => {
     if (!isToggleBudget) {
