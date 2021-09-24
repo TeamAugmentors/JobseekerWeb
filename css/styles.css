@@ -618,7 +618,7 @@ main {
 }
 
 .dashboard__profile {
-    height: 70vh;
+    height: 75vh;
     width: 25%;
 }
 
@@ -689,7 +689,7 @@ main {
     font-family: 'Roboto', sans-serif;
     color: var(--dark_green);
     font-weight: 700;
-    font-size: clamp(1rem, 2vw + 1rem, 2.5rem);
+    font-size: clamp(.3rem, 2vw + .1rem, 2.5rem);
 }
 
 .job-info h4 {
@@ -698,11 +698,6 @@ main {
     letter-spacing: 2px;
 
     font-size: clamp(.1rem, 2vw + .2rem, 1rem);
-}
-
-.profile__job-info .job-info {
-    padding: 1em;
-    margin: 0 auto;
 }
 
 .info-divider {
@@ -801,7 +796,6 @@ main {
     height: 75vh;
     width: 60%;
     position: relative;
-    /* background-color: red; */
 }
 
 .dashboard__status .status-bar li {
@@ -822,13 +816,17 @@ main {
 
 /* dashboard sections start*/
 
-#dashboard__overview:target #user-overview {
+#dashboard__overview:target #user-overview ,
+#dashboard__history:target #transaction-history,
+#dashboard__acc-details:target #user__acc-details {
     font-weight: 700;
     border-bottom: 3px solid darkgreen;
     padding-bottom: .2em;
 }
 
-.overview-content {
+.overview-content,
+.history-content, 
+.user__info-content{
     position: absolute;
     top: 10%;
     left: 2%;
@@ -874,8 +872,10 @@ main {
     color: var(--dark_green);
 }
 
-.overview-content .accordion-content {
+.overview-content .accordion-content,
+.user__info-content .accordion-content {
     padding: 0 0 2em 0;
+    margin-bottom: 2em;
 }
 
 /* nested overview accordion  */
@@ -931,12 +931,6 @@ main {
 
 /* overview accordion exclusive end */
 
-.history-content {
-    position: absolute;
-    top: 10%;
-    display: none;
-}
-
 #dashboard__overview:target .overview-content {
     display: block;
 }
@@ -945,11 +939,18 @@ main {
     display: block;
 }
 
-#dashboard__history:target #transaction-history {
-    font-weight: 700;
-    border-bottom: 3px solid darkgreen;
-    padding-bottom: .2em;
+#dashboard__acc-details:target .user__info-content {
+    display: block;
 }
+
+#dashboard__acc-details {
+    display: none;
+}
+
+#dashboard__acc-details .stats{
+    padding-top: 1em;
+}
+
 
 /* dashboard sections end*/
 
@@ -1119,7 +1120,7 @@ main {
     background-image: url("/images/arrow1.svg") !important;
 }
 
-.custom-prev{
+.custom-prev {
     top: 40%;
     margin-left: -15%;
     height: fit-content;
@@ -1140,14 +1141,15 @@ main {
     width: fit-content;
 }
 
-.files{
+.files {
     margin: 0 auto;
     width: 40%;
     justify-content: space-around;
 }
-.files .download-file{
+
+.files .download-file-btn {
     font-size: clamp(.1rem, 2vw, 2rem);
-    padding: .5em .5em;
+    padding: .5em 2em;
     margin: 0 .5em;
     margin-bottom: 3em;
     border-radius: 12px;
@@ -1157,16 +1159,15 @@ main {
     width: 30vw;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
-.download-file span{
+.download-file-btn span {
     font-size: var(--fs-span);
-    margin-left: 1em;
-    margin-right: .5em;
 }
-.download-file i{
+
+.download-file-btn i {
     font-size: var(--fs-span);
-    margin-right: 1em;
 }
 
 .apply-section {
@@ -1195,7 +1196,7 @@ main {
 .apply-section button {
     background-color: var(--dark_green);
     color: white;
-    font-size: clamp(2rem, 2vw + .5rem , 5rem);
+    font-size: clamp(2rem, 2vw + .5rem, 5rem);
     font-weight: 700;
     padding: 0em 1.5em .2em 1.5em;
     border-radius: 12px;
@@ -2332,6 +2333,13 @@ p {
     .footer-section .social-link span {
         letter-spacing: 2px;
     }
+
+    /* -----------Product Detials page------------- */
+
+    .files {
+        flex-direction: column;
+    }
+
 }
 
 @media (max-width: 770px) {
@@ -2486,8 +2494,16 @@ p {
 
     /* -----------Product Detials page------------- */
 
-    .hirer__info{
-        display: none;
+    .job-info-section {
+        flex-direction: column;
+    }
+
+    .job-info__details {
+        width: 80%;
+    }
+
+    .job-info__hirer {
+        margin: 0 auto;
     }
 }
 
@@ -2500,6 +2516,40 @@ p {
     } */
     .navbar-margin-top {
         margin-top: 1rem;
+    }
+
+    /* ---------------dashboard-mobile---------------- */
+
+    .dashboard-main {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .dashboard__profile,
+    .dashboard__status {
+        width: 100%;
+        height: 38vh;
+    }
+
+    .profile__details,
+    .profile-divider {
+        display: none;
+    }
+
+    main .custom--container {
+        height: auto;
+    }
+
+    .dashboard__status {
+        height: 100vh;
+    }
+
+    #dashboard__acc-details {
+        display: block;
+    }
+
+    .user__info-content .profile__details {
+        display: block;
     }
 }
 
@@ -2541,9 +2591,6 @@ p {
     .explore-container .wrapper .left {
         min-width: 100%;
     }
-
-    /* -----------dashboard------------ */
-
 
 }
 

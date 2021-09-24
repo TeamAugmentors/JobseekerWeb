@@ -69,7 +69,8 @@
         </nav>
     </header>
     <main>
-        <div class="custom--container flex">
+        <div class="dashboard-main custom--container flex">
+
             <div class="dashboard__profile">
                 <div class="profile__pic flex">
                     <img src="./images/JS.png" alt="profile picture">
@@ -102,7 +103,8 @@
 
                 <div class="profile__details">
                     <div>
-                        <input type="checkbox" name="details-accordion" id="acc-details" class="accordion__input" checked>
+                        <input type="checkbox" name="details-accordion" id="acc-details" class="accordion__input"
+                            checked>
 
                         <div class="details flex">
                             <i class='bx bxs-right-arrow'></i>
@@ -167,7 +169,8 @@
                                                 <input type="checkbox" name="status-nested-accordion" id="order1"
                                                     class="accordion__input">
                                                 <div class="overview-label flex">
-                                                    <label for="order1" class="accordion__label flex">Logo Design</label>
+                                                    <label for="order1" class="accordion__label flex">Logo
+                                                        Design</label>
                                                     <i class='bx bxs-right-arrow'></i>
                                                 </div>
                                                 <div class="accordion-content">
@@ -180,7 +183,8 @@
                                                 <input type="checkbox" name="status-nested-accordion" id="order2"
                                                     class="accordion__input">
                                                 <div class="overview-label flex">
-                                                    <label for="order2" class="accordion__label flex">Banner Design</label>
+                                                    <label for="order2" class="accordion__label flex">Banner
+                                                        Design</label>
                                                     <i class='bx bxs-right-arrow'></i>
                                                 </div>
                                                 <div class="accordion-content">
@@ -227,6 +231,73 @@
                         <a href="#dashboard__history" id="transaction-history" class="status-bar__items">History</a>
                         <div class="history-content">
                             hello
+                        </div>
+                    </li>
+
+                    <li id="dashboard__acc-details">
+                        <a href="#dashboard__acc-details" id="user__acc-details" class="status-bar__items">Personal
+                            Information</a>
+                        <div class="user__info-content">
+                            <div>
+                                <div class="overview-content__bg">
+                                    <input type="checkbox" name="status-accordion" id="user__info-details"
+                                        class="accordion__input" checked>
+                                    <div class="overview-label flex">
+                                        <label for="user__info-details" class="accordion__label flex">Details</label>
+                                        <i class='bx bxs-right-arrow'></i>
+                                    </div>
+                                    <div class="accordion-content">
+                                        <!-- nested accordion -->
+                                        <div>
+                                            <div class="overview-nested-content__bg">
+                                                <input type="checkbox" name="status-nested-accordion" id="acc--details"
+                                                    class="accordion__input">
+                                                <div class="overview-label flex">
+                                                    <label for="acc--details" class="accordion__label flex">Account
+                                                        Details</label>
+                                                    <i class='bx bxs-right-arrow'></i>
+                                                </div>
+                                                <div class="accordion-content">
+                                                    <h4>name</h4>
+                                                    <h4>mail</h4>
+                                                    <h4>phone</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="overview-nested-content__bg">
+                                                <input type="checkbox" name="status-nested-accordion" id="bill--info"
+                                                    class="accordion__input">
+                                                <div class="overview-label flex">
+                                                    <label for="bill--info" class="accordion__label flex">Billing
+                                                        Information</label>
+                                                    <i class='bx bxs-right-arrow'></i>
+                                                </div>
+                                                <div class="accordion-content">
+                                                    <h4>bkash no</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="overview-content__bg">
+                                    <input type="checkbox" name="status-accordion" id="user__info-statistics"
+                                        class="accordion__input">
+                                    <div class="overview-label flex">
+                                        <label for="user__info-statistics"
+                                            class="accordion__label flex">Statistics</label>
+                                        <i class='bx bxs-right-arrow'></i>
+                                    </div>
+                                    <div class="accordion-content stats">
+                                        <h4>Inbox response rate</h4>
+                                        <h4>Inbox response time</h4>
+                                        <h4>Order completion rate</h4>
+                                        <h4>Timely Delivery</h4>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                 </ul>
