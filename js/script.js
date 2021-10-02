@@ -1,7 +1,7 @@
 function map(x, in_min, in_max, out_min, out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-if (document.URL.includes("team.html")) {
+if (document.URL.includes("team.php")) {
   // =================================================
   // team page Animation
   // =================================================
@@ -23,21 +23,21 @@ if (document.URL.includes("team.html")) {
   }
   typeWriter();
 }
-else if (document.URL.includes("signin.html")) {
+else if (document.URL.includes("signin.php")) {
   // =====================Sign inpage back button===============================
   const signInBackButton = document.querySelector(".signin-page .arrow-left");
   signInBackButton.addEventListener('click', () => {
     history.back();
   });
 }
-else if (document.URL.includes("signup.html")) {
+else if (document.URL.includes("signup.php")) {
   // =====================Sign inSign up page back button===============================
   const signInBackButton = document.querySelector(".signup-page .arrow-left");
   signInBackButton.addEventListener('click', () => {
     history.back();
   });
 }
-else if (document.URL.includes("explore.html")) {
+else if (document.URL.includes("explore.php")) {
   const catagoryIconTriangle = document.querySelector(".catagory-div .icon-triangle");
   const catagoryItems = document.querySelector(".explore-container .left .choose-catagory");
   const budgetIconTriangle = document.querySelector(".budget-div .icon-triangle");
