@@ -1,3 +1,39 @@
+<?php
+session_start();
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jobseekerweb";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
+if (!empty($_POST)) {
+    $sql = "SELECT user_name, mail, password FROM users;";
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            if ((!strcmp($row['user_name'], $username) || !strcmp($row['mail'], $username)) && !strcmp($row['password'], $password)) {
+                $_SESSION["isLoggedIn"] = 1;
+                header("Location: http://localhost/JobseekerWeb/dashboard.php#dashboard__overview");
+            } else {
+                echo "Please enter correctly";
+            }
+        }
+    } else {
+        echo "Please signup first";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +42,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,14 +93,12 @@
                 <form method="POST" class="custom-form">
                     <div class="custom-form-group">
                         <label class="form-label" for="username">Username or Email Address</label>
-                        <input type="email" class="custom-input" id="username" aria-describedby="emailHelp"
-                            placeholder="ani.atikur99@gmail.com" required>
+                        <input type="text" class="custom-input" name="username" id="username" aria-describedby="emailHelp" placeholder="ani.atikur99@gmail.com" required>
                         <div class="line"></div>
                     </div>
                     <div class="custom-form-group">
                         <label class="form-label" for="password">Password</label>
-                        <input type="password" class="custom-input" id="password" aria-describedby="passwordHelp"
-                            required>
+                        <input type="password" class="custom-input" id="password" name="password" aria-describedby="passwordHelp" required>
                         <div class="line"></div>
                     </div>
                     <button type="submit" class="form-custom-button">Sign in</button>
@@ -74,9 +106,7 @@
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
         <script type="text/javascript" src="js/script.js"></script>
 </body>
