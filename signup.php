@@ -3,7 +3,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "jobseekerweb";
-
+// showToast();
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 // echo "<pre>";
 // print_r($_POST);
 // echo "</pre>";
+$success = 0;
 if (!empty($_POST)) {
     $name = $_POST['name'];
     $username = $_POST['username'];
@@ -21,9 +22,40 @@ if (!empty($_POST)) {
     $password = $_POST['password'];
     $sql = "INSERT INTO users (user_name, mail, password, name) VALUES('" . $username . "','" . $email . "','" . $password . "','" . $name . "')";
     if ($conn->query($sql) === TRUE) {
-        echo "Registered successfully";
+        $id = getId($email, $conn);
+        insertId($id, $conn);
+        $success = 1;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $success = 0;
+    }
+    $conn->close();
+}
+function getId($email, $conn)
+{
+    $sqlForId = "SELECT id FROM users WHERE mail='" . $email . "'";
+    $result = $conn->query($sqlForId);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            return $row["id"];
+        }
+    } else {
+        echo "Error";
+    }
+}
+function insertId($id, $conn)
+{
+    $sqlForFreelancerId = "INSERT INTO freelancer (id) VALUES(" . $id . ")";
+    $sqlForHirerId = "INSERT INTO hirer (id) VALUES(" . $id . ")";
+    if ($conn->query($sqlForFreelancerId) === TRUE) {
+        // echo "New record in freelancer created successfully";
+    } else {
+        echo "Error: " . $sqlForFreelancerId . "<br>" . $conn->error;
+    }
+    if ($conn->query($sqlForHirerId) === TRUE) {
+        // echo "New record in hirer created successfully";
+    } else {
+        echo "Error: " . $sqlForFreelancerId . "<br>" . $conn->error;
     }
 }
 ?>
@@ -48,6 +80,34 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                <strong class="me-auto">
+                    <?php
+                    if ($success === 1) {
+                        echo "Registered";
+                    } else {
+                        echo "Failed";
+                    }
+                    ?>
+                </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>
+                    <?php
+                    if ($success === 1) {
+                        echo "Registered Successfull";
+                    } else {
+                        echo "Registration failed";
+                    }
+                    ?>
+                </h3>
+            </div>
+        </div>
+    </div>
     <div class="signup-page">
         <div class="left">
             <div class="arrow-left">
@@ -119,10 +179,15 @@ if (!empty($_POST)) {
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+        var toastTrigger = document.getElementById('liveToastBtn');
+        var toastLiveExample = document.getElementById('liveToast');
+        var toast = new bootstrap.Toast(toastLiveExample);
+        toast.show();
+    </script>
 </body>
 
 </html>

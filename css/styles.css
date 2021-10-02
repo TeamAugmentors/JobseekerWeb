@@ -2342,6 +2342,168 @@ p {
 
 }
 
+/*----------------- profile page --------------------*/
+.account-setting-header,
+.info-section{
+    color: var(--dark_green);
+    font-weight: bold;
+    margin-top: 60px;
+}
+.info-section{
+    margin-top: 0px;
+    color: var(--dark_green);
+    font-weight: bold;
+    font-size: 3rem;
+}
+.avatar-xl img {
+    width: 120px;
+    aspect-ratio: 1;
+}
+.rounded-circle {
+    border-radius: 50%;
+}
+.avatar img {
+    vertical-align: middle;
+    border-style: none;
+}
+.text-muted {
+    color: #aeb0b4 !important;
+}
+.text-muted {
+    font-weight: 300;
+    font-size: 1.6rem;
+}
+.account-setting-header{
+    text-align: center;
+    padding: 20px;
+}
+.edit-profile-horizontal-line{
+    height: 3px;
+    background-color: var(--dark_green);
+    
+}
+.my-form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+.my-form-group label{
+    flex-grow: 1;
+    margin-left: 2px;
+    padding: 2px;
+    font-size: 1.5rem;
+}
+.my-form-group input{
+    flex-grow: 1;
+    display: block;
+    width: 100%;
+    padding: .400rem .85rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    outline: none;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.my-form-group input:focus{
+    border-color: var(--dark_green);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 1px 4px rgba(1, 164, 21, 0.6);
+}
+.chip-container{
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.chip-container .chip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 7px;
+    height: 35px;
+    margin-right: 10px;
+    font-size: 1.6rem;
+    border-radius: 50px;
+    background-color:  var(--dark_green);
+    color: white;
+    text-align: center;
+    padding-bottom: 2px;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.4);
+}
+.chip-content{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.chip-svg{
+    color: white;
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    font-size: 24px;
+}
+.chip-close{
+    cursor: pointer;
+}
+.chip-close:hover .chip-svg{
+    color: #333;
+}
+.cancel-button a{
+    text-decoration: none;
+    color: red;
+}
+.save-change-btn,
+.cancel-button{
+    margin-top: 1.6rem;
+}
+.cancel-button {
+    border-radius: 0.5rem;
+    padding: .4rem 1rem;
+    font-size: 1.6rem;
+}
+.save-change-btn,
+.change-picture-btn,
+.skill-add-btn{
+    background: none;
+    border: 1px solid var(--darker_green);
+    color: var(--dark_green);
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    padding: .4rem 1rem;
+    font-size: 1.6rem;
+    border-radius: .50rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.save-change-btn:hover,
+.change-picture-btn:hover,
+.skill-add-btn:hover{
+    color: white;
+    background-color: var(--dark_green);
+    border-color: var(--dark_green);
+}
+.cancel-button:hover a{
+    color: white;
+}
+.skill-input-form div{
+   display: grid;
+   grid-template-columns: 5fr 1fr;
+}
+.skill-add-btn{
+    margin-left: 10px;
+}
+
+
 @media (max-width: 770px) {
     .hero-image img {
         display: none;

@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if ($_SESSION["isLoggedIn"] != 1) {
+    header("Location: http://localhost/JobseekerWeb/signin.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

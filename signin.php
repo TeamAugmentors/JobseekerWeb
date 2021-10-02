@@ -12,9 +12,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
+$success = 1;
 if (!empty($_POST)) {
     $sql = "SELECT user_name, mail, password FROM users;";
     $username = $_POST['username'];
@@ -24,14 +22,16 @@ if (!empty($_POST)) {
         while ($row = $result->fetch_assoc()) {
             if ((!strcmp($row['user_name'], $username) || !strcmp($row['mail'], $username)) && !strcmp($row['password'], $password)) {
                 $_SESSION["isLoggedIn"] = 1;
+                $_SESSION["doneLoggedIn"] = 1;
                 header("Location: http://localhost/JobseekerWeb/dashboard.php#dashboard__overview");
             } else {
-                echo "Please enter correctly";
+                $success = 0;
             }
         }
     } else {
         echo "Please signup first";
     }
+    $conn->close();
 }
 ?>
 <!DOCTYPE html>
@@ -53,6 +53,18 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                <strong class="me-auto">Login Failed</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>Please enter correctly</h3>
+            </div>
+        </div>
+    </div>
     <div class="signin-page">
         <div class="left">
             <div class="arrow-left">
@@ -109,6 +121,16 @@ if (!empty($_POST)) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
         <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript">
+            <?php
+            if ($success == 0) {
+                echo " var toastTrigger = document.getElementById('liveToastBtn');
+            var toastLiveExample = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();";
+            }
+            ?>
+        </script>
 </body>
 
 </html>
