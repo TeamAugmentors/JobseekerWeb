@@ -43,20 +43,20 @@
             <div class="collapse navbar-collapse navbar-margin-top" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="about.html">About Us</a>
+                        <a class="nav-link" href="about.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="team.html">Meet the Team</a>
+                        <a class="nav-link" href="team.php">Meet the Team</a>
                     </li>
                     <div class="horizontal-border nav-item"></div>
                     <li class="nav-item sign-in">
-                        <a class="nav-link custom-link" href="signin.html"><i class="fas fa-lock"></i>Sign in</a>
+                        <a class="nav-link custom-link" href="signin.php"><i class="fas fa-lock"></i>Sign in</a>
                     </li>
                     <li class="nav-item sign-up">
-                        <a class="nav-link custom-link sign-up" href="signup.html">Sign up<i
+                        <a class="nav-link custom-link sign-up" href="signup.php">Sign up<i
                                 class="fas fa-user"></i></a>
                     </li>
                 </ul>

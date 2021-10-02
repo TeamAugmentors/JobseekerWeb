@@ -24,7 +24,7 @@
     <header class="dashboard">
         <nav class="navbar navbar-expand-lg navbar-dark common-nav__bg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.php">
                     <div class="d-flex">
                         <img src="images/tie2.png" height="auto" width="auto">
                         <div class=" d-flex flex-column justify-content-center">
