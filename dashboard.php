@@ -1,8 +1,11 @@
 <?php
 session_start();
-
+$success = 0;
 if ($_SESSION["isLoggedIn"] != 1) {
     header("Location: http://localhost/JobseekerWeb/signin.php");
+} else {
+    $success = $_SESSION["doneLoggedIn"];
+    $_SESSION["doneLoggedIn"] = 0;
 }
 ?>
 
@@ -297,10 +300,31 @@ if ($_SESSION["isLoggedIn"] != 1) {
             </div>
         </div>
     </main>
-
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                <strong class="me-auto">Login successful</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>Successfully Logged In</h3>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
     <script src="js/script.js"></script>
+    <script type="text/javascript">
+        <?php
+        if ($success == 1) {
+            echo " var toastTrigger = document.getElementById('liveToastBtn');
+            var toastLiveExample = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();";
+        }
+        ?>
+    </script>
 </body>
 
 </html>
