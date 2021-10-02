@@ -69,7 +69,7 @@
                 <h2>Illustration.</h2>
                 <div class="taka flex">
                     <div class="taka-logo flex">
-                        <img src="/images/taka3.svg" alt="taka">
+                        <img src="images/taka3.svg" alt="taka">
                     </div>
                     <div class="taka-amount">3000</div>
                 </div>
@@ -141,13 +141,13 @@
                         <div id="carouselExampleControls" class="carousel slide custom-carousel" data-interval="false">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img class="d-block" src="/images/notebook-1.jpg" alt="First slide">
+                                    <img class="d-block" src="images/notebook-1.jpg" alt="First slide">
                                 </div>
                                 <div class="carousel-item">
                                     <img class="d-block" src="images/notebook-2.jpg" alt="Second slide">
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="d-block" src="/images/freelance.jpg" alt="Third slide">
+                                    <img class="d-block" src="images/freelance.jpg" alt="Third slide">
                                 </div>
                             </div>
 
