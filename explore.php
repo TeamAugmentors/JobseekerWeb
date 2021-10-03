@@ -21,7 +21,15 @@ if ($conn->connect_error) {
 }
 
 // query 
-$sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
+if (empty($_GET)) {
+    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
+} else if (array_key_exists("category", $_GET) && strcmp($_GET['category'], "None") === 0) {
+    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
+} else if (array_key_exists("category", $_GET)) {
+    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE category ='" . $_GET['category'] . "'";
+} else if (array_key_exists("tk_min", $_GET) && array_key_exists("tk_max", $_GET)) {
+    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE salary >=" . $_GET['tk_min'] . " AND salary<=" . $_GET['tk_max'];
+}
 $result = $conn->query($sqlCards);
 $allCards = array();
 if ($result->num_rows > 0) {
@@ -34,12 +42,17 @@ if ($result->num_rows > 0) {
         $rowItems['duration'] = $row['duration'];
         $rowItems['negotiable'] = $row['negotiable'];
         $rowItems['details'] = $row['details'];
+
+        $datetime = new DateTime($rowItems['duration']);
+        $rowItems['duration'] =  $datetime->format('Y-m-d');
         array_push($allCards, $rowItems);
     }
 } else {
     echo "0 results";
 }
 $conn->close();
+
+
 // echo "<pre>";
 // print_r($allCards);
 // echo "</pre>";
@@ -59,7 +72,7 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" n integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!-- Boxicon CSS  -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <title>Explore</title>
@@ -79,19 +92,19 @@ $conn->close();
                         </div>
                         <div class="text-section">
                             <div class="name">
-                                <h1>Atiqur</h1>
+                                <h1><?php echo $_SESSION['name'] ?></h1>
                                 <div class="collapse-button">
                                     <img src="images/arrow.svg" alt="">
                                 </div>
                             </div>
                             <div class="acc-setting-text">
-                                <span>Go to Account Settings</span>
+                                <a href="dashboard.php">Go to Account Settings</a>
                             </div>
                         </div>
                     </div>
                     <div class="horizontal-line"></div>
                     <!-- --------------budget------------- -->
-                    <form action="" method="POST">
+                    <form action="" method="GET">
                         <div class="budget-div">
                             <div class="heading">
                                 <div class="icon-tk">
@@ -104,9 +117,9 @@ $conn->close();
                             </div>
                             <div class="content">
                                 <div class="input-amount">
-                                    <input type="number" min="0" max="50000" value="1" class="input-tk-min">
+                                    <input type="number" min="0" max="50000" class="input-tk-min" name="tk_min">
                                     <span>to</span>
-                                    <input type="number" min="0" max="50000" value="100" class="input-tk-max">
+                                    <input type="number" min="0" max="50000" class="input-tk-max" name="tk_max">
                                 </div>
                                 <div class="slider-container">
                                     <div class="tk-min">500</div>
@@ -131,7 +144,7 @@ $conn->close();
                                 <div class="icon-catagory">
                                     <img src="images/category.svg" alt="catagory">
                                 </div>
-                                <h1>Catagory</h1>
+                                <h1>Category</h1>
                                 <div class="icon-triangle">
                                     <img src="images/filterDown.svg" alt="">
                                 </div>
@@ -139,36 +152,40 @@ $conn->close();
                         </div>
                         <div class="choose-catagory">
                             <div class="radio-item">
-                                <input type="radio" id="gfxAndDesign" name="catagory">
+                                <input type="radio" id="gfxAndDesign" name="category" value="Graphics & Design">
                                 <label for="gfxAndDesign">Graphics & Design</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="digitalMarketing" name="catagory">
+                                <input type="radio" id="digitalMarketing" name="category" value="Digital Marketing">
                                 <label for="digitalMarketing">Digital Marketing</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="writingAndTranslation" name="catagory">
+                                <input type="radio" id="writingAndTranslation" name="category" value="Writing & Translation">
                                 <label for="writingAndTranslation">Writing & Translation</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="videoAndAnimation" name="catagory">
+                                <input type="radio" id="videoAndAnimation" name="category" value="Video & Animation">
                                 <label for="videoAndAnimation">Video & Animation</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="musicAndAudio" name="catagory">
+                                <input type="radio" id="musicAndAudio" name="category" value="Music & Audio">
                                 <label for="musicAndAudio">Music & Audio</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="programmingAndTech" name="catagory">
+                                <input type="radio" id="programmingAndTech" name="category" value="Programming & Tech">
                                 <label for="programmingAndTech">Programming & Tech</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="business" name="catagory">
+                                <input type="radio" id="business" name="category" value="Business">
                                 <label for="business">Business</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="lifestyle" name="catagory">
+                                <input type="radio" id="lifestyle" name="category" value="Lifestyle">
                                 <label for="lifestyle">Lifestyle</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="none" name="category" value="None">
+                                <label for="none">None</label>
                             </div>
                             <button type="submit" class="filter-btn">OK</button>
                         </div>
@@ -199,7 +216,11 @@ $conn->close();
                                     <div class="details">
                                         <div class="duration">
                                             <div class="details-left">Duration</div>
-                                            <div class="details-right">2</div>
+                                            <div class="details-right"><?php
+                                                                        $interval = date_diff(date_create(date('Y-m-d')), date_create($card['duration']));
+                                                                        echo $interval->format('%a Days');
+                                                                        ?>
+                                            </div>
                                         </div>
                                         <div class="revisions">
                                             <div class="details-left">revisions</div>
@@ -234,7 +255,6 @@ $conn->close();
             </div>
         </div>
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/script.js"></script>
