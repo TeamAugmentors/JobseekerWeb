@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 $success = 1;
 if (!empty($_POST)) {
-    $sql = "SELECT id, user_name, mail, password FROM users;";
+    $sql = "SELECT id, name, user_name, mail, password FROM users;";
     $username = $_POST['username'];
     $password = $_POST['password'];
     $result = $conn->query($sql);
@@ -24,6 +24,7 @@ if (!empty($_POST)) {
                 $_SESSION["isLoggedIn"] = 1;
                 $_SESSION["doneLoggedIn"] = 1;
                 $_SESSION["userId"] = $row['id'];
+                $_SESSION["name"] = $row['name'];
                 header("Location: http://localhost/JobseekerWeb/dashboard.php#dashboard__overview");
             } else {
                 $success = 0;
