@@ -642,6 +642,7 @@ main {
 }
 
 .profile__name h1 {
+    text-transform: capitalize;
     font-size: var(--fs-h1);
     color: var(--dark_green);
     font-family: sans-serif;

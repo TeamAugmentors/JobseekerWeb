@@ -7,6 +7,43 @@ if ($_SESSION["isLoggedIn"] != 1) {
     $success = $_SESSION["doneLoggedIn"];
     $_SESSION["doneLoggedIn"] = 0;
 }
+
+// database stuffs
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jobseekerweb";
+
+$user = null;
+$name = null;
+$email = null;
+$phoneNo = null;
+$billing = null;
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// query 
+$sqlSelect = "SELECT * FROM users WHERE id = " . $_SESSION["userId"];
+$result = $conn->query($sqlSelect);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $user = $row["user_name"];
+        $name = $row["name"];
+        $email = $row["mail"];
+        $name = $row["name"];
+        $phoneNo = $row["phone_no"];
+        $billing = $row["billing_info"];
+    }
+} else {
+    echo "0 results";
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -82,10 +119,10 @@ if ($_SESSION["isLoggedIn"] != 1) {
                     <img src="./images/JS.png" alt="profile picture">
                 </div>
                 <div class="profile__name">
-                    <h1>Lorem, ipsum dolor.</h1>
+                    <h1><?php echo $user ?></h1>
                 </div>
                 <div class="profile__mail">
-                    <h2>Lorem, ipsum.</h2>
+                    <h2><?php echo $email ?></h2>
                 </div>
                 <div class="profile__job-info flex">
                     <div class="job-info earned">
@@ -119,18 +156,18 @@ if ($_SESSION["isLoggedIn"] != 1) {
                         <div class="accordion-content">
                             <div class="profile__details-item profile__account-details">
                                 <h3>Account Details</h3>
-                                <h4>name</h4>
-                                <h4>mail</h4>
-                                <h4>phone</h4>
+                                <h4><?php echo $name ?></h4>
+                                <h4><?php echo $email ?></h4>
+                                <h4><?php echo $phoneNo ?></h4>
                             </div>
                             <div class="profile__details-item profile__billing">
                                 <h3>Billing Information</h3>
-                                <h4>bkash no</h4>
+                                <h4><?php echo $billing ?></h4>
                             </div>
                         </div>
                     </div>
 
-                    <div>
+                    <!-- <div>
                         <input type="checkbox" name="details-accordion" id="acc-statistics" class="accordion__input">
 
                         <div class="details flex">
@@ -146,7 +183,7 @@ if ($_SESSION["isLoggedIn"] != 1) {
                                 <h4>Timely Delivery</h4>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -197,7 +234,7 @@ if ($_SESSION["isLoggedIn"] != 1) {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <div class="overview-content__bg">
                                     <input type="checkbox" name="status-accordion" id="current-skills" class="accordion__input">
                                     <div class="overview-label flex">
@@ -205,7 +242,7 @@ if ($_SESSION["isLoggedIn"] != 1) {
                                         <i class='bx bxs-right-arrow'></i>
                                     </div>
                                     <div class="accordion-content">
-                                        <!-- nested accordion -->
+                                        nested accordion
                                         <div>
                                             <div class="overview-nested-content__bg">
                                                 <input type="checkbox" name="status-nested-accordion" id="skill1" class="accordion__input">
@@ -223,7 +260,7 @@ if ($_SESSION["isLoggedIn"] != 1) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </li>
 
@@ -256,9 +293,9 @@ if ($_SESSION["isLoggedIn"] != 1) {
                                                     <i class='bx bxs-right-arrow'></i>
                                                 </div>
                                                 <div class="accordion-content">
-                                                    <h4>name</h4>
-                                                    <h4>mail</h4>
-                                                    <h4>phone</h4>
+                                                    <h4><?php echo $name ?></h4>
+                                                    <h4><?php echo $email ?></h4>
+                                                    <h4><?php echo $phoneNo ?></h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -271,14 +308,14 @@ if ($_SESSION["isLoggedIn"] != 1) {
                                                     <i class='bx bxs-right-arrow'></i>
                                                 </div>
                                                 <div class="accordion-content">
-                                                    <h4>bkash no</h4>
+                                                    <h4><?php echo $billing ?></h4>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <div class="overview-content__bg">
                                     <input type="checkbox" name="status-accordion" id="user__info-statistics" class="accordion__input">
                                     <div class="overview-label flex">
@@ -292,7 +329,7 @@ if ($_SESSION["isLoggedIn"] != 1) {
                                         <h4>Timely Delivery</h4>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </li>
                 </ul>
