@@ -2165,7 +2165,21 @@ input[type='checkbox']:checked:after {
     transform: translateX(25%);
     background-color: var(--dark_green);
 }
-
+.explore-container .left .filter-btn{
+    background: var(--dark_green);
+    border: none;
+    margin: 2rem 0 1rem 0;
+    width: 100%;
+    padding: 0.4rem 1.3rem;
+    font-size: 2rem;
+    font-family: Roboto;
+    border-radius: 10px;
+    color: white;
+    transition: box-shadow 0.2s ease-in-out;
+}
+.explore-container .left .filter-btn:hover{
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.25);
+}
 .explore-container .right .custom-container {
     /* background-color: rgba(72, 189, 224, 0.26); */
     width: 94%;
@@ -2173,7 +2187,6 @@ input[type='checkbox']:checked:after {
     min-height: 100vh;
     padding: 1rem 0;
 }
-
 .explore-container .right .header h1 {
     color: var(--dark_green);
     font-size: 7.5rem;

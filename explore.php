@@ -51,86 +51,88 @@ if ($_SESSION["isLoggedIn"] != 1) {
                     </div>
                     <div class="horizontal-line"></div>
                     <!-- --------------budget------------- -->
-                    <div class="budget-div">
-                        <div class="heading">
-                            <div class="icon-tk">
-                                <img src="images/taka2.svg" alt="">
+                    <form action="" method="POST">
+                        <div class="budget-div">
+                            <div class="heading">
+                                <div class="icon-tk">
+                                    <img src="images/taka2.svg" alt="">
+                                </div>
+                                <h1>Budget</h1>
+                                <div class="icon-triangle">
+                                    <img src="images/filterDown.svg" alt="">
+                                </div>
                             </div>
-                            <h1>Budget</h1>
-                            <div class="icon-triangle">
-                                <img src="images/filterDown.svg" alt="">
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div class="input-amount">
-                                <input type="number" min="0" max="50000" value="1" class="input-tk-min">
-                                <span>to</span>
-                                <input type="number" min="0" max="50000" value="100" class="input-tk-max">
-                            </div>
-                            <div class="slider-container">
-                                <div class="tk-min">500</div>
-                                <div class="amount-slider">
-                                    <div class="range-slider">
-                                        <div class="track">
-                                            <div class="track-bg"></div>
-                                            <div class="track-selected"></div>
-                                        </div>
-                                        <div class="thumbs">
-                                            <div class="left-thumb"></div>
-                                            <div class="right-thumb"></div>
+                            <div class="content">
+                                <div class="input-amount">
+                                    <input type="number" min="0" max="50000" value="1" class="input-tk-min">
+                                    <span>to</span>
+                                    <input type="number" min="0" max="50000" value="100" class="input-tk-max">
+                                </div>
+                                <div class="slider-container">
+                                    <div class="tk-min">500</div>
+                                    <div class="amount-slider">
+                                        <div class="range-slider">
+                                            <div class="track">
+                                                <div class="track-bg"></div>
+                                                <div class="track-selected"></div>
+                                            </div>
+                                            <div class="thumbs">
+                                                <div class="left-thumb"></div>
+                                                <div class="right-thumb"></div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="tk-max">1000</div>
                                 </div>
-                                <div class="tk-max">1000</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="catagory-div">
-                        <div class="heading">
-                            <div class="icon-catagory">
-                                <img src="images/category.svg" alt="catagory">
+                        <div class="catagory-div">
+                            <div class="heading">
+                                <div class="icon-catagory">
+                                    <img src="images/category.svg" alt="catagory">
+                                </div>
+                                <h1>Catagory</h1>
+                                <div class="icon-triangle">
+                                    <img src="images/filterDown.svg" alt="">
+                                </div>
                             </div>
-                            <h1>Catagory</h1>
-                            <div class="icon-triangle">
-                                <img src="images/filterDown.svg" alt="">
+                        </div>
+                        <div class="choose-catagory">
+                            <div class="radio-item">
+                                <input type="radio" id="gfxAndDesign" name="catagory">
+                                <label for="gfxAndDesign">Graphics & Design</label>
                             </div>
+                            <div class="radio-item">
+                                <input type="radio" id="digitalMarketing" name="catagory">
+                                <label for="digitalMarketing">Digital Marketing</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="writingAndTranslation" name="catagory">
+                                <label for="writingAndTranslation">Writing & Translation</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="videoAndAnimation" name="catagory">
+                                <label for="videoAndAnimation">Video & Animation</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="musicAndAudio" name="catagory">
+                                <label for="musicAndAudio">Music & Audio</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="programmingAndTech" name="catagory">
+                                <label for="programmingAndTech">Programming & Tech</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="business" name="catagory">
+                                <label for="business">Business</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="lifestyle" name="catagory">
+                                <label for="lifestyle">Lifestyle</label>
+                            </div>
+                            <button type="submit" class="filter-btn">OK</button>
                         </div>
-                    </div>
-                    <div class="choose-catagory">
-                        <div class="radio-item">
-                            <input type="radio" id="gfxAndDesign" name="catagory">
-                            <label for="gfxAndDesign">Graphics & Design</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="digitalMarketing" name="catagory">
-                            <label for="digitalMarketing">Digital Marketing</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="writingAndTranslation" name="catagory">
-                            <label for="writingAndTranslation">Writing & Translation</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="videoAndAnimation" name="catagory">
-                            <label for="videoAndAnimation">Video & Animation</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="musicAndAudio" name="catagory">
-                            <label for="musicAndAudio">Music & Audio</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="programmingAndTech" name="catagory">
-                            <label for="programmingAndTech">Programming & Tech</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="business" name="catagory">
-                            <label for="business">Business</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="lifestyle" name="catagory">
-                            <label for="lifestyle">Lifestyle</label>
-                        </div>
-
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="right">
