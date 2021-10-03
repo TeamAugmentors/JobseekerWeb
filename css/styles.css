@@ -60,6 +60,13 @@
     display: grid;
 }
 
+.flex {
+    display: flex;
+}
+
+.flex-space-btwn{
+    justify-content: space-between;
+}
 /*-----------*/
 
 /*NAV BAR*/
@@ -552,10 +559,6 @@ h2.hero-subtext {
 /* =============================================================
             dashboard 
 ============================================================= */
-
-.flex {
-    display: flex;
-}
 
 main .custom--container {
     margin-top: 0;

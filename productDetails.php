@@ -86,16 +86,18 @@ $conn->close();
 
     <!-- Boxicon CSS  -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <link rel="stylesheet" href="css/styles.css">
     <title>Product Details</title>
 </head>
 
 <body>
     <header>
-        <?php
-        include "nav.php";
-        ?>
+        <div class="product-nav">
+            <?php
+            include "nav.php";
+            ?>
+        </div>
     </header>
 
     <main>

@@ -5,6 +5,33 @@ $isLoggedIn = 0;
 if (!empty($_SESSION)) {
     $isLoggedIn = $_SESSION["isLoggedIn"];
 }
+
+// database stuffs
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jobseekerweb";
+
+$teammate = array();
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sqlTeam = "SELECT * FROM team";
+$result = $conn->query($sqlTeam);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $temp = array("name" => $row["name"], "id" => $row["id"], "hobby" => $row["hobby"], "picture" => $row["picture"]);
+        array_push($teammate, $temp);
+        // print_r($temp);
+    }
+} else {
+    echo "0 results from active orders";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,6 +68,8 @@ if (!empty($_SESSION)) {
                     <?php
                     include "nav.php";
                     ?>
+                    <!-- main nav  -->
+                    
                     <div class="team--hero-text custom--container">
                         <h1 id="team--hero-header"></h1>
                         <div class="team--hero-text">
@@ -62,23 +91,18 @@ if (!empty($_SESSION)) {
                 </div>
             </section>
 
-            <section class="section" id="team-section-1">
-                <div class="sanjid">
-                    Hello
+            <?php
+            foreach($teammate as $temp){
+            ?>
+            <section class="section" id="<?php echo $temp["id"] ?>">
+                <div class="<?php echo $temp["name"]?>">
+                    <h1><?php echo $temp["name"] ?> </h1>
+                    <h2><?php echo $temp["id"]?> </h2>
+                    <!-- <?php echo $temp["picture"] ?> -->
+                    <?php echo $temp["hobby"] ?>
                 </div>
             </section>
-
-            <section class="section" id="team-section-2">
-                <div class="atikur">
-                    Hi
-                </div>
-            </section>
-
-            <section class="section" id="team-section-3">
-                <div class="tanim">
-                    Bye
-                </div>
-            </section>
+            <?php } ?>
         </div>
     </div>
     <!-- This is a comment -->
