@@ -98,8 +98,8 @@ if ($result->num_rows > 0) {
                 <div class="<?php echo $temp["name"]?>">
                     <h1><?php echo $temp["name"] ?> </h1>
                     <h2><?php echo $temp["id"]?> </h2>
-                    <?php echo $temp["picture"] ?>
                     <?php echo $temp["hobby"] ?>
+                    <!-- <?php echo $temp["picture"] ?> -->
                 </div>
             </section>
             <?php } ?>

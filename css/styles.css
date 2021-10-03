@@ -2387,6 +2387,12 @@ p {
     vertical-align: middle;
     border-style: none;
 }
+.editname{
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--dark_green);
+    margin-bottom: 2em !important;
+}
 .text-muted {
     color: #aeb0b4 !important;
 }

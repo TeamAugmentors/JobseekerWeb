@@ -120,11 +120,10 @@ $conn->close();
                         <div class="col">
                             <div class="row align-items-center">
                                 <div class="col-md-7">
-                                    <h2 class="mb-1"><?php echo $name ?></h2>
-                                    <p class="small mb-3"><span class="badge badge-dark">New York, USA</span></p>
+                                    <h2 class="mb-1 editname"><?php echo $name ?></h2>
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <!-- <div class="row mb-4">
                                 <div class="col-md-7">
                                     <p class="text-muted">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl
@@ -138,7 +137,7 @@ $conn->close();
                                     <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
                                     <p class="small mb-0 text-muted">(537) 315-1481</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <form method="POST" action="">
