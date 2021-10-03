@@ -595,10 +595,10 @@ main .custom--container {
     font-size: 1.6rem;
 }
 
-.dashboard .nav-item {
+/* .dashboard .nav-item {
     font-size: 2rem;
     white-space: nowrap;
-}
+} */
 
 .dashboard .switch-to-hirer {
     background: var(--darker_green);

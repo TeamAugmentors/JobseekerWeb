@@ -22,6 +22,7 @@ if (!empty($_POST)) {
         $id = getId($email, $conn);
         insertId($id, $conn);
         $success = 1;
+        header("Location: http://localhost/JobseekerWeb/signin.php");
     } else {
         $success = 0;
     }

@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+$isLoggedIn = 1;
+$active = "productDetails";
 if ($_SESSION["isLoggedIn"] != 1) {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
@@ -22,47 +23,10 @@ if ($_SESSION["isLoggedIn"] != 1) {
 </head>
 
 <body>
-    <header class="dashboard">
-        <nav class="navbar navbar-expand-lg navbar-dark common-nav__bg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">
-                    <div class="d-flex">
-                        <img src="images/tie2.png" height="auto" width="auto">
-                        <div class=" d-flex flex-column justify-content-center">
-                            <h1 class="header-logo job">
-                                JOB
-                            </h1>
-                            <h1 class="header-logo seeker">
-                                seeker
-                            </h1>
-                        </div>
-                    </div>
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse navbar-margin-top justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-
-                        <form class="flex align-items-center custom-search">
-                            <i class='bx bx-search custom-search-icon'></i>
-                            <input class="form-control custom-search-field shadow-none" type="search" placeholder="Search for work..." aria-label="Search">
-                            <button class="btn custom-search-btn shadow-none" type="submit">Search</button>
-                        </form>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Inbox</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link switch-to-hirer" href="#">Switch to hirer</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <header>
+        <?php 
+            include "nav.php"; 
+        ?>
     </header>
 
     <main>
