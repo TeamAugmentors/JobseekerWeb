@@ -21,6 +21,10 @@ if (!empty($_SESSION)) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Boxicon CSS  -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    
     <title>About Us</title>
 </head>
 

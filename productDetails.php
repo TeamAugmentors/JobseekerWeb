@@ -5,7 +5,72 @@ $active = "productDetails";
 if ($_SESSION["isLoggedIn"] != 1) {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
-print_r($_GET);
+
+// database stuffs
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jobseekerweb";
+
+$posted_by = null;
+$category = null;
+$name = null;
+$salary = null;
+$duration = null;
+$details = null;
+$sample_images = null;
+$sample_files = null;
+$negotiable = null;
+$preferred_skills = null;
+
+$hirer_name = null;
+$hirer_spent = null;
+$hirer_hired = null;
+$hirer_rated = null;
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// query 
+$sqlSelect = "SELECT * FROM job WHERE id = " . $_GET["job_id"];
+$result = $conn->query($sqlSelect);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $posted_by = $row['posted_by'];
+        $category = $row["category"];
+        $name = $row["name"];
+        $salary = $row["salary"];
+        $duration = $row["duration"];
+        $details = $row["details"];
+        $sample_images = $row["sample_images"];
+        $sample_files = $row["sample_files"];
+        $negotiable = $row["negotiable"];
+        $preferred_skills = $row["preferred_skills"];
+    }
+} else {
+    echo "0 results from job";
+}
+
+//query 2
+$sqlPoster = "SELECT u.name, h.* FROM users u JOIN hirer h ON u.id = h.id WHERE h.id = " . $posted_by;
+$result = $conn->query($sqlPoster);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $hirer_name = $row["name"];
+        $hirer_spent = $row["spent"];
+        $hirer_hired = $row["hired"];
+        $hirer_rated = $row["rating"];
+    }
+} else {
+    echo "0 results from hirer";
+}
+
+$conn->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +84,9 @@ print_r($_GET);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
+    <!-- Boxicon CSS  -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    
     <link rel="stylesheet" href="css/styles.css">
     <title>Product Details</title>
 </head>
@@ -32,34 +100,41 @@ print_r($_GET);
 
     <main>
         <div class="product-details">
-            <h1 class="special--container">Graphics & Design</h1>
+            <h1 class="special--container"><?php echo $category ?></h1>
             <section class="product__title-section special--container flex">
-                <h2>Illustration.</h2>
+                <h2><?php echo $name ?>.</h2>
                 <div class="taka flex">
                     <div class="taka-logo flex">
                         <img src="images/taka3.svg" alt="taka">
                     </div>
-                    <div class="taka-amount">3000</div>
+                    <div class="taka-amount"><?php echo $salary ?></div>
                 </div>
             </section>
             <section class="job-info-section flex">
                 <div class="job-info__details special--container">
                     <div class="job-details flex">
                         <h3>Duration</h3>
-                        <h3>lorem</h3>
+                        <h3><?php echo $duration ?></h3>
                     </div>
                     <div class="job-details flex">
                         <h3>Revisions</h3>
-                        <h3>lorem</h3>
+                        <h3>4</h3>
                     </div>
                     <div class="job-details flex">
                         <h3>Negotiable</h3>
-                        <h3>lorem</h3>
+                        <h3><?php
+                            if ($negotiable) {
+                                echo "YES";
+                            } else {
+                                echo "NO";
+                            }
+                            ?>
+                        </h3>
                     </div>
-                    <div class="job-details flex">
+                    <!-- <div class="job-details flex">
                         <h3>Preferred skills</h3>
-                        <h3>lorem</h3>
-                    </div>
+                        <h3><?php echo $preferred_skills ?></h3>
+                    </div> -->
                 </div>
                 <div class="job-info__hirer flex">
                     <div class="hirer-card">
@@ -68,26 +143,26 @@ print_r($_GET);
                                 <img src="https://picsum.photos/200" alt="Hirer's profile picture">
                             </div>
                             <div class="hirer__name">
-                                <h3>lorem</h3>
+                                <h3><?php echo $hirer_name ?> </h3>
                                 <h4>Hirer</h4>
                             </div>
                         </div>
                         <div class="hirer__info flex">
                             <div class="job-info earned">
                                 <h2>Spent</h2>
-                                <h3>lorem</h3>
+                                <h3><?php echo $hirer_spent ?></h3>
                                 <h4>TAKA</h4>
                             </div>
                             <div class="info-divider"></div>
                             <div class="job-info completed">
                                 <h2>Hired</h2>
-                                <h3>lorem</h3>
+                                <h3><?php echo $hirer_hired ?></h3>
                                 <h4>Freelancers</h4>
                             </div>
                             <div class="info-divider"></div>
                             <div class="job-info rated">
                                 <h2>Rated</h2>
-                                <h3>lorem</h3>
+                                <h3><?php echo $hirer_rated ?></h3>
                                 <h4>STARS</h4>
                             </div>
                         </div>
@@ -96,9 +171,7 @@ print_r($_GET);
             </section>
             <section class="description-section special--container">
                 <h2>Description</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste tempora quasi, eos cupiditate iure rem
-                    natus alias, illo est eum consequuntur autem ducimus, ad laudantium. Libero quod sequi culpa iure.
-                </p>
+                <p><?php echo $details ?></p>
             </section>
             <section class="sample-files-section">
                 <div class="special--container">
@@ -151,7 +224,7 @@ print_r($_GET);
             <section class="apply-section">
                 <div class="special--container">
                     <h2>Hurry Up!</h2>
-                    <p>Only # applications left for this job!</p>
+                    <p>Only few applications left for this job!</p>
                     <p>If you have what it takes, what are you waiting for?</p>
                     <button>Apply now</button>
                     <h3>By clicking the apply button, I agree to all the terms and conditions</h3>

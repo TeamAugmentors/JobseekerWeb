@@ -1118,7 +1118,8 @@ main {
 .custom-prev .carousel-control-prev-icon {
     height: 5vw;
     width: 5vw;
-    background-image: url("/images/arrow1.svg") !important;
+    background-color: red;
+    background-image: url("/images/arrow.svg") !important;
 }
 
 .custom-prev {
@@ -1131,6 +1132,7 @@ main {
 .custom-next .carousel-control-next-icon {
     height: 5vw;
     width: 5vw;
+    background-color: red;
     background-image: url("/images/arrow1.svg") !important;
     transform: rotate(180deg);
 }

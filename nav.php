@@ -48,7 +48,7 @@
                             <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
                             </li>';
                     echo '<li class="nav-item sign-up">
-                        <a class="nav-link custom-link sign-up" href="logout.php">Log out<i class="fas fa-user"></i></a>
+                        <a class="nav-link custom-link sign-up" href="logout.php"> <i class="bx bx-log-out"></i> Log out</a>
                         </li>';
                 } else {
                     echo '<li class="nav-item sign-in">

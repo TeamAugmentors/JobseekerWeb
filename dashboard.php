@@ -20,6 +20,12 @@ $email = null;
 $phoneNo = null;
 $billing = null;
 
+$user_earned = null;
+$user_completed = null;
+$user_rated = null;
+
+$job = array();
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
@@ -40,8 +46,34 @@ if ($result->num_rows > 0) {
         $billing = $row["billing_info"];
     }
 } else {
-    echo "0 results";
+    echo "0 results from user";
 }
+
+// query 2
+$sqlSelectUser = "SELECT * FROM freelancer WHERE id = " . $_SESSION["userId"];
+$result = $conn->query($sqlSelectUser);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $user_earned = $row["earned"];
+        $user_completed = $row["completed"];
+        $user_rated = $row["rating"];
+    }
+} else {
+    echo "0 results from user";
+}
+
+//query 3
+$sqlUser = "SELECT b.name, b.details, a.serial FROM job b JOIN activeorder a ON b.id = a.job_id WHERE a.user_id =" . $_SESSION["userId"];
+$result = $conn->query($sqlUser);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $temp = array("serial" => $row["serial"], "name" => $row["name"], "details" => $row["details"]);
+        array_push($job, $temp);
+    }
+} else {
+    echo "0 results from active orders";
+}
+
 $conn->close();
 ?>
 
@@ -102,7 +134,7 @@ $conn->close();
                             <a class="nav-link" href="profile.php">Edit Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link switch-to-hirer" href="logout.php">Logout</a>
+                            <a class="nav-link switch-to-hirer" href="logout.php"><i class='bx bx-log-out'></i> Logout </a>
                         </li>
 
                     </ul>
@@ -126,19 +158,19 @@ $conn->close();
                 <div class="profile__job-info flex">
                     <div class="job-info earned">
                         <h2>Earned</h2>
-                        <h3>lorem</h3>
+                        <h3><?php echo $user_earned ?></h3>
                         <h4>TAKA</h4>
                     </div>
                     <div class="info-divider"></div>
                     <div class="job-info completed">
                         <h2>Completed</h2>
-                        <h3>lorem</h3>
+                        <h3><?php echo $user_completed ?></h3>
                         <h4>JOBS</h4>
                     </div>
                     <div class="info-divider"></div>
                     <div class="job-info rated">
                         <h2>Rated</h2>
-                        <h3>lorem</h3>
+                        <h3><?php echo $user_rated ?></h3>
                         <h4>STARS</h4>
                     </div>
                 </div>
@@ -204,32 +236,24 @@ $conn->close();
                                     </div>
                                     <div class="accordion-content">
                                         <!-- nested accordion -->
-                                        <div>
-                                            <div class="overview-nested-content__bg">
-                                                <input type="checkbox" name="status-nested-accordion" id="order1" class="accordion__input">
-                                                <div class="overview-label flex">
-                                                    <label for="order1" class="accordion__label flex">Logo
-                                                        Design</label>
-                                                    <i class='bx bxs-right-arrow'></i>
-                                                </div>
-                                                <div class="accordion-content">
-                                                    wat an egg!
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="overview-nested-content__bg">
-                                                <input type="checkbox" name="status-nested-accordion" id="order2" class="accordion__input">
-                                                <div class="overview-label flex">
-                                                    <label for="order2" class="accordion__label flex">Banner
-                                                        Design</label>
-                                                    <i class='bx bxs-right-arrow'></i>
-                                                </div>
-                                                <div class="accordion-content">
-                                                    wat an egg!
+                                        <?php
+                                        foreach ($job as $temp) {
+                                        ?>
+                                            <div>
+                                                <div class="overview-nested-content__bg">
+                                                    <input type="checkbox" name="status-nested-accordion" id="order<?php echo $temp["serial"]?>" class="accordion__input">
+                                                    <div class="overview-label flex">
+                                                        <label for="order<?php echo $temp["serial"]?>" class="accordion__label flex"><?php echo $temp["name"] ?></label>
+                                                        <i class='bx bxs-right-arrow'></i>
+                                                    </div>
+                                                    <div class="accordion-content">
+                                                        <?php echo $temp["details"]?>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+
+                                        <?php } ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -263,12 +287,12 @@ $conn->close();
                         </div>
                     </li>
 
-                    <li id="dashboard__history">
+                    <!-- <li id="dashboard__history">
                         <a href="#dashboard__history" id="transaction-history" class="status-bar__items">History</a>
                         <div class="history-content">
                             hello
                         </div>
-                    </li>
+                    </li> -->
 
                     <li id="dashboard__acc-details">
                         <a href="#dashboard__acc-details" id="user__acc-details" class="status-bar__items">Personal

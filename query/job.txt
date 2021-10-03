@@ -1,4 +1,4 @@
-INSERT INTO `job`(`posted_by`, `applied_by`, `category`, `name`, `salary`, `duration`, `details`, `sample_images`, `sample_files`, `negotiable`, `preferred_skills`) 
+INSERT INTO `job`(`posted_by`, `accepted_by`, `category`, `name`, `salary`, `duration`, `details`, `sample_images`, `sample_files`, `negotiable`, `preferred_skills`) 
 VALUES  (1,2,'Graphics & Design', 'Illustration1', '3000','2021-12-12 02:30:01', 'illustration is very nice', null, null, 1, 'Design'  ),
 	(1,2,'Graphics & Design', 'Illustration2', '3000','2021-12-12 02:30:01', 'illustration is very nice', null, null, 1, 'Design'  ),
 	(1,2,'Graphics & Design', 'Illustration3', '3000','2021-12-12 02:30:01', 'illustration is very nice', null, null, 1, 'Design'  ),

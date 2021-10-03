@@ -18,6 +18,9 @@ if (!empty($_SESSION)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
+    <!-- Boxicon CSS  -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="stylesheet" href="css/styles.css">
     <title>Hello, world!</title>
 </head>
@@ -66,7 +69,7 @@ if (!empty($_SESSION)) {
                             <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
                             </li>';
                         echo '<li class="nav-item sign-up">
-                        <a class="nav-link custom-link sign-up" href="logout.php">Log out<i class="fas fa-user"></i></a>
+                        <a class="nav-link custom-link sign-up" href="logout.php"><i class="bx bx-log-out"></i> Log out</a>
                         </li>';
                     } else {
                         echo '<li class="nav-item sign-in">
