@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+$isLoggedIn = 1;
+$active = "explore";
 if ($_SESSION["isLoggedIn"] != 1) {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
@@ -25,49 +26,9 @@ if ($_SESSION["isLoggedIn"] != 1) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark common-nav__bg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">
-                <div class="d-flex">
-                    <img src="images/tie2.png" height="auto" width="auto">
-                    <div class=" d-flex flex-column justify-content-center">
-                        <h1 class="header-logo job">
-                            JOB
-                        </h1>
-                        <h1 class="header-logo seeker">
-                            seeker
-                        </h1>
-                    </div>
-                </div>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse navbar-margin-top" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="about.php">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="team.php">Meet the Team</a>
-                    </li>
-                    <div class="horizontal-border nav-item"></div>
-                    <li class="nav-item sign-in">
-                        <a class="nav-link custom-link" href="signin.html"><i class="fas fa-lock"></i>Sign in</a>
-                    </li>
-                    <li class="nav-item sign-up">
-                        <a class="nav-link custom-link sign-up" href="signup.php">Sign up<i class="fas fa-user"></i></a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <?php
+    include "nav.php";
+    ?>
     <div class="explore-container">
         <div class="wrapper">
             <div class="left">

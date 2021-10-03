@@ -11,9 +11,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
 $success = 0;
 if (!empty($_POST)) {
     $name = $_POST['name'];

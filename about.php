@@ -1,3 +1,11 @@
+<?php
+session_start();
+$isLoggedIn = 0;
+$active = "about";
+if (!empty($_SESSION)) {
+    $isLoggedIn = $_SESSION["isLoggedIn"];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,49 +26,9 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark common-nav__bg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <div class="d-flex">
-                    <img src="images/tie2.png" height="auto" width="auto">
-                    <div class=" d-flex flex-column justify-content-center">
-                        <h1 class="header-logo job">
-                            JOB
-                        </h1>
-                        <h1 class="header-logo seeker">
-                            seeker
-                        </h1>
-                    </div>
-                </div>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse navbar-margin-top" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="about.php">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="team.php">Meet the Team</a>
-                    </li>
-                    <div class="horizontal-border nav-item"></div>
-                    <li class="nav-item sign-in">
-                        <a class="nav-link custom-link" href="signin.php"><i class="fas fa-lock"></i>Sign in</a>
-                    </li>
-                    <li class="nav-item sign-up">
-                        <a class="nav-link custom-link sign-up" href="signup.php">Sign up<i
-                                class="fas fa-user"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
+    include "nav.php";
+    ?>
 
     <div class="main-section">
         <div class="section-1">
@@ -184,9 +150,7 @@
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="script.js"></script>
 </body>

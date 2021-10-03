@@ -59,15 +59,14 @@ if ($_SESSION["isLoggedIn"] != 1) {
                             <input class="form-control custom-search-field shadow-none" type="search" placeholder="Search for work..." aria-label="Search">
                             <button class="btn custom-search-btn shadow-none" type="submit">Search</button>
                         </form>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Explore</a>
+                            <a class="nav-link" href="explore.php">Explore</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Inbox</a>
+                            <a class="nav-link" href="profile.php">Edit Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link switch-to-hirer" href="#">Switch to hirer</a>
+                            <a class="nav-link switch-to-hirer" href="logout.php">Logout</a>
                         </li>
 
                     </ul>
