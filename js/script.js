@@ -87,7 +87,7 @@ else if (document.URL.includes("explore.php")) {
       <button class="card-button">See More</button>
   </div>
 </div>`;
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= -1; i++) {
     jobCardContainer.innerHTML += jobCard;
   }
   let isLeftThumb = false;

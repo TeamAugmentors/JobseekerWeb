@@ -5,6 +5,7 @@ $active = "productDetails";
 if ($_SESSION["isLoggedIn"] != 1) {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
+print_r($_GET);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +25,8 @@ if ($_SESSION["isLoggedIn"] != 1) {
 
 <body>
     <header>
-        <?php 
-            include "nav.php"; 
+        <?php
+        include "nav.php";
         ?>
     </header>
 

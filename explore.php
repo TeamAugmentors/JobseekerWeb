@@ -5,6 +5,44 @@ $active = "explore";
 if ($_SESSION["isLoggedIn"] != 1) {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
+
+// database stuffs
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jobseekerweb";
+
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// query 
+$sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
+$result = $conn->query($sqlCards);
+$allCards = array();
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $rowItems = array();
+        $rowItems['id'] = $row['id'];
+        $rowItems['category'] = $row['category'];
+        $rowItems['name'] = $row['name'];
+        $rowItems['salary'] = $row['salary'];
+        $rowItems['duration'] = $row['duration'];
+        $rowItems['negotiable'] = $row['negotiable'];
+        $rowItems['details'] = $row['details'];
+        array_push($allCards, $rowItems);
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+// echo "<pre>";
+// print_r($allCards);
+// echo "</pre>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,7 +180,53 @@ if ($_SESSION["isLoggedIn"] != 1) {
                         <div class="line"></div>
                     </div>
                     <div class="job-card-container">
-
+                        <?php
+                        foreach ($allCards as $card) {
+                        ?>
+                            <div class="job-card">
+                                <div class="job-card-header">
+                                    <h1 class="catagory"><?php echo $card['category'] ?></h1>
+                                    <h1 class="job-name"><?php echo $card['name'] ?></h1>
+                                    <div class="amount-div">
+                                        <div class="tk-icon">
+                                            <img src="images/taka3.svg" alt="">
+                                        </div>
+                                        <h1 class="amount"><?php echo $card['salary'] ?></h1>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="details">
+                                        <div class="duration">
+                                            <div class="details-left">Duration</div>
+                                            <div class="details-right">2</div>
+                                        </div>
+                                        <div class="revisions">
+                                            <div class="details-left">revisions</div>
+                                            <div class="details-right">4</div>
+                                        </div>
+                                        <div class="negotiable">
+                                            <div class="details-left">Negotiable</div>
+                                            <div class="details-right"><?php
+                                                                        if ($card['negotiable'] === 1) {
+                                                                            echo "Yes";
+                                                                        } else {
+                                                                            echo "No";
+                                                                        }
+                                                                        ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="description">
+                                        <p><?php echo $card['details'] ?></p>
+                                    </div>
+                                    <form action="productDetails.php" method="GET">
+                                        <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
+                                        <button class="card-button">See More</button>
+                                    </form>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
