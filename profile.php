@@ -1,3 +1,73 @@
+<?php
+session_start();
+$isLoggedIn = 0;
+$active = "profile";
+if (!empty($_SESSION)) {
+    $isLoggedIn = $_SESSION["isLoggedIn"];
+} else {
+    header("Location: http://localhost/JobseekerWeb/signin.php");
+}
+// database stuffs
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jobseekerweb";
+
+$name = null;
+$email = null;
+$phoneNo = null;
+$billing = null;
+$oldPass = null;
+
+$isFailed = 0;
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$sqlSelect = "SELECT * FROM users WHERE id = " . $_SESSION["userId"];
+$result = $conn->query($sqlSelect);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $name = $row["name"];
+        $email = $row["mail"];
+        $oldPass = $row["password"];
+        $name = $row["name"];
+        $phoneNo = $row["phone_no"];
+        $billing = $row["billing_info"];
+    }
+} else {
+    echo "0 results";
+}
+if (!empty($_POST)) {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $phoneNo = $_POST["phoneNo"];
+    $billing = $_POST["billing"];
+    $oldPass1 = $_POST["oldPass"];
+    $newPass = $_POST["newPass"];
+    $confirmPass = $_POST["confirmPass"];
+
+    if (strcmp($oldPass, $oldPass1) === 0 && strcmp($newPass, $confirmPass) === 0) {
+        if (strlen($newPass) > 0) {
+            $oldPass1 = $newPass;
+        }
+        $sqlInsert = "UPDATE users SET name='" . $name . "',mail='" . $email . "',phone_no='" . $phoneNo . "',billing_info='" . $billing . "',password='" . $oldPass1 . "'WHERE id = " . $_SESSION["userId"];
+        if ($conn->query($sqlInsert) === TRUE) {
+            // echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
+    } else {
+        $isFailed = 1;
+    }
+}
+
+$conn->close();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,48 +83,24 @@
 
 <body>
     <!-- --------------------main nav------------------ -->
-    <nav class="navbar navbar-expand-lg navbar-dark common-nav__bg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <div class="d-flex">
-                    <img src="images/tie2.png" height="auto" width="auto">
-                    <div class=" d-flex flex-column justify-content-center">
-                        <h1 class="header-logo job">
-                            JOB
-                        </h1>
-                        <h1 class="header-logo seeker">
-                            seeker
-                        </h1>
-                    </div>
-                </div>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse navbar-margin-top" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="about.php">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="team.php">Meet the Team</a>
-                    </li>
-                    <div class="horizontal-border nav-item"></div>
-                    <li class="nav-item sign-in">
-                        <a class="nav-link custom-link" href="signin.php"><i class="fas fa-lock"></i>Sign in</a>
-                    </li>
-                    <li class="nav-item sign-up">
-                        <a class="nav-link custom-link sign-up" href="signup.php">Sign up<i class="fas fa-user"></i></a>
-                    </li>
-                </ul>
+    <?php
+    include "nav.php";
+    ?>
+
+    <!-- -----------------------main body----------------------------- -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                <strong class="me-auto">Error</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>Incorrect Password</h3>
             </div>
         </div>
-    </nav>
-    <!-- -----------------------main body----------------------------- -->
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8 mx-auto">
@@ -71,7 +117,7 @@
                         <div class="col">
                             <div class="row align-items-center">
                                 <div class="col-md-7">
-                                    <h2 class="mb-1">Atiqur Rahman</h2>
+                                    <h2 class="mb-1"><?php echo $name ?></h2>
                                     <p class="small mb-3"><span class="badge badge-dark">New York, USA</span></p>
                                 </div>
                             </div>
@@ -92,97 +138,29 @@
                             </div>
                         </div>
                     </div>
-                    <form>
+                    <form method="POST" action="">
                         <!-- ----------------------Your Info------------------ -->
                         <h2 class="d-flex justify-content-start info-section">Your Info</h2>
                         <div class="edit-profile-horizontal-line mb-1"></div>
                         <div class="form-row row">
                             <div class="my-form-group col-md-6">
-                                <label for="firstname">Firstname</label>
-                                <input type="text" id="firstname" placeholder="Atiqur" />
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Atiqur" value=<?php echo $name ?> required />
                             </div>
                             <div class="my-form-group col-md-6">
-                                <label for="lastname">Lastname</label>
-                                <input type="text" id="lastname" placeholder="Rahman" />
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="brown@asher.me" value=<?php echo $email ?> required />
                             </div>
                         </div>
                         <div class="my-form-group">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" id="inputEmail4" placeholder="brown@asher.me" />
-                        </div>
-                        <div class="my-form-group">
-                            <label for="inputAddress5">Address</label>
-                            <input type="text" id="inputAddress5" placeholder="Mirpur-1, Dhaka" />
-                        </div>
-                        <div class="form-row row">
-                            <div class="my-form-group col-md-6">
-                                <label for="inputCompany5">Company</label>
-                                <input type="text" id="inputCompany5" placeholder="Jobseeker" />
-                            </div>
-                            <div class="my-form-group col-md-4">
-                                <label for="inputState5">State</label>
-                                <input type="text" id="inputState5" placeholder="Dhaka" />
-                            </div>
-                            <div class="my-form-group col-md-2">
-                                <label for="inputZip5">Zip</label>
-                                <input type="text" id="inputZip5" placeholder="98232" />
-                            </div>
-                        </div>
-                        <!-- -----------------------------Skills---------------------------- -->
-                        <h2 class="d-flex justify-content-start info-section mt-5">Skills</h2>
-                        <div class="edit-profile-horizontal-line mb-1"></div>
-                        <div class="row mb-4">
-                            <div class="col-md-12">
-                                <div class="my-form-group skill-input-form">
-                                    <label for="Skills">Enter Your Skills</label>
-                                    <div>
-                                        <input type="Text" id="Skills" placeholder="C++, Java, Logo design" />
-                                        <button type="button" class="skill-add-btn">Add</button>
-                                    </div>
+                            <div class="form-row row">
+                                <div class="my-form-group col-md-6">
+                                    <label for="phoneNo">Phone No</label>
+                                    <input type="number" id="phoneNo" name="phoneNo" placeholder="0177.........." value=<?php echo $phoneNo ?> />
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="chip-container">
-                                    <div class="chip">
-                                        <div class="chip-content">C++</div>
-                                        <div class="chip-close">
-                                            <svg class="chip-svg" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                                                <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z">
-                                                </path>
-                                            </svg>
-
-                                        </div>
-                                    </div>
-                                    <div class="chip">
-                                        <div class="chip-content">Java</div>
-                                        <div class="chip-close">
-                                            <svg class="chip-svg" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                                                <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z">
-                                                </path>
-                                            </svg>
-
-                                        </div>
-                                    </div>
-                                    <div class="chip">
-                                        <div class="chip-content">Python</div>
-                                        <div class="chip-close">
-                                            <svg class="chip-svg" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                                                <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z">
-                                                </path>
-                                            </svg>
-
-                                        </div>
-                                    </div>
-                                    <div class="chip">
-                                        <div class="chip-content">Javascript</div>
-                                        <div class="chip-close">
-                                            <svg class="chip-svg" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                                                <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z">
-                                                </path>
-                                            </svg>
-
-                                        </div>
-                                    </div>
+                                <div class="my-form-group col-md-6">
+                                    <label for="billing">Billing info</label>
+                                    <input type="number" id="billing" name="billing" placeholder="0177........" value=<?php echo $billing ?> />
                                 </div>
                             </div>
                         </div>
@@ -192,16 +170,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="my-form-group">
-                                    <label for="Old-Password">Old Password</label>
-                                    <input type="password" id="Old-Password" />
+                                    <label for="oldPassword">Old Password</label>
+                                    <input type="password" id="oldPassword" name="oldPass" required />
                                 </div>
                                 <div class="my-form-group">
-                                    <label for="New-Password">New Password</label>
-                                    <input type="password" id="New-Password" />
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" name="newPass" />
                                 </div>
                                 <div class="my-form-group">
-                                    <label for="Confirm-Password">Confirm Password</label>
-                                    <input type="password" id="Conform-Password" />
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input type="password" id="conformPassword" name="confirmPass" />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -217,14 +195,23 @@
                                 </ul>
                             </div>
                         </div>
-                        <button class="save-change-btn">Save Change</button>
-                        <button type="button" class="btn btn btn-outline-danger cancel-button"> <a href="./index.html">Cancel</a></button>
+                        <button type="submit" class="save-change-btn">Save Change</button>
+                        <button type="button" class="btn btn btn-outline-danger cancel-button"> <a href="dashboard.php#dashboard__overview">Cancel</a></button>
                     </form>
                 </div>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-        <script src="js/script.js"></script>
+        <script type="text/javascript">
+            <?php
+            if ($isFailed) {
+                echo " var toastTrigger = document.getElementById('liveToastBtn');
+            var toastLiveExample = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();";
+            }
+            ?>
+        </script>
 </body>
 
 </html>
