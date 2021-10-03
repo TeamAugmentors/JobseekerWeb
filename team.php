@@ -69,7 +69,7 @@ if ($result->num_rows > 0) {
                     include "nav.php";
                     ?>
                     <!-- main nav  -->
-                    
+
                     <div class="team--hero-text custom--container">
                         <h1 id="team--hero-header"></h1>
                         <div class="team--hero-text">
@@ -98,7 +98,7 @@ if ($result->num_rows > 0) {
                 <div class="<?php echo $temp["name"]?>">
                     <h1><?php echo $temp["name"] ?> </h1>
                     <h2><?php echo $temp["id"]?> </h2>
-                    <!-- <?php echo $temp["picture"] ?> -->
+                    <?php echo $temp["picture"] ?>
                     <?php echo $temp["hobby"] ?>
                 </div>
             </section>
