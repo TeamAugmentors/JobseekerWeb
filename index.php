@@ -533,7 +533,6 @@ if (!empty($_SESSION)) {
             <div class="computer" id="computer">
 
             </div>
-
             <div>
                 <h2 class="third">go ahead</h2>
             </div>
