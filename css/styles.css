@@ -1858,6 +1858,9 @@ input[type='checkbox']:checked:after {
 .explore-container .wrapper .left .freelancer-dashboard img {
     max-width: 100%;
     object-fit: cover;
+    aspect-ratio: 1;
+    vertical-align: middle;
+    border-style: none;
 }
 
 .explore-container .wrapper .left .text-section {
