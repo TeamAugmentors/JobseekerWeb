@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+$active = 'home';
 $isLoggedIn = 0;
 if (!empty($_SESSION)) {
     $isLoggedIn = $_SESSION["isLoggedIn"];
@@ -25,15 +26,6 @@ if (!empty($_SESSION)) {
     <title>Hello, world!</title>
 
     <style>
-        @font-face {
-            font-family: 'fresh';
-            src: url('fonts/FreshEaters.ttf');
-        }
-
-        .navbar-brand:hover {
-            color: white;
-        }
-
         .enter-text {
             margin: 0;
             font-family: 'fresh';
@@ -159,7 +151,6 @@ if (!empty($_SESSION)) {
         body {
             background-color: #212529;
             z-index: -2;
-            letter-spacing: 1px;
             overflow-x: hidden;
         }
 
@@ -234,18 +225,18 @@ if (!empty($_SESSION)) {
 
         .header-text {
             color: white;
-            font-size: 80px;
+            font-size: 8rem;
         }
 
         .header-text-2 {
             color: white;
-            font-size: 40px;
+            font-size: 4rem;
             opacity: 0.8;
         }
 
         .header-text-3 {
             color: white;
-            font-size: 30px;
+            font-size: 3rem;
             opacity: 0.8;
         }
 
@@ -253,7 +244,7 @@ if (!empty($_SESSION)) {
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
-            font-size: 25px;
+            font-size: 2.5rem;
             transition: all 0.3s;
         }
 
@@ -355,7 +346,7 @@ if (!empty($_SESSION)) {
         }
 
         .color-black {
-            color: black;
+            color: black !important;
         }
 
         .new-card-container {
@@ -411,7 +402,7 @@ if (!empty($_SESSION)) {
             height: 60px;
             margin-top: 15px;
             color: white;
-            font-size: 23px;
+            font-size: 2.3rem;
             text-align: center;
             padding-top: 5px;
         }
@@ -446,68 +437,74 @@ if (!empty($_SESSION)) {
             margin-top: 220px;
         }
 
-        footer {
-            height: 200px;
-        }
-
         .animation-content {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
         }
+
+        .section {
+            min-height: 100vh;
+        }
+
+
+        /* MOBILE  */
+
+        /*LG*/
+        
+        @media (max-width: 999px) {
+            .img-col {
+                display: none !important;
+            }
+
+            .header-col {
+                text-align: center;
+            }
+
+            .button-col {
+                display: block !important;
+                margin: auto;
+            }
+
+            .icon-scroll {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-text {
+                font-size: 12vw;
+            }
+
+            .header-text-2 {
+                font-size: 9vw !important;
+            }
+
+            .header-text-3 {
+                font-size: 7vw;
+            }
+
+            .my-button {
+                font-size: 7vw;
+                margin: 10px 0 !important;
+            }
+
+            .button-earn {
+                margin: 10px auto !important;
+            }
+
+
+
+        }
     </style>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 </head>
 
 <body class="overflow-hidden">
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark common-nav__bg sticky-top ">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                JS
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item  active">
-                        <a class="nav-link" aria-current="page" href="#" style="color:white">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.php">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="team.php">Meet the Team</a>
-                    </li>
-                    <div class="horizontal-border nav-item"></div>
-                    <?php
-                    if ($isLoggedIn === 1) {
-                        echo '<li class="nav-item">
-                        <a class="nav-link" href="explore.php">Explore</a>
-                        </li>';
-                        echo '<li class="nav-item">
-                            <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
-                            </li>';
-                        echo '<li class="nav-item sign-up">
-                        <a class="nav-link custom-link sign-up" href="logout.php"><i class="bx bx-log-out"></i> Log out</a>
-                        </li>';
-                    } else {
-                        echo '<li class="nav-item sign-in">
-                        <a class="nav-link custom-link" href="signin.php"><i class="fas fa-lock"></i>Sign in</a>
-                        </li>
-                        <li class="nav-item sign-up">
-                            <a class="nav-link custom-link sign-up" href="signup.php">Sign up<i class="fas fa-user"></i></a>
-                        </li>';
-                    }
-                    ?>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
+    include "nav.php";
+    ?>
 
     <div class="white-bg">
     </div>
@@ -539,23 +536,14 @@ if (!empty($_SESSION)) {
         </div>
     </div>
 
-    <!-- <div class="hero-buttons">
-                    <a class="btn shadow-none btn-primary-custom rounded-btn" href="https://drive.google.com/u/0/uc?id=1eegNBg5l8NAVdHD5DzRxe_HYoSNoReoy&export=download" target="_blank">Get
-                        the app<i class="fas fa-arrow-down"></i></a>
-                    <a class="btn shadow-none btn-secondary rounded-btn" href="https://www.youtube.com/watch?v=YYKiquIiLZ4&t=193s" target="_blank">Watch
-                        Video<i class="fas fa-play fa-xs"></i></a>
-                </div> -->
-
-    <div class="main-content"
-        style="transform-origin: center;transform: scale(0.3) translate(110px, -820px);opacity: 1;transition: all 0.5s ease 0s;  pointer-events: none; opacity: 0;"
-        id="mainContent">
-        <div class="container-fluid vm-100 w-80 vh-100" id="headerContent">
+    <div class="main-content" style="transform-origin: center;transform: scale(0.3) translate(110px, -820px);opacity: 1;transition: all 0.5s ease 0s;  pointer-events: none; opacity: 0;" id="mainContent">
+        <div class="container-fluid vm-100 w-80 section" id="headerContent">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 header-col">
                     <h1 class="header-text">We pave the way</h1>
                     <h2 class="header-text-2 vm-30">So that you can focus on what is important</h2>
                     <h3 class="header-text-3 vm-100">Interested? Explore how it works</h3>
-                    <div class="d-flex vm-30">
+                    <div class="d-flex vm-30 button-col">
                         <button class="my-button outline hmr-10" id="btnDownload">
                             Get the App
                         </button>
@@ -565,7 +553,7 @@ if (!empty($_SESSION)) {
                     </div>
                 </div>
 
-                <div class="col-lg-6 d-flex">
+                <div class="col-lg-6 d-flex img-col">
                     <div class="vr">
 
                     </div>
@@ -580,15 +568,13 @@ if (!empty($_SESSION)) {
     <div id="secondContent" class="d-none">
         <div class="vm-30"></div>
 
-        <div class="container-fluid p-5 bg-light vh-100">
+        <div class="container-fluid p-5 bg-light section">
             <div class="row w-90 m-auto">
                 <h1 class="header-text color-black text-center vm-100">
                     Pick one which is right for you.
                 </h1>
-                <div class="vm-100">
 
-                </div>
-                <div class="col-lg-3 d-grid justify-content-center">
+                <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
                     <div class="new-card-container">
                         <div class="inside-container pt-4 bg-black">
                             <h3 class="color-white card-logo-text text-center m-0">
@@ -637,7 +623,7 @@ if (!empty($_SESSION)) {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 d-grid justify-content-center">
+                <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
                     <div class="new-card-container">
                         <div class="inside-container pt-4 bg-black">
                             <h3 class="color-white card-logo-text text-center m-0">
@@ -686,7 +672,7 @@ if (!empty($_SESSION)) {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 d-grid justify-content-center">
+                <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
                     <div class="new-card-container">
                         <div class="inside-container pt-4 bg-black">
                             <h3 class="color-white card-logo-text text-center m-0">
@@ -734,7 +720,7 @@ if (!empty($_SESSION)) {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 d-grid justify-content-center">
+                <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
                     <div class="new-card-container">
                         <div class="inside-container pt-4 bg-black">
                             <h3 class="color-white card-logo-text text-center m-0">
@@ -789,13 +775,13 @@ if (!empty($_SESSION)) {
             </div>
         </div>
 
-        <div class="container-fluid vm-100 w-80 vh-100">
+        <div class="container-fluid vm-100 w-80 section">
             <div class="row">
-                <div class="col-lg-6 d-flex justify-content-center">
+                <div class="col-lg-6 d-flex justify-content-center img-col">
                     <img src="images/sectionimg.png" class="img-fluid" width="500px">
-                </div>
-                <div class="col-lg-6 d-flex ">
                     <div class="vr mx-5"></div>
+                </div>
+                <div class="col-lg-6 d-flex header-col">
                     <div>
                         <h1 class="header-text">Having doubts?</h1>
                         <h2 class="header-text-2 vm-30">We believe in actions more than words.</h2>
@@ -806,7 +792,7 @@ if (!empty($_SESSION)) {
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <button class="my-button outline w-50 d-block mx-auto vm-100 ">
+                    <button class="my-button outline w-50 d-block mx-auto vm-100 button-earn">
                         I want to start earning!
                     </button>
                     <h1 class="header-text-2 text-center vm-100 ">
@@ -815,27 +801,12 @@ if (!empty($_SESSION)) {
                 </div>
             </div>
         </div>
-
-        <footer class="bg-black overflow-hidden">
-            <div class="row d-flex flex-column align-items-center ">
-                <hr class="color-white my-5 w-90 ">
-                <div class="d-flex justify-content-between  w-90">
-                    <div class="d-flex align-items-center">
-                        <a href="#" class="navbar-brand color-white " style="text-decoration: none;">JS</a>
-                        <h4 class="color-white" style="font-size: 2.2rem; margin:0; padding:0">© 2021 Company, Inc</h4>
-                    </div>
-                    <div>
-                        <h1 class="header-text-2">
-                            <i class="fab fa-facebook"></i>
-                            <i class="fab fa-facebook-messenger"></i>
-                            <i class="fab fa-twitter"></i>
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        </footer> 
+        <?php
+        include "footer.php";
+        ?>
     </div>
- 
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
@@ -849,6 +820,8 @@ if (!empty($_SESSION)) {
 
     <script>
         $(document).ready(() => {
+            var width = $(window).width();
+
             var computer = $('#computer')
             var enter = $('#enter')
             var second = $('#second')
@@ -861,6 +834,39 @@ if (!empty($_SESSION)) {
             var animationContent = $('#animationContent')
 
             var bool = false
+            var resized = false
+
+            $(window).resize(() => {
+
+                if (!resized && $(window).width() < 1950) {
+                    whiteBg.remove()
+
+                    mainContent.css('transform', 'scale(1)')
+                    mainContent.css('pointer-events', 'auto')
+
+                    animationContent.remove()
+                    $('#headerContent').unwrap()
+
+                    $('body').removeClass('overflow-hidden')
+                    $('#secondContent').removeClass('d-none')
+
+                    resized = true;
+                }
+            })
+
+            if (width < 1950 && !resized) {
+                whiteBg.remove()
+
+                mainContent.css('transform', 'scale(1)')
+                mainContent.css('pointer-events', 'auto')
+
+                animationContent.remove()
+                $('#headerContent').unwrap()
+
+                $('body').removeClass('overflow-hidden')
+                $('#secondContent').removeClass('d-none')
+                resized = true;
+            }
 
             setTimeout(() => {
                 enter.css({
@@ -880,7 +886,7 @@ if (!empty($_SESSION)) {
             }, 2000)
 
 
-            setTimeout(function () {
+            setTimeout(function() {
                 computer.css('animation', "hover 1s ease-in-out both infinite")
 
                 computer.hover(() => {
@@ -940,7 +946,7 @@ if (!empty($_SESSION)) {
 
                                     $('body').removeClass('overflow-hidden')
                                     $('#secondContent').removeClass('d-none')
-                                }, 2600) 
+                                }, 2600)
                             })
                         }
                     }, 1000)

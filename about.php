@@ -24,7 +24,7 @@ if (!empty($_SESSION)) {
 
     <!-- Boxicon CSS  -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <title>About Us</title>
 </head>
 
@@ -151,6 +151,10 @@ if (!empty($_SESSION)) {
                 </div>
             </div>
         </footer>
+
+        <?php
+        include "footer.php";
+        ?>
     </div>
 
 
