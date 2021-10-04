@@ -78,8 +78,8 @@ function imageupload($conn)
         // echo "<pre>";
         // print_r($_FILES['profile_image']);
         // echo "</pre>";
-        $img_name = $_FILES["profile_image"]["name"];
-        $img_size = $_FILES["profile_image"]["size"];
+        // $img_name = $_FILES["profile_image"]["name"];
+        // $img_size = $_FILES["profile_image"]["size"];
         $temp_name = $_FILES["profile_image"]["tmp_name"];
         $error = $_FILES["profile_image"]["error"];
         if ($error === 0) {
@@ -146,11 +146,15 @@ function imageupload($conn)
                             <div class="col-md-3 text-center mb-5">
                                 <div class="avatar avatar-xl">
                                     <?php
-                                    echo '<img src="data:image/jpeg;base64,' . base64_encode($profile_image) . '" alt="..." class="avatar-img rounded-circle"/>'
+                                    if (!empty($profile_image)) {
+                                        echo '<img src="data:image/jpeg;base64,' . base64_encode($profile_image) . '" alt="..." class="avatar-img rounded-circle"/>';
+                                    } else {
+                                        echo '<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />';
+                                    }
                                     ?>
-                                    <!-- <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" /> -->
+                                    <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
+                                    <button class="change-picture-btn mt-4">Change Picture</button>
                                 </div>
-                                <input type="file" name="profile_image" accept="image/x-png,image/gif,image/jpeg" />
                             </div>
                             <div class="col">
                                 <div class="row align-items-center">
@@ -160,7 +164,6 @@ function imageupload($conn)
                                 </div>
                             </div>
                         </div>
-                        <!-- <form method="POST" action=""> -->
                         <!-- ----------------------Your Info------------------ -->
                         <h2 class="d-flex justify-content-start info-section">Your Info</h2>
                         <div class="edit-profile-horizontal-line mb-1"></div>
@@ -178,11 +181,11 @@ function imageupload($conn)
                             <div class="form-row row">
                                 <div class="my-form-group col-md-6">
                                     <label for="phoneNo">Phone No</label>
-                                    <input type="number" id="phoneNo" name="phoneNo" placeholder="0177.........." value=<?php echo $phoneNo ?> />
+                                    <input type="text" id="phoneNo" name="phoneNo" placeholder="0177.........." value=<?php echo $phoneNo ?> />
                                 </div>
                                 <div class="my-form-group col-md-6">
                                     <label for="billing">Billing info</label>
-                                    <input type="number" id="billing" name="billing" placeholder="0177........" value=<?php echo $billing ?> />
+                                    <input type="text" id="billing" name="billing" placeholder="0177........" value=<?php echo $billing ?> />
                                 </div>
                             </div>
                         </div>
@@ -223,17 +226,18 @@ function imageupload($conn)
                 </form>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            <?php
-            if ($isFailed) {
-                echo " var toastTrigger = document.getElementById('liveToastBtn');
-            var toastLiveExample = document.getElementById('liveToast');
-            var toast = new bootstrap.Toast(toastLiveExample);
-            toast.show();";
-            }
-            ?>
-        </script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    < type="text/javascript">
+        <?php
+        if ($isFailed) {
+            echo " var toastTrigger = document.getElementById('liveToastBtn');
+                var toastLiveExample = document.getElementById('liveToast');
+                var toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();";
+        }
+        ?>
 </body>
 
 </html>
