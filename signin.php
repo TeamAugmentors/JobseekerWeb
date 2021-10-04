@@ -1,3 +1,41 @@
+<?php
+session_start();
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "jobseekerweb";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$success = 1;
+if (!empty($_POST)) {
+    $sql = "SELECT id, name, user_name, mail, password FROM users;";
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            if ((!strcmp($row['user_name'], $username) || !strcmp($row['mail'], $username)) && !strcmp($row['password'], $password)) {
+                $_SESSION["isLoggedIn"] = 1;
+                $_SESSION["doneLoggedIn"] = 1;
+                $_SESSION["userId"] = $row['id'];
+                $_SESSION["name"] = $row['name'];
+                header("Location: http://localhost/JobseekerWeb/dashboard.php#dashboard__overview");
+            } else {
+                $success = 0;
+            }
+        }
+    } else {
+        echo "Please signup first";
+    }
+    $conn->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +44,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +55,18 @@
 </head>
 
 <body>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                <strong class="me-auto">Login Failed</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>Please enter correctly</h3>
+            </div>
+        </div>
+    </div>
     <div class="signin-page">
         <div class="left">
             <div class="arrow-left">
@@ -59,14 +107,12 @@
                 <form method="POST" class="custom-form">
                     <div class="custom-form-group">
                         <label class="form-label" for="username">Username or Email Address</label>
-                        <input type="email" class="custom-input" id="username" aria-describedby="emailHelp"
-                            placeholder="ani.atikur99@gmail.com" required>
+                        <input type="text" class="custom-input" name="username" id="username" aria-describedby="emailHelp" placeholder="ani.atikur99@gmail.com" required>
                         <div class="line"></div>
                     </div>
                     <div class="custom-form-group">
                         <label class="form-label" for="password">Password</label>
-                        <input type="password" class="custom-input" id="password" aria-describedby="passwordHelp"
-                            required>
+                        <input type="password" class="custom-input" id="password" name="password" aria-describedby="passwordHelp" required>
                         <div class="line"></div>
                     </div>
                     <button type="submit" class="form-custom-button">Sign in</button>
@@ -74,11 +120,19 @@
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
         <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript">
+            <?php
+            if ($success == 0) {
+                echo " var toastTrigger = document.getElementById('liveToastBtn');
+            var toastLiveExample = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();";
+            }
+            ?>
+        </script>
 </body>
 
 </html>

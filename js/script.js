@@ -53,47 +53,47 @@ else if (document.URL.includes("explore.php")) {
   const inputTkMax = document.querySelector(".input-amount .input-tk-max");
   console.log(inputTkMin);
   console.log(inputTkMax);
-  const jobCard = `<div class="job-card">
-  <div class="job-card-header">
-      <h1 class="catagory">Graphics & design</h1>
-      <h1 class="job-name">Illustration</h1>
-      <div class="amount-div">
-          <div class="tk-icon">
-              <img src="images/taka3.svg" alt="">
-          </div>
-          <h1 class="amount">3000</h1>
-      </div>
-      <div class="line"></div>
-      <div class="details">
-          <div class="duration">
-              <div class="details-left">Duration</div>
-              <div class="details-right">2 Days</div>
-          </div>
-          <div class="revisions">
-              <div class="details-left">revisions</div>
-              <div class="details-right">4</div>
-          </div>
-          <div class="negotiable">
-              <div class="details-left">Negotiable</div>
-              <div class="details-right">No</div>
-          </div>
-      </div>
-      <div class="description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident ipsum
-              perferendis autem, aliquid eos voluptatibus id suscipit, odio temporibus sed et
-              nam
-              repellendus eaque numquam cum reprehenderit nemo repudiandae rerum!</p>
-      </div>
-      <button class="card-button">See More</button>
-  </div>
-</div>`;
-  for (let i = 1; i <= 10; i++) {
-    jobCardContainer.innerHTML += jobCard;
-  }
+  //   const jobCard = `<div class="job-card">
+  //   <div class="job-card-header">
+  //       <h1 class="catagory">Graphics & design</h1>
+  //       <h1 class="job-name">Illustration</h1>
+  //       <div class="amount-div">
+  //           <div class="tk-icon">
+  //               <img src="images/taka3.svg" alt="">
+  //           </div>
+  //           <h1 class="amount">3000</h1>
+  //       </div>
+  //       <div class="line"></div>
+  //       <div class="details">
+  //           <div class="duration">
+  //               <div class="details-left">Duration</div>
+  //               <div class="details-right">2 Days</div>
+  //           </div>
+  //           <div class="revisions">
+  //               <div class="details-left">revisions</div>
+  //               <div class="details-right">4</div>
+  //           </div>
+  //           <div class="negotiable">
+  //               <div class="details-left">Negotiable</div>
+  //               <div class="details-right">No</div>
+  //           </div>
+  //       </div>
+  //       <div class="description">
+  //           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident ipsum
+  //               perferendis autem, aliquid eos voluptatibus id suscipit, odio temporibus sed et
+  //               nam
+  //               repellendus eaque numquam cum reprehenderit nemo repudiandae rerum!</p>
+  //       </div>
+  //       <button class="card-button">See More</button>
+  //   </div>
+  // </div>`;
+  //   // for (let i = 1; i <= -1; i++) {
+  //   //   jobCardContainer.innerHTML += jobCard;
+  //   // }
   let isLeftThumb = false;
   let isRightThumb = false;
-  let thumbposLeft = 20;
-  let thumbposRight = 80;
+  let thumbposLeft = 5;
+  let thumbposRight = 95;
   function initSliders() {
     leftThumb.style.left = `${thumbposLeft}%`;
     selectedTrack.style.left = `${thumbposLeft}%`;
@@ -126,14 +126,12 @@ else if (document.URL.includes("explore.php")) {
       let thumbsContainerLeft = rect.left;
       let thumbContainerWidth = rect.width;
       thumbposLeft = (dx - thumbsContainerLeft) / thumbContainerWidth * 100;
-      console.log(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
       if (thumbposLeft > thumbposRight) {
         thumbposLeft = thumbposRight;
       }
       else if (thumbposLeft < 0) {
         thumbposLeft = 0;
       }
-      // prnt(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
       leftThumb.style.left = `${thumbposLeft}%`;
       selectedTrack.style.left = `${thumbposLeft}%`;
       inputTkMin.value = parseInt(map(thumbposLeft, 0, 100, 0, 50000));
@@ -151,7 +149,6 @@ else if (document.URL.includes("explore.php")) {
       else if (thumbposRight > 100) {
         thumbposRight = 100;
       }
-      // prnt(`posLeft ${thumbposLeft}, pos Right ${100 - thumbposRight}`);
       rightThumb.style.left = `${thumbposRight}%`;
       selectedTrack.style.right = `${100 - thumbposRight}%`;
       inputTkMax.value = parseInt(map(thumbposRight, 0, 100, 0, 50000));
@@ -159,7 +156,6 @@ else if (document.URL.includes("explore.php")) {
     }
   }
   function mouseUpHandler() {
-    console.log("Mouse Up");
     isLeftThumb = false;
     isRightThumb = false;
     document.removeEventListener('mousemove', mouseMoveHandler);
