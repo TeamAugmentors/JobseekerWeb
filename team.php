@@ -25,7 +25,7 @@ $sqlTeam = "SELECT * FROM team";
 $result = $conn->query($sqlTeam);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $temp = array("name" => $row["name"], "id" => $row["id"], "hobby" => $row["hobby"], "picture" => $row["picture"]);
+        $temp = array("member"=> $row["member"],"name" => $row["name"], "id" => $row["id"], "hobby" => $row["hobby"], "picture" => $row["picture"]);
         array_push($teammate, $temp);
         // print_r($temp);
     }
@@ -94,12 +94,11 @@ if ($result->num_rows > 0) {
             <?php
             foreach($teammate as $temp){
             ?>
-            <section class="section" id="<?php echo $temp["id"] ?>">
-                <div class="<?php echo $temp["name"]?>">
+            <section class="section teammates" id="<?php echo $temp["id"] ?>">
+                <div class="<?php echo $temp["member"]?> member">
                     <h1><?php echo $temp["name"] ?> </h1>
                     <h2><?php echo $temp["id"]?> </h2>
                     <?php echo $temp["hobby"] ?>
-                    <!-- <?php echo $temp["picture"] ?> -->
                 </div>
             </section>
             <?php } ?>
