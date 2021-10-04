@@ -241,9 +241,13 @@ else if (document.URL.includes("explore.php")) {
   const chooseImage = document.querySelector('.choose-image');
 
   const log = (x) => console.log(x);
+  changePictureBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    chooseImage.click();
+  })
 
   chooseImage.addEventListener('change', function () {
-    log("here");
+    console.log("I am here");
     const file = this.files[0];
     if (file) {
       const reader = new FileReader();

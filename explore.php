@@ -19,7 +19,16 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+//query for profile picture
+$sqlPicture = "SELECT picture FROM users WHERE id = " . $_SESSION['userId'];
+$result = $conn->query($sqlPicture);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $profile_image = $row["picture"];
+    }
+} else {
+    echo "No image found";
+}
 // query 
 if (empty($_GET)) {
     $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
@@ -51,7 +60,6 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 $conn->close();
-
 
 // echo "<pre>";
 // print_r($allCards);
@@ -88,7 +96,14 @@ $conn->close();
                 <div class="freelancer-dashboard">
                     <div class="freelancer-info">
                         <div class="picture">
-                            <img src="//unsplash.it/500/500" alt="profile-pic">
+                            <?php
+                            if (!empty($profile_image)) {
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($profile_image) . '" alt="profile-pic"/>';
+                            } else {
+                                echo '<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile-pic">';
+                            }
+                            ?>
+                            <!-- <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile-pic"> -->
                         </div>
                         <div class="text-section">
                             <div class="name">
