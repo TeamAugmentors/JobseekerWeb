@@ -170,7 +170,7 @@ function imageupload($conn)
                         <div class="form-row row">
                             <div class="my-form-group col-md-6">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" placeholder="Atiqur" value=<?php echo'str$name' ?> required />
+                                <input type="text" id="name" name="name" placeholder="Atiqur" value=<?php echo "'" . $name . "'" ?> required />
                             </div>
                             <div class="my-form-group col-md-6">
                                 <label for="email">Email</label>
@@ -185,7 +185,7 @@ function imageupload($conn)
                                 </div>
                                 <div class="my-form-group col-md-6">
                                     <label for="billing">Billing info</label>
-                                    <input type="text" id="billing" name="billing" placeholder="0177........" value=<?php echo $billing ?> />
+                                    <input type="number" id="billing" name="billing" placeholder="0177........" value=<?php echo $billing ?> />
                                 </div>
                             </div>
                         </div>
