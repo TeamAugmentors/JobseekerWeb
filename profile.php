@@ -63,7 +63,7 @@ if (isset($_POST["submit"])) {
         if ($conn->query($sqlInsert) === TRUE) {
             // echo "Record updated successfully";
             imageupload($conn);
-            header("Location: http://localhost/JobseekerWeb/dashboard.php");
+            header("Location: http://localhost/JobseekerWeb/dashboard.php#dashboard__overview");
         } else {
             echo "Error updating record: " . $conn->error;
         }
@@ -170,7 +170,7 @@ function imageupload($conn)
                         <div class="form-row row">
                             <div class="my-form-group col-md-6">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" placeholder="Atiqur" value=<?php echo $name ?> required />
+                                <input type="text" id="name" name="name" placeholder="Atiqur" value=<?php echo'str$name' ?> required />
                             </div>
                             <div class="my-form-group col-md-6">
                                 <label for="email">Email</label>
