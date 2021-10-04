@@ -22,6 +22,7 @@ $name = null;
 $email = null;
 $phoneNo = null;
 $billing = null;
+$picture = null;
 
 $user_earned = null;
 $user_completed = null;
@@ -36,7 +37,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// query 
+// query personal info
 $sqlSelect = "SELECT * FROM users WHERE id = " . $_SESSION["userId"];
 $result = $conn->query($sqlSelect);
 if ($result->num_rows > 0) {
@@ -47,12 +48,14 @@ if ($result->num_rows > 0) {
         $name = $row["name"];
         $phoneNo = $row["phone_no"];
         $billing = $row["billing_info"];
+        $picture = $row['picture'];
     }
+
 } else {
     echo "0 results from user";
 }
 
-// query 2
+// query 2 freelancing info
 $sqlSelectUser = "SELECT * FROM freelancer WHERE id = " . $_SESSION["userId"];
 $result = $conn->query($sqlSelectUser);
 if ($result->num_rows > 0) {
@@ -61,11 +64,12 @@ if ($result->num_rows > 0) {
         $user_completed = $row["completed"];
         $user_rated = $row["rating"];
     }
+
 } else {
     echo "0 results from user";
 }
 
-//query 3
+//query 3 job details
 $sqlUser = "SELECT b.name, b.details, a.serial FROM job b JOIN activeorder a ON b.id = a.job_id WHERE a.user_id =" . $_SESSION["userId"];
 $result = $conn->query($sqlUser);
 if ($result->num_rows > 0) {
@@ -73,6 +77,7 @@ if ($result->num_rows > 0) {
         $temp = array("serial" => $row["serial"], "name" => $row["name"], "details" => $row["details"]);
         array_push($job, $temp);
     }
+    
 } else {
     echo "0 results from active orders";
 }
@@ -111,7 +116,14 @@ $conn->close();
 
             <div class="dashboard__profile">
                 <div class="profile__pic flex">
-                    <img src="./images/JS.png" alt="profile picture">
+                    <?php
+                        if(!empty($picture)){
+                            echo '<img src="data:image/jpeg:base64,' . base64_encode($picture) . '"alt="profile-picture"/>';
+                        }
+                        else{
+                            echo '<img src="./images/JS.png" alt="profile picture">';
+                        }
+                    ?> 
                 </div>
                 <div class="profile__name">
                     <h1><?php echo $user ?></h1>
