@@ -607,10 +607,13 @@ main {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    box-shadow: -.5px -.5px 0px 2px var(--darker_green);
 }
 
 .dashboard__profile .profile__pic img {
     width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
 }
 
 .dashboard__profile .profile__name,
