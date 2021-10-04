@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&family=Raleway:wght@300;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
+@font-face {
+    font-family: 'fresh';
+    src: url('/fonts/FreshEaters.otf');
+}
 /*CUSTOM VARIABLES*/
 :root {
     font-size: 62.5%;
@@ -43,17 +46,14 @@
     --fs-span: clamp(.5rem, 2vw + 1rem, 2rem);
 }
 
-@font-face {
-    font-family: Fresh-Eaters;
-    src: url(/fonts/FreshEaters.ttf);
-}
+
 
 .font-roboto {
     font-family: 'Roboto', sans-serif;
 }
 
 .font-fresh-eaters {
-    font-family: Fresh-Eaters;
+    font-family: 'fresh';
 }
 
 .grid {
@@ -78,6 +78,21 @@ html {
 
 body {
     position: relative;
+}
+
+.navbar-brand {
+    font-size: 40px;
+    padding: 0 8px;
+    background-image: linear-gradient(white, white),
+        linear-gradient(white, white),
+        linear-gradient(white, white),
+        linear-gradient(white, white);
+    font-family: 'fresh';
+
+    background-repeat: no-repeat;
+    background-size: 1px 50%, 50% 1px, 1px 50%, 50% 1px, calc(100% - 8px) calc(100% - 8px);
+    background-position: left bottom, left bottom, right top, right top, 4px 4px;
+
 }
 
 .bg {
@@ -120,8 +135,7 @@ body {
 
 li.nav-item {
     align-self: center;
-    padding: 0px 12px;
-    margin: 0px 8px;
+    margin: 0px 16px;
 }
 
 .horizontal-border {
@@ -151,14 +165,26 @@ a .nav-link .custom-link {
 .nav-item.sign-up {
     transition: all 0.3s;
     background: rgba(0, 0, 0, 0.05);
-    border-radius: 40px;
+    position: relative;
 }
 
-.nav-item.sign-up:hover {
-    background: rgba(255, 255, 255, 0.94);
+/* .nav-item.sign-up:hover {
     box-shadow: 1px 13px 5px -6px rgba(0, 0, 0, 0.23);
     transform: translateY(-5px);
-}
+    border-bottom: 2px solid white;
+} */
+
+.nav-item.sign-up:after {
+    display:block;
+    content: '';
+    transform: scaleX(0);  
+    border-bottom: solid 2px #ffffff;  
+    transition: transform 250ms ease-in-out;
+  }
+
+  .nav-item.sign-up:hover:after { 
+      transform: scaleX(1) !important;
+   }
 
 a.nav-link:hover {
     color: white !important;
@@ -169,7 +195,7 @@ a.nav-link.custom-link.sign-up {
 }
 
 a.nav-link.custom-link.sign-up:hover {
-    color: var(--dark_green) !important;
+    /* color: black !important; */
 }
 
 .common-nav__bg {
@@ -189,8 +215,9 @@ a.nav-link.custom-link.sign-up:hover {
 }
 
 .active {
-    border: 1px solid var(--transparent_white);
-    border-radius: 40px;
+    border-bottom: 2px solid white;
+    font-size: 16px;
+    color: white !important;
 }
 
 
