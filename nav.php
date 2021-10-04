@@ -52,7 +52,7 @@
                     }
                     if (strcmp($active, "dashboard") === 0) {
                         echo '<li class="nav-item active">
-                    <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
+                    <a class="nav-link" href="profile.php">Edit profile</a>
                     </li>';
                     } else {
                         echo '<li class="nav-item">
