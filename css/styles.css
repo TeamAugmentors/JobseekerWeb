@@ -89,8 +89,8 @@ body {
 }
 
 .navbar-brand {
-    font-size: 40px;
-    padding: 0 8px;
+    font-size: 40px !important;
+    padding: 0 8px !important;
     background-image: linear-gradient(white, white),
         linear-gradient(white, white),
         linear-gradient(white, white),
@@ -2344,18 +2344,6 @@ p {
 /*MOBILE*/
 
 @media (max-width: 450px) {
-    .navbar-brand img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .navbar-brand .job {
-        font-size: 3.2rem;
-    }
-
-    .navbar-brand .seeker {
-        font-size: 2.4rem;
-    }
 
     .custom-nav {
         margin-inline: 25px !important;

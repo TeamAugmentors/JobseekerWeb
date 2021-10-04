@@ -1,3 +1,9 @@
+<style>
+    .navbar-brand {
+        font-size: 40px !important;
+        padding: 0 8px !important;
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark common-nav__bg sticky-top ">
     <div class="container-fluid">
 
@@ -15,8 +21,8 @@
                                         echo "active";
                                     } ?>">
                     <a class="nav-link" aria-current="page" href="index.php" <?php if (strcmp($active, "home") === 0) {
-                                        echo 'style="color:white"';
-                                    } ?>>Home</a>
+                                                                                    echo 'style="color:white"';
+                                                                                } ?>>Home</a>
                 </li>
                 <li class="nav-item <?php if (strcmp($active, "about") === 0) {
                                         echo "active";
@@ -29,8 +35,8 @@
                                         echo "active";
                                     } ?>">
                     <a class="nav-link" href="team.php" <?php if (strcmp($active, "team") === 0) {
-                                                                echo 'style="color:white"';
-                                                            } ?>>Meet the Team</a>
+                                                            echo 'style="color:white"';
+                                                        } ?>>Meet the Team</a>
                 </li>
                 <div class="horizontal-border nav-item"></div>
                 <?php
@@ -44,9 +50,16 @@
                         <a class="nav-link" href="explore.php">Explore</a>
                         </li>';
                     }
-                    echo '<li class="nav-item">
-                            <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
-                            </li>';
+                    if (strcmp($active, "dashboard") === 0) {
+                        echo '<li class="nav-item active">
+                    <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
+                    </li>';
+                    } else {
+                        echo '<li class="nav-item">
+                    <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
+                    </li>';
+                    }
+
                     echo '<li class="nav-item sign-up">
                         <a class="nav-link custom-link sign-up" href="logout.php"> <i class="bx bx-log-out"></i> Log out</a>
                         </li>';

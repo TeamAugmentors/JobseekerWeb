@@ -1,7 +1,10 @@
 <?php
 session_start();
+$active = "dashboard";
+$isLoggedIn = 1;
 $success = 0;
 if ($_SESSION["isLoggedIn"] != 1) {
+    $isLoggedIn = 0;
     header("Location: http://localhost/JobseekerWeb/signin.php");
 } else {
     $success = $_SESSION["doneLoggedIn"];
@@ -99,48 +102,9 @@ $conn->close();
 
 <body>
     <header class="dashboard">
-        <nav class="navbar navbar-expand-lg navbar-dark common-nav__bg">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">
-                    <div class="d-flex">
-                        <img src="images/tie2.png" height="auto" width="auto">
-                        <div class=" d-flex flex-column justify-content-center">
-                            <h1 class="header-logo job">
-                                JOB
-                            </h1>
-                            <h1 class="header-logo seeker">
-                                seeker
-                            </h1>
-                        </div>
-                    </div>
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse navbar-margin-top" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-
-                        <form class="flex align-items-center custom-search">
-                            <i class='bx bx-search custom-search-icon'></i>
-                            <input class="form-control custom-search-field shadow-none" type="search" placeholder="Search for work..." aria-label="Search">
-                            <button class="btn custom-search-btn shadow-none" type="submit">Search</button>
-                        </form>
-                        <li class="nav-item">
-                            <a class="nav-link" href="explore.php">Explore</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="profile.php">Edit Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link switch-to-hirer" href="logout.php"><i class='bx bx-log-out'></i> Logout </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php
+        include "nav.php";
+        ?>
     </header>
     <main>
         <div class="dashboard-main custom--container flex">
@@ -241,13 +205,13 @@ $conn->close();
                                         ?>
                                             <div>
                                                 <div class="overview-nested-content__bg">
-                                                    <input type="checkbox" name="status-nested-accordion" id="order<?php echo $temp["serial"]?>" class="accordion__input">
+                                                    <input type="checkbox" name="status-nested-accordion" id="order<?php echo $temp["serial"] ?>" class="accordion__input">
                                                     <div class="overview-label flex">
-                                                        <label for="order<?php echo $temp["serial"]?>" class="accordion__label flex"><?php echo $temp["name"] ?></label>
+                                                        <label for="order<?php echo $temp["serial"] ?>" class="accordion__label flex"><?php echo $temp["name"] ?></label>
                                                         <i class='bx bxs-right-arrow'></i>
                                                     </div>
                                                     <div class="accordion-content">
-                                                        <?php echo $temp["details"]?>
+                                                        <?php echo $temp["details"] ?>
                                                     </div>
                                                 </div>
                                             </div>
