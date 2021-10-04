@@ -62,36 +62,41 @@ if (isset($_POST["submit"])) {
         $sqlInsert = "UPDATE users SET name='" . $name . "',mail='" . $email . "',phone_no='" . $phoneNo . "',billing_info='" . $billing . "',password='" . $oldPass1 . "'WHERE id = " . $_SESSION["userId"];
         if ($conn->query($sqlInsert) === TRUE) {
             // echo "Record updated successfully";
+            imageupload($conn);
             header("Location: http://localhost/JobseekerWeb/dashboard.php");
-            $conn->close();
         } else {
             echo "Error updating record: " . $conn->error;
         }
     } else {
         $isFailed = 1;
     }
+    $conn->close();
 }
-if (isset($_POST["submit"]) && isset($_FILES["profile_image"]) && $_FILES["profile_image"]["size"] > 0) {
-    // echo "<pre>";
-    // print_r($_FILES['profile_image']);
-    // echo "</pre>";
-    $img_name = $_FILES["profile_image"]["name"];
-    $img_size = $_FILES["profile_image"]["size"];
-    $temp_name = $_FILES["profile_image"]["tmp_name"];
-    $error = $_FILES["profile_image"]["error"];
-    if ($error === 0) {
-        $img_file = addslashes(file_get_contents($temp_name));
-        $sqlImage = "UPDATE users SET picture = '$img_file' WHERE id = " . $_SESSION["userId"];
-        if ($conn->query($sqlImage) === TRUE) {
-            header("Location: http://localhost/JobseekerWeb/dashboard.php");
-            $conn->close();
+function imageupload($conn)
+{
+    if (isset($_POST["submit"]) && isset($_FILES["profile_image"]) && $_FILES["profile_image"]["size"] > 0) {
+        // echo "<pre>";
+        // print_r($_FILES['profile_image']);
+        // echo "</pre>";
+        $img_name = $_FILES["profile_image"]["name"];
+        $img_size = $_FILES["profile_image"]["size"];
+        $temp_name = $_FILES["profile_image"]["tmp_name"];
+        $error = $_FILES["profile_image"]["error"];
+        if ($error === 0) {
+            $img_file = addslashes(file_get_contents($temp_name));
+            $sqlImage = "UPDATE users SET picture = '$img_file' WHERE id = " . $_SESSION["userId"];
+            if ($conn->query($sqlImage) === TRUE) {
+                header("Location: http://localhost/JobseekerWeb/dashboard.php");
+                $conn->close();
+            } else {
+                echo "Something wrong in uploading image into database";
+            }
         } else {
-            echo "Something wrong in uploading image into database";
+            echo "Error in image";
         }
-    } else {
-        echo "Error in image";
     }
 }
+
 
 
 ?>
