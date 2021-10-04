@@ -3,6 +3,7 @@ session_start();
 $isLoggedIn = 1;
 $active = "explore";
 if ($_SESSION["isLoggedIn"] != 1) {
+    $isLoggedIn = 0;
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
 
