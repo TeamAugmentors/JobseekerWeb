@@ -101,7 +101,7 @@ $conn->close();
                             if (!empty($profile_image)) {
                                 echo '<img src="data:image/jpeg;base64,' . base64_encode($profile_image) . '" alt="profile-pic"/>';
                             } else {
-                                echo '<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile-pic">';
+                                echo '<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile-pic"/>';
                             }
                             ?>
                             <!-- <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="profile-pic"> -->

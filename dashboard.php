@@ -50,7 +50,6 @@ if ($result->num_rows > 0) {
         $billing = $row["billing_info"];
         $picture = $row['picture'];
     }
-
 } else {
     echo "0 results from user";
 }
@@ -64,7 +63,6 @@ if ($result->num_rows > 0) {
         $user_completed = $row["completed"];
         $user_rated = $row["rating"];
     }
-
 } else {
     echo "0 results from user";
 }
@@ -77,7 +75,6 @@ if ($result->num_rows > 0) {
         $temp = array("serial" => $row["serial"], "name" => $row["name"], "details" => $row["details"]);
         array_push($job, $temp);
     }
-    
 } else {
     echo "0 results from active orders";
 }
@@ -117,13 +114,12 @@ $conn->close();
             <div class="dashboard__profile">
                 <div class="profile__pic flex">
                     <?php
-                        if(!empty($picture)){
-                            echo '<img src="data:image/jpeg:base64,' . base64_encode($picture) . '"alt="profile-picture"/>';
-                        }
-                        else{
-                            echo '<img src="./images/JS.png" alt="profile picture">';
-                        }
-                    ?> 
+                    if (!empty($picture)) {
+                        echo '<img src="data:image/jpeg;base64,' . base64_encode($picture) . '"alt="profile-picture"/>';
+                    } else {
+                        echo '<img src="./images/JS.png" alt="profile picture">';
+                    }
+                    ?>
                 </div>
                 <div class="profile__name">
                     <h1><?php echo $user ?></h1>
