@@ -3,7 +3,7 @@ session_start();
 
 include "dbconnection.php";
 
-$success = 0;
+$success = 1;
 $isBanned = 0;
 if (!empty($_POST)) {
     $sql = "SELECT id, name, user_name, mail, password, ban FROM users;";
@@ -42,7 +42,7 @@ if (!empty($_POST)) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'headLinks.php'?>
+    <?php include 'headLinks.php' ?>
     <title>Sign-in</title>
 </head>
 
@@ -132,7 +132,7 @@ if (!empty($_POST)) {
         <script type="text/javascript" src="js/script.js"></script>
         <script type="text/javascript">
             <?php
-            if ($success == 0) {
+            if ($success == 0 && !$isBanned) {
                 echo "var toastLiveExample = document.getElementById('liveToastError');
                     var toast = new bootstrap.Toast(toastLiveExample);
                     toast.show();";
