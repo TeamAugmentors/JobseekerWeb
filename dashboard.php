@@ -11,11 +11,8 @@ if ($_SESSION["isLoggedIn"] != 1) {
     $_SESSION["doneLoggedIn"] = 0;
 }
 
-// database stuffs
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobseekerweb";
+
+include "dbconnection.php";
 
 $user = null;
 $name = null;
@@ -30,12 +27,6 @@ $user_rated = null;
 
 $job = array();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // query personal info
 $sqlSelect = "SELECT * FROM users WHERE id = " . $_SESSION["userId"];

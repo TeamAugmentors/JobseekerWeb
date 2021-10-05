@@ -6,26 +6,15 @@ if (!empty($_SESSION)) {
     $isLoggedIn = $_SESSION["isLoggedIn"];
 }
 
-// database stuffs
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobseekerweb";
+include "dbconnection.php";
 
 $teammate = array();
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $sqlTeam = "SELECT * FROM team";
 $result = $conn->query($sqlTeam);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $temp = array("member"=> $row["member"],"name" => $row["name"], "id" => $row["id"], "hobby" => $row["hobby"], "picture" => $row["picture"]);
+        $temp = array("member" => $row["member"], "name" => $row["name"], "id" => $row["id"], "hobby" => $row["hobby"], "picture" => $row["picture"]);
         array_push($teammate, $temp);
         // print_r($temp);
     }
@@ -53,7 +42,7 @@ if ($result->num_rows > 0) {
 
     <!-- Boxicon CSS  -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <!-- Font -->
     <link href='https://bigfontsite.com/fonts/fresh-eaters.html' rel="stylesheet">
 
@@ -92,15 +81,15 @@ if ($result->num_rows > 0) {
             </section>
 
             <?php
-            foreach($teammate as $temp){
+            foreach ($teammate as $temp) {
             ?>
-            <section class="section teammates" id="<?php echo $temp["id"] ?>">
-                <div class="<?php echo $temp["member"]?> member">
-                    <h1><?php echo $temp["name"] ?> </h1>
-                    <h2><?php echo $temp["id"]?> </h2>
-                    <?php echo $temp["hobby"] ?>
-                </div>
-            </section>
+                <section class="section teammates" id="<?php echo $temp["id"] ?>">
+                    <div class="<?php echo $temp["member"] ?> member">
+                        <h1><?php echo $temp["name"] ?> </h1>
+                        <h2><?php echo $temp["id"] ?> </h2>
+                        <?php echo $temp["hobby"] ?>
+                    </div>
+                </section>
             <?php } ?>
         </div>
     </div>

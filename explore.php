@@ -7,19 +7,8 @@ if ($_SESSION["isLoggedIn"] != 1) {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
 
-// database stuffs
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobseekerweb";
+include "dbconnection.php";
 
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 //query for profile picture
 $sqlPicture = "SELECT picture FROM users WHERE id = " . $_SESSION['userId'];
 $result = $conn->query($sqlPicture);

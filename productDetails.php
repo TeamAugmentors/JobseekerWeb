@@ -6,11 +6,8 @@ if ($_SESSION["isLoggedIn"] != 1) {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
 
-// database stuffs
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobseekerweb";
+
+include "dbconnection.php";
 
 $posted_by = null;
 $category = null;
@@ -28,12 +25,6 @@ $hirer_spent = null;
 $hirer_hired = null;
 $hirer_rated = null;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // query 
 $sqlSelect = "SELECT * FROM job WHERE id = " . $_GET["job_id"];
