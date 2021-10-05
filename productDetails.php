@@ -65,8 +65,7 @@ $sqlSelect = "SELECT sample_images FROM jobimages WHERE id =" . $_GET["job_id"];
 $result = $conn->query($sqlSelect);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $temp = array("sample_images" => $row["sample_images"]);
-        array_push($sample_images, $temp);
+        array_push($sample_images, $row["sample_images"]);
     }
 }
 
@@ -75,8 +74,7 @@ $sqlSelect = $sqlSelect = "SELECT sample_files FROM jobfiles WHERE id =" . $_GET
 $result = $conn->query($sqlSelect);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $temp = array("sample_files" => $row["sample_files"]);
-        array_push($sample_files, $temp);
+        array_push($sample_files, $row["sample_files"]);
     }
 }
 
@@ -192,37 +190,43 @@ $conn->close();
                     if (!empty($sample_images)) {
                     ?>
                         <div class="img-carousel">
-
                             <div id="carouselExampleControls" class="carousel slide custom-carousel" data-interval="false">
                                 <div class="carousel-inner">
                                     <?php
-                                    foreach ($sample_files as $temp) {
+                                    for ($i = 0; $i < count($sample_images); $i++) {
                                     ?>
-                                        <div class="carousel-item">
-                                            <img class="d-block" src="images/notebook-1.jpg" alt="slide">
+                                        <div class="carousel-item <?php
+                                                                    if ($i === 0) {
+                                                                        echo 'active';
+                                                                    }
+                                                                    ?>">
+                                            <?php
+                                            echo '<img src="data:image/jpeg;base64,' . base64_encode($sample_images[$i]) . '" alt="slide" class="d-block" />';
+                                            ?>
                                         </div>
-                                    <?php } ?>
-                                    <!-- <div class="carousel-item">
-                                    <img class="d-block" src="images/notebook-2.jpg" alt="Second slide">
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
-                                <div class="carousel-item">
-                                    <img class="d-block" src="images/freelance.jpg" alt="Third slide">
-                                </div> -->
-
-                                </div>
-
-                                <a class="carousel-control-prev custom-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next custom-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
+                                <?php
+                                if (count($sample_images) > 1) {
+                                ?>
+                                    <a class="carousel-control-prev custom-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next custom-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                <?php
+                                }
+                                ?>
                             </div>
 
                         </div>
-                    <?php } else {
+                    <?php
+                    } else {
                         echo "<h4>There are no sample images for this job.</h4>";
                     }
                     ?>

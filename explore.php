@@ -43,6 +43,7 @@ if (array_key_exists("tk_min", $_GET) && array_key_exists("tk_max", $_GET) && ar
     // echo 5;
 }
 HERE:
+unset($_GET);
 // echo $sqlCards;
 $result = $conn->query($sqlCards);
 $allCards = array();
