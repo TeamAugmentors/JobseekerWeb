@@ -89,7 +89,7 @@ function insertId($id, $conn)
             <div class="arrow-left">
                 <i class="fa fa-arrow-left fa-3x"></i>
             </div>
-            <div class="vertical-signin-text">
+            <div class="vertical-signup-text">
                 SIGN UP
             </div>
             <div class="text-wrapper">
