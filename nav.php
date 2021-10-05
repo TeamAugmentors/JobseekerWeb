@@ -1,3 +1,9 @@
+<style>
+    .navbar-brand {
+        font-size: 40px !important;
+        padding: 0 8px !important;
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark common-nav__bg sticky-top ">
     <div class="container-fluid">
 
@@ -52,9 +58,16 @@
                         <a class="nav-link" href="explore.php">Explore</a>
                         </li>';
                     }
-                    echo '<li class="nav-item">
-                            <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
-                            </li>';
+                    if (strcmp($active, "dashboard") === 0) {
+                        echo '<li class="nav-item active">
+                    <a class="nav-link" href="profile.php">Edit profile</a>
+                    </li>';
+                    } else {
+                        echo '<li class="nav-item">
+                    <a class="nav-link" href="dashboard.php#dashboard__overview">Dashboard</a>
+                    </li>';
+                    }
+
                     echo '<li class="nav-item sign-up">
                         <a class="nav-link custom-link sign-up" href="logout.php"> <i class="bx bx-log-out"></i> Log out</a>
                         </li>';

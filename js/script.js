@@ -235,4 +235,27 @@ else if (document.URL.includes("explore.php")) {
       isToggleCatagory = false;
     }
   })
+} else if (document.URL.includes("profile.php")) {
+  const changePictureBtn = document.querySelector('.change-picture-btn');
+  const avaterImage = document.querySelector('.avatar-img');
+  const chooseImage = document.querySelector('.choose-image');
+
+  const log = (x) => console.log(x);
+  changePictureBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    chooseImage.click();
+  })
+
+  chooseImage.addEventListener('change', function () {
+    console.log("I am here");
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result;
+        avaterImage.src = result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 }

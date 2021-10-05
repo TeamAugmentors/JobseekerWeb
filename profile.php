@@ -7,26 +7,18 @@ if (!empty($_SESSION)) {
 } else {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
-// database stuffs
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobseekerweb";
+
+include "dbconnection.php";
 
 $name = null;
 $email = null;
 $phoneNo = null;
 $billing = null;
 $oldPass = null;
+$profile_image = null;
 
 $isFailed = 0;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 $sqlSelect = "SELECT * FROM users WHERE id = " . $_SESSION["userId"];
 $result = $conn->query($sqlSelect);
 if ($result->num_rows > 0) {
@@ -37,11 +29,12 @@ if ($result->num_rows > 0) {
         $name = $row["name"];
         $phoneNo = $row["phone_no"];
         $billing = $row["billing_info"];
+        $profile_image = $row["picture"];
     }
 } else {
     echo "0 results";
 }
-if (!empty($_POST)) {
+if (isset($_POST["submit"])) {
     $name = $_POST["name"];
     $email = $_POST["email"];
     $phoneNo = $_POST["phoneNo"];
@@ -49,6 +42,9 @@ if (!empty($_POST)) {
     $oldPass1 = $_POST["oldPass"];
     $newPass = $_POST["newPass"];
     $confirmPass = $_POST["confirmPass"];
+    // echo "<pre>";
+    // print_r($_FILES["profile_image"]);
+    // echo "</pre>";
 
     if (strcmp($oldPass, $oldPass1) === 0 && strcmp($newPass, $confirmPass) === 0) {
         if (strlen($newPass) > 0) {
@@ -57,15 +53,42 @@ if (!empty($_POST)) {
         $sqlInsert = "UPDATE users SET name='" . $name . "',mail='" . $email . "',phone_no='" . $phoneNo . "',billing_info='" . $billing . "',password='" . $oldPass1 . "'WHERE id = " . $_SESSION["userId"];
         if ($conn->query($sqlInsert) === TRUE) {
             // echo "Record updated successfully";
+            imageupload($conn);
+            header("Location: http://localhost/JobseekerWeb/dashboard.php#dashboard__overview");
         } else {
             echo "Error updating record: " . $conn->error;
         }
     } else {
         $isFailed = 1;
     }
+    $conn->close();
+}
+function imageupload($conn)
+{
+    if (isset($_POST["submit"]) && isset($_FILES["profile_image"]) && $_FILES["profile_image"]["size"] > 0) {
+        // echo "<pre>";
+        // print_r($_FILES['profile_image']);
+        // echo "</pre>";
+        // $img_name = $_FILES["profile_image"]["name"];
+        // $img_size = $_FILES["profile_image"]["size"];
+        $temp_name = $_FILES["profile_image"]["tmp_name"];
+        $error = $_FILES["profile_image"]["error"];
+        if ($error === 0) {
+            $img_file = addslashes(file_get_contents($temp_name));
+            $sqlImage = "UPDATE users SET picture = '$img_file' WHERE id = " . $_SESSION["userId"];
+            if ($conn->query($sqlImage) === TRUE) {
+                header("Location: http://localhost/JobseekerWeb/dashboard.php");
+                $conn->close();
+            } else {
+                echo "Something wrong in uploading image into database";
+            }
+        } else {
+            echo "Error in image";
+        }
+    }
 }
 
-$conn->close();
+
 
 ?>
 <!DOCTYPE html>
@@ -80,7 +103,7 @@ $conn->close();
     <link rel="stylesheet" href="css/styles.css">
     <!-- Boxicon CSS  -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <title>Job Seeker</title>
 </head>
 
@@ -108,46 +131,37 @@ $conn->close();
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8 mx-auto">
                 <h1 class="account-setting-header">Account Settings</h1>
-                <div class="my-4">
-                    <div class="row mt-5 align-items-center">
-                        <div class="col-md-3 text-center mb-5">
-                            <div class="avatar avatar-xl">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
-                            </div>
-                            <input type="file" class="choose-image" accept="image/x-png,image/gif,image/jpeg" hidden>
-                            <button class="change-picture-btn mt-4">Change Picture</button>
-                        </div>
-                        <div class="col">
-                            <div class="row align-items-center">
-                                <div class="col-md-7">
-                                    <h2 class="mb-1 editname"><?php echo $name ?></h2>
+                <form method="POST" action="" enctype="multipart/form-data">
+                    <div class="my-4">
+                        <div class="row mt-5 align-items-center">
+                            <div class="col-md-3 text-center mb-5">
+                                <div class="avatar avatar-xl">
+                                    <?php
+                                    if (!empty($profile_image)) {
+                                        echo '<img src="data:image/jpeg;base64,' . base64_encode($profile_image) . '" alt="..." class="avatar-img rounded-circle"/>';
+                                    } else {
+                                        echo '<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />';
+                                    }
+                                    ?>
+                                    <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
+                                    <button class="change-picture-btn mt-4">Change Picture</button>
                                 </div>
                             </div>
-                            <!-- <div class="row mb-4">
-                                <div class="col-md-7">
-                                    <p class="text-muted">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit nisl
-                                        ullamcorper, rutrum metus in, congue lectus. In hac habitasse platea
-                                        dictumst. Cras urna quam, malesuada vitae risus at,
-                                        pretium blandit sapien.
-                                    </p>
+                            <div class="col">
+                                <div class="row align-items-center">
+                                    <div class="col-md-7">
+                                        <h2 class="mb-1 editname"><?php echo $name ?></h2>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
-                                    <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
-                                    <p class="small mb-0 text-muted">(537) 315-1481</p>
-                                </div>
-                            </div> -->
+                            </div>
                         </div>
-                    </div>
-                    <form method="POST" action="">
                         <!-- ----------------------Your Info------------------ -->
                         <h2 class="d-flex justify-content-start info-section">Your Info</h2>
                         <div class="edit-profile-horizontal-line mb-1"></div>
                         <div class="form-row row">
                             <div class="my-form-group col-md-6">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" placeholder="Atiqur" value=<?php echo $name ?> required />
+                                <input type="text" id="name" name="name" placeholder="Atiqur" value=<?php echo "'" . $name . "'" ?> required />
                             </div>
                             <div class="my-form-group col-md-6">
                                 <label for="email">Email</label>
@@ -197,23 +211,25 @@ $conn->close();
                                 </ul>
                             </div>
                         </div>
-                        <button type="submit" class="save-change-btn">Save Change</button>
+                        <input type="submit" name="submit" class="save-change-btn"></input>
                         <button type="button" class="btn btn btn-outline-danger cancel-button"> <a href="dashboard.php#dashboard__overview">Cancel</a></button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            <?php
-            if ($isFailed) {
-                echo " var toastTrigger = document.getElementById('liveToastBtn');
-            var toastLiveExample = document.getElementById('liveToast');
-            var toast = new bootstrap.Toast(toastLiveExample);
-            toast.show();";
-            }
-            ?>
-        </script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+        <?php
+        if ($isFailed) {
+            echo " var toastTrigger = document.getElementById('liveToastBtn');
+                var toastLiveExample = document.getElementById('liveToast');
+                var toast = new bootstrap.Toast(toastLiveExample);
+                toast.show();";
+        }
+        ?>
+    </script>
 </body>
 
 </html>
