@@ -7,7 +7,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark common-nav__bg sticky-top ">
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="http://localhost/JobseekerWeb/index.php">
             JS
         </a>
 

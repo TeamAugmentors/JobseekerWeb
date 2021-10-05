@@ -23,6 +23,8 @@
 
     --light-green-tint: rgb(240, 239, 239);
 
+    --main-bg: rgb(33, 37, 41);
+
     /* ---------------Font sizes for sign in and sign up page------------------ */
     --fs-signup-reminder: clamp(0.6rem, 20vw - 5rem, 2rem);
     --fs-job: clamp(2rem, 8vw + 1rem, 6.3rem);
@@ -563,9 +565,87 @@ h2.hero-subtext {
 
 .member{
     height: 100vh;
-    background-color: var(--dark_green);
+    background-color: var(--main-bg);
+    justify-content: center;
+    align-items: center;
 }
 
+.member-background{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+}
+
+.default-card{
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    border-top: .1px solid rgba(255, 255, 255, 0.5);
+    border-left: .1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 1.5em;
+    width: 350px;
+    height: 42vh;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.default-card .content{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+    transition: opacity 500ms ease , transform 500ms ease;
+}
+.default-card:hover .content{
+    opacity: 1;
+    transform: translateY(-20px);
+    transition: transform 500ms ease;
+}
+
+.default-card .member-image{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 5px solid rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+
+.default-card .content .member-image img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.default-card .content{
+    color: var(--transparent_white_more);
+}
+.default-card .content h1{
+    font-size: 2.5rem;
+    font-weight: 500;
+
+}
+.default-card .content :is(h2, span){
+    font-size: 2rem;
+    transform: translateY(60px);
+    opacity: 0;
+    transition: transform 500ms ease, opacity 500ms ease;
+}
+
+.default-card:hover .content :is(h2, span){
+    transform: translateY(0);
+    opacity: 1;
+}
 /* =============================================================
             dashboard 
 ============================================================= */
@@ -1098,9 +1178,7 @@ main {
 .custom-prev .carousel-control-prev-icon {
     height: 5vw;
     width: 5vw;
-    /* background-color: red; */
     background-image: url("../images/arrow1.svg") !important;
-    z-index: 10;
 }
 
 .custom-prev {
@@ -1113,7 +1191,6 @@ main {
 .custom-next .carousel-control-next-icon {
     height: 5vw;
     width: 5vw;
-    /* background-color: red; */
     background-image: url("../images/arrow1.svg") !important;
     transform: rotate(180deg);
     z-index: 10;
