@@ -574,6 +574,7 @@ h2.hero-subtext {
     position: absolute;
     height: 100vh;
     width: 100vw;
+    object-fit: cover;
 }
 
 .default-card{
