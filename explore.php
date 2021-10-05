@@ -98,9 +98,6 @@ $conn->close();
                         <div class="text-section">
                             <div class="name">
                                 <h1><?php echo $_SESSION['name'] ?></h1>
-                                <div class="collapse-button">
-                                    <img src="images/arrow.svg" alt="">
-                                </div>
                             </div>
                             <div class="acc-setting-text">
                                 <a href="dashboard.php">Go to Account Settings</a>

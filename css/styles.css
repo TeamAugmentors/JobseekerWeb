@@ -1894,7 +1894,7 @@ input[type='checkbox'] {
                     Explore page
 ============================================================= */
 .explore-container {
-    background-color: rgb(245, 255, 249);
+    background-color: var(--light-green-tint);
     min-height: 100vh;
 }
 
@@ -1920,8 +1920,8 @@ input[type='checkbox'] {
 .explore-container .wrapper .left .freelancer-dashboard {
     background-color: white;
     min-height: 100%;
-    border-radius: 30px;
-    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 0px;
+    box-shadow: 0px 0px 5px 5px rgb(0 0 0 / 3%);
 }
 
 .explore-container .wrapper .left .freelancer-info {

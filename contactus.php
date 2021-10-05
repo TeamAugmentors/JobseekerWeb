@@ -29,19 +29,20 @@ if (!empty($_SESSION)) {
 
         .contact-section {
             position: relative;
-            height: 70%;
+            min-height: 70%;
             background-color: rgb(18, 18, 18);
             background-image: url('images/map-2.png');
         }
 
         .below-contact-section {
-            height: 30%;
+            min-height: 30%;
             background-color: rgb(15, 15, 15);
         }
 
         .w-75 {
             width: 75% !important;
         }
+
 
         .header-text {
             position: absolute;
@@ -70,9 +71,8 @@ if (!empty($_SESSION)) {
         }
 
         .form-container {
-            position: absolute;
             height: fit-content;
-            width: 550px;
+            max-width: 550px;
             background-color: white;
             border-radius: 10px;
             top: 100px;
@@ -138,11 +138,58 @@ if (!empty($_SESSION)) {
             line-height: 24px;
         }
 
-       
+        @media (max-width: 1400px) {
+            .button-map {
+                display: block;
+                margin-top: 30px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .form-container {
+                margin: 30px 0;
+                width: 100%;
+                padding: 10%;
+                margin-top: 10%;
+                text-align: center;
+            }
+
+            .header-text {
+                display: none;
+            }
+
+            .footer-title {
+                font-size: clamp(12px, 2.4vw, 2.4rem) !important;
+            }
+
+            .footer-text {
+                font-size: clamp(10px, 2vw, 2.2rem) !important;
+            }
+
+            input[type="text"] {
+                font-size: clamp(16px, 2vw, 2.7rem) !important;
+                margin-top: clamp(16px, 6vw, 55px) !important;
+            }
+
+            input[type="submit"] {
+                font-size: clamp(14px, 2vw, 2rem);
+            }
+
+        }
+
+        @media (max-width: 400px) {
+            .w-75 {
+                width: 100% !important;
+            }
+        }
+
+        body {
+            overflow-x: hidden;
+        }
     </style>
 </head>
 
-<body class="overflow-hidden">
+<body>
 
     <?php
     include "nav.php";
@@ -152,15 +199,14 @@ if (!empty($_SESSION)) {
         <div class="col-12">
             <div class="row contact-section">
                 <div class="row w-75 mx-auto">
-                    <div class="col-lg-6">
+                    <div class="col-xxl-6">
                         <button class="button-map">Look at Google maps</button>
                         <h1 class="header-text color-white">Contact Us</h1>
                     </div>
-                    <div class="col-lg-6 position-relative">
+                    <div class="col-xxl-6 d-grid justify-content-center align-items-center">
                         <div class="form-container">
                             <form>
                                 <h1 class="feedback-text">Feedback Card</h1>
-
                                 <input type="text" class="w-100" placeholder="Name">
                                 <input type="text" class="w-100" placeholder="Email">
                                 <input type="text" class="w-100" placeholder="Phone">
@@ -171,9 +217,10 @@ if (!empty($_SESSION)) {
                     </div>
                 </div>
             </div>
+
             <div class="row below-contact-section">
                 <div class="row w-75 mx-auto p-5">
-                    <div class="col-lg-6 d-flex justify-content-between">
+                    <div class="col-xxl-6 d-flex justify-content-between">
                         <div class='d-flex flex-column'>
                             <h1 class="footer-title">
                                 Our Address
@@ -189,7 +236,7 @@ if (!empty($_SESSION)) {
 
                         <div class='d-flex flex-column'>
                             <h1 class="footer-title">
-                                Call us 
+                                Call us
                             </h1>
                             <h1 class="footer-text text-2">
                                 +8801733799386<br>
@@ -200,7 +247,6 @@ if (!empty($_SESSION)) {
                             </h1>
                         </div>
                     </div>
-                    <div class="col-lg-6"></div>
                 </div>
             </div>
         </div>
