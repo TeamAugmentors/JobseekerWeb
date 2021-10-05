@@ -19,6 +19,3 @@
 
 <!-- custom stylesheet  -->
 <link rel="stylesheet" href="css/styles.css">
-
-<!-- fullpage CSS -->
-<link rel="stylesheet" href="css/fullpage.min.css">
