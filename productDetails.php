@@ -17,12 +17,15 @@ $duration = null;
 $details = null;
 $negotiable = null;
 $preferred_skills = null;
+$sample_images = array();
+$sample_files = array();
 
 $hirer_name = null;
 $hirer_spent = null;
 $hirer_hired = null;
 $hirer_rated = null;
 $hirer_picture = null;
+
 
 // query 
 $sqlSelect = "SELECT * FROM job WHERE id = " . $_GET["job_id"];
@@ -57,6 +60,26 @@ if ($result->num_rows > 0) {
     echo "0 results from hirer";
 }
 
+//query 3 fetching sample images
+$sqlSelect = "SELECT sample_images FROM jobimages WHERE id =" . $_GET["job_id"];
+$result = $conn->query($sqlSelect);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $temp = array("sample_images" => $row["sample_images"]);
+        array_push($sample_images, $temp);
+    }
+}
+
+//query 4 fetching sample files
+$sqlSelect = $sqlSelect = "SELECT sample_files FROM jobfiles WHERE id =" . $_GET["job_id"];
+$result = $conn->query($sqlSelect);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $temp = array("sample_files" => $row["sample_files"]);
+        array_push($sample_files, $temp);
+    }
+}
+
 $conn->close();
 
 ?>
@@ -67,7 +90,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'headLinks.php'?>
+    <?php include 'headLinks.php' ?>
     <title>Product Details</title>
 </head>
 
@@ -165,48 +188,71 @@ $conn->close();
                 <div class="special--container">
                     <h2>Sample Images & Files </h2>
                     <h3>Images</h3>
-                    <div class="img-carousel">
+                    <?php
+                    if (!empty($sample_images)) {
+                    ?>
+                        <div class="img-carousel">
 
-                        <div id="carouselExampleControls" class="carousel slide custom-carousel" data-interval="false">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block" src="images/notebook-1.jpg" alt="First slide">
-                                </div>
-                                <div class="carousel-item">
+                            <div id="carouselExampleControls" class="carousel slide custom-carousel" data-interval="false">
+                                <div class="carousel-inner">
+                                    <?php
+                                    foreach ($sample_files as $temp) {
+                                    ?>
+                                        <div class="carousel-item">
+                                            <img class="d-block" src="images/notebook-1.jpg" alt="slide">
+                                        </div>
+                                    <?php } ?>
+                                    <!-- <div class="carousel-item">
                                     <img class="d-block" src="images/notebook-2.jpg" alt="Second slide">
                                 </div>
                                 <div class="carousel-item">
                                     <img class="d-block" src="images/freelance.jpg" alt="Third slide">
+                                </div> -->
+
                                 </div>
+
+                                <a class="carousel-control-prev custom-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next custom-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
 
-                            <a class="carousel-control-prev custom-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next custom-next" href="#carouselExampleControls" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
                         </div>
-
-                    </div>
+                    <?php } else {
+                        echo "<h4>There are no sample images for this job.</h4>";
+                    }
+                    ?>
 
                     <h3>Files</h3>
-                    <div class="files flex">
-                        <button class="download-file-btn flex">
+                    <?php
+                    if (!empty($sample_files)) {
+                    ?>
+                        <div class="files flex">
+                            <?php
+                            foreach ($sample_files as $temp) {
+                            ?>
+                                <button class="download-file-btn flex">
+                                    <span>File</span>
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            <?php } ?>
+                            <!-- <button class="download-file-btn flex">
                             <span>File#.jpg</span>
                             <i class="fas fa-download"></i>
                         </button>
                         <button class="download-file-btn flex">
                             <span>File#.jpg</span>
                             <i class="fas fa-download"></i>
-                        </button>
-                        <button class="download-file-btn flex">
-                            <span>File#.jpg</span>
-                            <i class="fas fa-download"></i>
-                        </button>
-                    </div>
+                        </button> -->
+                        </div>
+                    <?php } else {
+                        echo "<h4>There are no sample files for this job.</h4>";
+                    }
+                    ?>
                 </div>
             </section>
             <section class="apply-section">

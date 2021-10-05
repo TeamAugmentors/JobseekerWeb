@@ -291,7 +291,7 @@ if (!empty($_SESSION)) {
                 </div>
 
                 <h1 class="header-text-2 color-black text-center vm-100 ">
-                    <a href="#" style="text-decoration: none;">Sign up</a> to explore your potential
+                    <a href="signup.php" style="text-decoration: none;">Sign up</a> to explore your potential
                 </h1>
             </div>
         </div>
@@ -317,7 +317,7 @@ if (!empty($_SESSION)) {
                         I want to start earning!
                     </button>
                     <h1 class="header-text-2 text-center vm-100 ">
-                        Curious? Check out who <a href="#" class="a-custom" style="text-decoration: none;">we are</a>
+                        Curious? Check out who <a href="team.php" class="a-custom" style="text-decoration: none;">we are</a>
                     </h1>
                 </div>
             </div>
