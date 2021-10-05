@@ -1037,7 +1037,7 @@ main {
     justify-content: space-between;
     align-items: center;
     padding-bottom: .5em;
-    border-bottom: 1px solid rgb(0, 128, 0, 0.3);
+    border-bottom: 1px solid var(--darker_green);
 }
 
 .product__title-section h2,
@@ -1104,7 +1104,7 @@ main {
 .hirer__pic img {
     width: 100%;
     height: auto;
-    box-shadow: 0 0 0 2px white, 0 0 0 4px green;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--dark_green);
 }
 
 .hirer__name h3 {
@@ -1160,6 +1160,7 @@ main {
 .img-carousel {
     margin: 0 auto;
     overflow: hidden;
+    margin-bottom: 4em;
 }
 
 .custom-carousel {

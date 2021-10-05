@@ -15,8 +15,6 @@ $name = null;
 $salary = null;
 $duration = null;
 $details = null;
-$sample_images = null;
-$sample_files = null;
 $negotiable = null;
 $preferred_skills = null;
 
@@ -24,7 +22,7 @@ $hirer_name = null;
 $hirer_spent = null;
 $hirer_hired = null;
 $hirer_rated = null;
-
+$hirer_picture = null;
 
 // query 
 $sqlSelect = "SELECT * FROM job WHERE id = " . $_GET["job_id"];
@@ -37,8 +35,6 @@ if ($result->num_rows > 0) {
         $salary = $row["salary"];
         $duration = $row["duration"];
         $details = $row["details"];
-        $sample_images = $row["sample_images"];
-        $sample_files = $row["sample_files"];
         $negotiable = $row["negotiable"];
         $preferred_skills = $row["preferred_skills"];
     }
@@ -47,7 +43,7 @@ if ($result->num_rows > 0) {
 }
 
 //query 2
-$sqlPoster = "SELECT u.name, h.* FROM users u JOIN hirer h ON u.id = h.id WHERE h.id = " . $posted_by;
+$sqlPoster = "SELECT u.name,u.picture, h.* FROM users u JOIN hirer h ON u.id = h.id WHERE h.id = " . $posted_by;
 $result = $conn->query($sqlPoster);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -55,6 +51,7 @@ if ($result->num_rows > 0) {
         $hirer_spent = $row["spent"];
         $hirer_hired = $row["hired"];
         $hirer_rated = $row["rating"];
+        $hirer_picture = $row["picture"];
     }
 } else {
     echo "0 results from hirer";
@@ -70,15 +67,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-
-    <!-- Boxicon CSS  -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-
-    <link rel="stylesheet" href="css/styles.css">
+    <?php include 'headLinks.php'?>
     <title>Product Details</title>
 </head>
 
@@ -133,7 +122,13 @@ $conn->close();
                     <div class="hirer-card">
                         <div class="hirer__pic-name flex">
                             <div class="hirer__pic">
-                                <img src="https://picsum.photos/200" alt="Hirer's profile picture">
+                                <?php
+                                if (!empty($hirer_picture)) {
+                                    echo '<img src="data:image/jpeg;base64,' . base64_encode($hirer_picture) . '"alt="profile-picture"/>';
+                                } else {
+                                    echo '<img src="https://picsum.photos/200/300" alt="profile picture">';
+                                }
+                                ?>
                             </div>
                             <div class="hirer__name">
                                 <h3><?php echo $hirer_name ?> </h3>
@@ -168,7 +163,7 @@ $conn->close();
             </section>
             <section class="sample-files-section">
                 <div class="special--container">
-                    <h2>Sample Images & Files</h2>
+                    <h2>Sample Images & Files </h2>
                     <h3>Images</h3>
                     <div class="img-carousel">
 
