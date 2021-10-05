@@ -7,14 +7,14 @@ if (document.URL.includes("team.php")) {
   // =================================================
 
   // vanilla-tilt 
-  
+
   console.log("hello");
   VanillaTilt.init(document.querySelectorAll(".default-card"), {
-		max: 25,
-		speed: 400,
+    max: 25,
+    speed: 400,
     glare: true,
     "max-glare": 1,
-	});
+  });
 
   new fullpage('#team-fullpage', {
     anchors: ['intro', 'sanjid', 'atikur', 'tanim'],
@@ -104,8 +104,8 @@ else if (document.URL.includes("explore.php")) {
   //   // }
   let isLeftThumb = false;
   let isRightThumb = false;
-  let thumbposLeft = 5;
-  let thumbposRight = 95;
+  let thumbposLeft = 2;
+  let thumbposRight = 98;
   function initSliders() {
     leftThumb.style.left = `${thumbposLeft}%`;
     selectedTrack.style.left = `${thumbposLeft}%`;

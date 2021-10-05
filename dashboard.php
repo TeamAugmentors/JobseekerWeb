@@ -3,6 +3,7 @@ session_start();
 $active = "dashboard";
 $isLoggedIn = 1;
 $success = 0;
+$orderCnt = 0;
 if ($_SESSION["isLoggedIn"] != 1) {
     $isLoggedIn = 0;
     header("Location: http://localhost/JobseekerWeb/signin.php");
@@ -32,6 +33,7 @@ $job = array();
 $sqlSelect = "SELECT * FROM users WHERE id = " . $_SESSION["userId"];
 $result = $conn->query($sqlSelect);
 if ($result->num_rows > 0) {
+    $orderCnt = 1;
     while ($row = $result->fetch_assoc()) {
         $user = $row["user_name"];
         $name = $row["name"];
@@ -42,6 +44,7 @@ if ($result->num_rows > 0) {
         $picture = $row['picture'];
     }
 } else {
+    // $orderCnt = 0;
     echo "0 results from user";
 }
 
@@ -55,7 +58,7 @@ if ($result->num_rows > 0) {
         $user_rated = $row["rating"];
     }
 } else {
-    echo "0 results from user";
+    echo "0 results from freelancer";
 }
 
 //query 3 job details
@@ -67,7 +70,8 @@ if ($result->num_rows > 0) {
         array_push($job, $temp);
     }
 } else {
-    echo "0 results from active orders";
+    $orderCnt = 0;
+    // echo "0 results from active orders";
 }
 
 $conn->close();
@@ -80,7 +84,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'headLinks.php'?>
+    <?php include 'headLinks.php' ?>
     <title>Dashboard</title>
 </head>
 
@@ -313,12 +317,11 @@ $conn->close();
             </div>
         </div>
     </main>
-
+    <!-- ---------------------------------Toast------------------------------- -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <!-- <img src="..." class="rounded me-2" alt="..."> -->
-                <strong class="me-auto">Login successful</strong>
+                <h4 class="me-auto mb-0">Login successful</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
@@ -326,14 +329,31 @@ $conn->close();
             </div>
         </div>
     </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastNoOrder" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <h4 class="me-auto mb-0">You have no active orders</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>Please apply for suitable jobs<br>for start earning</h3>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
     <script src="js/script.js"></script>
     <script type="text/javascript">
         <?php
-        if ($success == 1) {
-            echo " var toastTrigger = document.getElementById('liveToastBtn');
-            var toastLiveExample = document.getElementById('liveToast');
+        if ($success === 1) {
+            echo "var toastLiveExample = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();";
+        }
+        if ($orderCnt === 0) {
+            echo "var toastLiveExample = document.getElementById('liveToastNoOrder');
             var toast = new bootstrap.Toast(toastLiveExample);
             toast.show();";
         }

@@ -52,7 +52,7 @@ if (!empty($_POST)) {
         <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <!-- <img src="..." class="rounded me-2" alt="..."> -->
-                <strong class="me-auto">Login Failed</strong>
+                <h4 class="me-auto mb-0">Login Failed</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
@@ -65,7 +65,7 @@ if (!empty($_POST)) {
         <div id="liveToastBan" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <!-- <img src="..." class="rounded me-2" alt="..."> -->
-                <strong class="me-auto">You have been banned</strong>
+                <h4 class="me-auto mb-0">You have been banned</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">

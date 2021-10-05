@@ -20,18 +20,34 @@ if ($result->num_rows > 0) {
     echo "No image found";
 }
 // query 
+$sqlCards = null;
+$cardCnt = 0;
 if (empty($_GET)) {
     $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
+    // echo 1;
 } else if (array_key_exists("category", $_GET) && strcmp($_GET['category'], "None") === 0) {
     $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
-} else if (array_key_exists("category", $_GET)) {
-    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE category ='" . $_GET['category'] . "'";
-} else if (array_key_exists("tk_min", $_GET) && array_key_exists("tk_max", $_GET)) {
-    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE salary >=" . $_GET['tk_min'] . " AND salary<=" . $_GET['tk_max'];
+    // echo 2;
+    goto HERE;
 }
+if (array_key_exists("category", $_GET)) {
+    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE category ='" . $_GET['category'] . "'";
+    // echo 3;
+}
+if (array_key_exists("tk_min", $_GET) && array_key_exists("tk_max", $_GET)) {
+    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE salary >=" . $_GET['tk_min'] . " AND salary<=" . $_GET['tk_max'];
+    // echo 4;
+}
+if (array_key_exists("tk_min", $_GET) && array_key_exists("tk_max", $_GET) && array_key_exists("category", $_GET)) {
+    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE salary >=" . $_GET['tk_min'] . " AND salary<=" . $_GET['tk_max'] . " AND category ='" . $_GET['category'] . "'";
+    // echo 5;
+}
+HERE:
+// echo $sqlCards;
 $result = $conn->query($sqlCards);
 $allCards = array();
 if ($result->num_rows > 0) {
+    $cardCnt = 1;
     while ($row = $result->fetch_assoc()) {
         $rowItems = array();
         $rowItems['id'] = $row['id'];
@@ -47,7 +63,8 @@ if ($result->num_rows > 0) {
         array_push($allCards, $rowItems);
     }
 } else {
-    echo "0 results";
+    $cardCnt = 0;
+    // echo "0 results";
 }
 $conn->close();
 
@@ -62,7 +79,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'headLinks.php'?>
+    <?php include 'headLinks.php' ?>
     <title>Explore</title>
 </head>
 
@@ -247,9 +264,33 @@ $conn->close();
             </div>
         </div>
     </div>
+    <!-- -----------------------Toast------------------------- -->
+    <!-- -----------------Toast------------------------- -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastNoCard" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                <h4 class="me-auto mb-0">Messege</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>No job card found</h3>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+        <?php
+        if ($cardCnt === 0) {
+            echo "var toastLiveExample = document.getElementById('liveToastNoCard');
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    toast.show();";
+        }
+        ?>
+    </script>
 
 </body>
 
