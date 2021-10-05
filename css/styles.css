@@ -1099,6 +1099,7 @@ main {
     height: auto;
     margin-right: 2em;
     margin-bottom: 2em;
+    aspect-ratio: 1;
 }
 
 .hirer__pic img {
