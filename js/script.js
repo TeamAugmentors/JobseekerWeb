@@ -5,6 +5,17 @@ if (document.URL.includes("team.php")) {
   // =================================================
   // team page Animation
   // =================================================
+
+  // vanilla-tilt 
+  
+  console.log("hello");
+  VanillaTilt.init(document.querySelectorAll(".default-card"), {
+		max: 25,
+		speed: 400,
+    glare: true,
+    "max-glare": 1,
+	});
+
   new fullpage('#team-fullpage', {
     anchors: ['intro', 'sanjid', 'atikur', 'tanim'],
     navigation: true,
@@ -22,6 +33,7 @@ if (document.URL.includes("team.php")) {
     }
   }
   typeWriter();
+
 }
 else if (document.URL.includes("signin.php")) {
   // =====================Sign inpage back button===============================

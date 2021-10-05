@@ -25,7 +25,7 @@ $sqlTeam = "SELECT * FROM team";
 $result = $conn->query($sqlTeam);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $temp = array("member"=> $row["member"],"name" => $row["name"], "id" => $row["id"], "hobby" => $row["hobby"], "picture" => $row["picture"]);
+        $temp = array("member" => $row["member"], "name" => $row["name"], "id" => $row["id"], "hobby" => $row["hobby"], "picture" => $row["picture"], "background" => $row["background"]);
         array_push($teammate, $temp);
         // print_r($temp);
     }
@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
 
     <!-- Boxicon CSS  -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <!-- Font -->
     <link href='https://bigfontsite.com/fonts/fresh-eaters.html' rel="stylesheet">
 
@@ -92,20 +92,42 @@ if ($result->num_rows > 0) {
             </section>
 
             <?php
-            foreach($teammate as $temp){
+            foreach ($teammate as $temp) {
             ?>
-            <section class="section teammates" id="<?php echo $temp["id"] ?>">
-                <div class="<?php echo $temp["member"]?> member">
-                    <h1><?php echo $temp["name"] ?> </h1>
-                    <h2><?php echo $temp["id"]?> </h2>
-                    <?php echo $temp["hobby"] ?>
-                </div>
-            </section>
+                <section class="section teammates" id="<?php echo $temp["id"] ?>">
+                    <div class="<?php echo $temp["member"] ?> member flex">
+                        <?php
+                        if (!empty($temp["background"])) {
+                            echo '<img class="member-background" src="data:image/jpeg;base64,' . base64_encode($temp["background"]) . '"alt="background-picture"/>';
+                        }
+                        ?>
+                        <div class="default-card flex">
+                            <div class="content flex">
+                                <div class="member-image">
+                                    <?php
+                                    if (!empty($temp["picture"])) {
+                                        echo '<img src="data:image/jpeg;base64,' . base64_encode($temp["picture"]) . '"alt="profile-picture"/>';
+                                    } else {
+                                        echo '<img src="./images/JS.png" alt="profile-picture"/>';
+                                    }
+                                    ?>
+                                </div>
+                                <h1><?php echo $temp["name"] ?> </h1>
+                                <h2>ID: <?php echo $temp["id"] ?> </h2>
+                                <span>
+                                    Hobby: <?php echo $temp["hobby"] ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             <?php } ?>
         </div>
     </div>
     <!-- This is a comment -->
     <script src="js/fullpage.min.js"></script>
+
+    <script type="text/javascript" src="js/vanilla-tilt.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
