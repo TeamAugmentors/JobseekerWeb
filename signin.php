@@ -3,20 +3,27 @@ session_start();
 
 include "dbconnection.php";
 
-$success = 1;
+$success = 0;
+$isBanned = 0;
 if (!empty($_POST)) {
-    $sql = "SELECT id, name, user_name, mail, password FROM users;";
+    $sql = "SELECT id, name, user_name, mail, password, ban FROM users;";
     $username = $_POST['username'];
     $password = $_POST['password'];
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             if ((!strcmp($row['user_name'], $username) || !strcmp($row['mail'], $username)) && !strcmp($row['password'], $password)) {
-                $_SESSION["isLoggedIn"] = 1;
-                $_SESSION["doneLoggedIn"] = 1;
-                $_SESSION["userId"] = $row['id'];
-                $_SESSION["name"] = $row['name'];
-                header("Location: http://localhost/JobseekerWeb/dashboard.php#dashboard__overview");
+                $isBanned = $row["ban"];
+                if ($isBanned) {
+                    break;
+                } else {
+                    $success = 1;
+                    $_SESSION["isLoggedIn"] = 1;
+                    $_SESSION["doneLoggedIn"] = 1;
+                    $_SESSION["userId"] = $row['id'];
+                    $_SESSION["name"] = $row['name'];
+                    header("Location: http://localhost/JobseekerWeb/dashboard.php#dashboard__overview");
+                }
             } else {
                 $success = 0;
             }
@@ -26,6 +33,7 @@ if (!empty($_POST)) {
     }
     $conn->close();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,8 +54,9 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+    <!-- -----------------Toast------------------------- -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <!-- <img src="..." class="rounded me-2" alt="..."> -->
                 <strong class="me-auto">Login Failed</strong>
@@ -58,6 +67,20 @@ if (!empty($_POST)) {
             </div>
         </div>
     </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastBan" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <!-- <img src="..." class="rounded me-2" alt="..."> -->
+                <strong class="me-auto">You have been banned</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>Contact our support for <br> more information</h3>
+            </div>
+        </div>
+    </div>
+
     <div class="signin-page">
         <div class="left">
             <div class="arrow-left">
@@ -117,10 +140,13 @@ if (!empty($_POST)) {
         <script type="text/javascript">
             <?php
             if ($success == 0) {
-                echo " var toastTrigger = document.getElementById('liveToastBtn');
-            var toastLiveExample = document.getElementById('liveToast');
-            var toast = new bootstrap.Toast(toastLiveExample);
-            toast.show();";
+                echo "var toastLiveExample = document.getElementById('liveToastError');
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    toast.show();";
+            } else if ($isBanned) {
+                echo "var toastLiveExample = document.getElementById('liveToastBan');
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    toast.show();";
             }
             ?>
         </script>
