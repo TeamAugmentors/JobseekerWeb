@@ -492,9 +492,6 @@ if (!empty($_SESSION)) {
             .button-earn {
                 margin: 10px auto !important;
             }
-
-
-
         }
     </style>
 

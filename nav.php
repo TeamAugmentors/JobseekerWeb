@@ -15,8 +15,8 @@
                                         echo "active";
                                     } ?>">
                     <a class="nav-link" aria-current="page" href="index.php" <?php if (strcmp($active, "home") === 0) {
-                                        echo 'style="color:white"';
-                                    } ?>>Home</a>
+                                                                                    echo 'style="color:white"';
+                                                                                } ?>>Home</a>
                 </li>
                 <li class="nav-item <?php if (strcmp($active, "about") === 0) {
                                         echo "active";
@@ -25,12 +25,20 @@
                                                                 echo 'style="color:white"';
                                                             } ?>>About Us</a>
                 </li>
+                <li class="nav-item <?php if (strcmp($active, "contactUs") === 0) {
+                                        echo "active";
+                                    } ?>">
+                    <a class="nav-link" href="contactus.php" <?php if (strcmp($active, "contactUs") === 0) {
+                                                            echo 'style="color:white"';
+                                                        } ?>>Contact Us</a>
+                </li>
+
                 <li class="nav-item <?php if (strcmp($active, "team") === 0) {
                                         echo "active";
                                     } ?>">
                     <a class="nav-link" href="team.php" <?php if (strcmp($active, "team") === 0) {
-                                                                echo 'style="color:white"';
-                                                            } ?>>Meet the Team</a>
+                                                            echo 'style="color:white"';
+                                                        } ?>>Meet the Team</a>
                 </li>
                 <div class="horizontal-border nav-item"></div>
                 <?php
