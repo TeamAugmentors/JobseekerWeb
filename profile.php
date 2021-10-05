@@ -7,11 +7,8 @@ if (!empty($_SESSION)) {
 } else {
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
-// database stuffs
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobseekerweb";
+
+include "dbconnection.php";
 
 $name = null;
 $email = null;
@@ -22,12 +19,6 @@ $profile_image = null;
 
 $isFailed = 0;
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 $sqlSelect = "SELECT * FROM users WHERE id = " . $_SESSION["userId"];
 $result = $conn->query($sqlSelect);
 if ($result->num_rows > 0) {
@@ -181,7 +172,7 @@ function imageupload($conn)
                             <div class="form-row row">
                                 <div class="my-form-group col-md-6">
                                     <label for="phoneNo">Phone No</label>
-                                    <input type="text" id="phoneNo" name="phoneNo" placeholder="0177.........." value=<?php echo $phoneNo ?> />
+                                    <input type="number" id="phoneNo" name="phoneNo" placeholder="0177.........." value=<?php echo $phoneNo ?> />
                                 </div>
                                 <div class="my-form-group col-md-6">
                                     <label for="billing">Billing info</label>
@@ -229,7 +220,7 @@ function imageupload($conn)
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/script.js"></script>
-    < type="text/javascript">
+    <script type="text/javascript">
         <?php
         if ($isFailed) {
             echo " var toastTrigger = document.getElementById('liveToastBtn');
@@ -238,6 +229,7 @@ function imageupload($conn)
                 toast.show();";
         }
         ?>
+    </script>
 </body>
 
 </html>

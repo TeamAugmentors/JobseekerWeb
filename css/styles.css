@@ -1192,6 +1192,7 @@ main {
     width: 5vw;
     background-image: url("../images/arrow1.svg") !important;
     transform: rotate(180deg);
+    z-index: 10;
 }
 
 .custom-next {
@@ -1641,10 +1642,10 @@ main {
 }
 
 .signin-page .vertical-signin-text,
-.signup-page .vertical-signin-text {
+.signup-page .vertical-signup-text {
     position: absolute;
     font-size: 21rem;
-    font-family: "Fresh-Eaters", sans-serif;
+    font-family: "fresh", sans-serif;
     top: 15%;
     right: 0;
     writing-mode: vertical-lr;
@@ -1652,7 +1653,9 @@ main {
     font-weight: 1000;
     opacity: 0.2;
 }
-
+.signup-page .vertical-signup-text{
+    font-size: 20rem;
+}
 .signin-page .left .text-wrapper,
 .signup-page .left .text-wrapper {
     z-index: 1;

@@ -5,6 +5,24 @@ $active = "about";
 if (!empty($_SESSION)) {
     $isLoggedIn = $_SESSION["isLoggedIn"];
 }
+$description1 = null;
+$description2 = null;
+$description3 = null;
+
+include "dbconnection.php";
+$sql = "SELECT * FROM aboutus";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while ($row = $result->fetch_assoc()) {
+        $description1 = $row['description_1'];
+        $description2 = $row['description_2'];
+        $description3 = $row['description_3'];
+    }
+} else {
+    echo "No description found";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,10 +82,7 @@ if (!empty($_SESSION)) {
                     <div class="text">
                         <h1 class="future">FUTURE</h1>
                         <h2 class="talents">OF TALENTS</h2>
-                        <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam,
-                            blanditiis rem? Quos ullam
-                            cupiditate ipsum tempora quaerat molestiae iusto aliquam molestias enim, quis cumque facere
-                            qui quae, ad in aperiam.</p>
+                        <p class="description"><?php echo $description1 ?></p>
                     </div>
                 </div>
             </div>
@@ -94,16 +109,14 @@ if (!empty($_SESSION)) {
             <div class="about-container">
                 <div class="left">
                     <div class="text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, magni. Obcaecati nobis,
-                            provident nisi corrupti ducimus recusandae! Minima illum asperiores enim aliquid repellat
-                            explicabo, velit optio?Lorem ipsum dolor sit amet</p>
+                        <p><?php echo $description2 ?></p>
                     </div>
                 </div>
                 <div class="right">
                     <div class="text">
                         <h1 class="heading-1">ONE APP</h1>
                         <h1 class="heading-2">ENDLESS POSSIBILITIES</h1>
-                        <P>Get jobs on the go with our mobile app<br> available at the playstore</P>
+                        <P><?php echo $description3 ?></P>
                     </div>
                 </div>
             </div>

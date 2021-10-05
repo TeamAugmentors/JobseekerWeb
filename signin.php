@@ -1,17 +1,8 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobseekerweb";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+include "dbconnection.php";
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 $success = 1;
 if (!empty($_POST)) {
     $sql = "SELECT id, name, user_name, mail, password FROM users;";

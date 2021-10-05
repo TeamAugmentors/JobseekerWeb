@@ -1,18 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobseekerweb";
-// showToast();
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-$success = 0;
-if (!empty($_POST)) {
+include "dbconnection.php";
+
+$isChecked = 1;
+if (!empty($_POST) && array_key_exists('isChecked', $_POST)) {
     $name = $_POST['name'];
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -24,9 +15,11 @@ if (!empty($_POST)) {
         $success = 1;
         header("Location: http://localhost/JobseekerWeb/signin.php");
     } else {
-        $success = 0;
+        echo "Something went wrong";
     }
     $conn->close();
+} else {
+    $isChecked = 0;
 }
 function getId($email, $conn)
 {
@@ -56,6 +49,7 @@ function insertId($id, $conn)
         echo "Error: " . $sqlForFreelancerId . "<br>" . $conn->error;
     }
 }
+
 ?>
 
 
@@ -82,27 +76,11 @@ function insertId($id, $conn)
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <!-- <img src="..." class="rounded me-2" alt="..."> -->
-                <strong class="me-auto">
-                    <?php
-                    if ($success === 1) {
-                        echo "Registered";
-                    } else {
-                        echo "Failed";
-                    }
-                    ?>
-                </strong>
+                <strong class="me-auto">Error</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                <h3>
-                    <?php
-                    if ($success === 1) {
-                        echo "Registered Successfull";
-                    } else {
-                        echo "Registration failed";
-                    }
-                    ?>
-                </h3>
+                <h3>Please check terms and conditions</h3>
             </div>
         </div>
     </div>
@@ -111,7 +89,7 @@ function insertId($id, $conn)
             <div class="arrow-left">
                 <i class="fa fa-arrow-left fa-3x"></i>
             </div>
-            <div class="vertical-signin-text">
+            <div class="vertical-signup-text">
                 SIGN UP
             </div>
             <div class="text-wrapper">
@@ -164,7 +142,7 @@ function insertId($id, $conn)
                         <div class="line"></div>
                     </div>
                     <div class="custom-form-check">
-                        <input class="custom-form-check-input" type="checkbox" value="" id="termAndCondition">
+                        <input class="custom-form-check-input" type="checkbox" value=1 id="termAndCondition" name="isChecked">
                         <label class="custom-form-check-label" for="termAndCondition">Creating an account means you're
                             okay to our <a href="#" class="term-text-green">Term of Services, Privacy Policy,</a>and out
                             default
@@ -181,10 +159,14 @@ function insertId($id, $conn)
 
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript">
-        var toastTrigger = document.getElementById('liveToastBtn');
-        var toastLiveExample = document.getElementById('liveToast');
-        var toast = new bootstrap.Toast(toastLiveExample);
-        toast.show();
+        <?php
+        if ($isChecked === 0) {
+            echo " var toastTrigger = document.getElementById('liveToastBtn');
+            var toastLiveExample = document.getElementById('liveToast');
+            var toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();";
+        }
+        ?>
     </script>
 </body>
 
