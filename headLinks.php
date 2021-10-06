@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
 
 <!-- page icon  -->
-<link rel="icon" type="image/png" sizes="32x32" href="./images/JS.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./images/taka-bw.svg">
 
 <!-- custom stylesheet  -->
 <link rel="stylesheet" href="css/styles.css">

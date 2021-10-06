@@ -2583,8 +2583,14 @@ p {
     margin-left: 10px;
 }
 
+@media (max-width: 750px) {
+    .profile-container .editname{
+        text-align: center;
+    } 
+}
 
 @media (max-width: 770px) {
+
     .hero-image img {
         display: none;
     }

@@ -98,7 +98,7 @@ function imageupload($conn)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'headLinks.php'?>
+    <?php include 'headLinks.php' ?>
     <title>Job Seeker</title>
 </head>
 
@@ -122,7 +122,7 @@ function imageupload($conn)
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container profile-container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8 mx-auto">
                 <h1 class="account-setting-header">Account Settings</h1>
@@ -138,13 +138,17 @@ function imageupload($conn)
                                         echo '<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />';
                                     }
                                     ?>
+                                    <!-- <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
+                                    <button class="change-picture-btn mt-4">Change Picture</button> -->
+                                </div>
+                                <div class="col-md-12 text-center mb-5">
                                     <input type="file" class="choose-image" name="profile_image" accept="image/x-png,image/gif,image/jpeg" hidden />
                                     <button class="change-picture-btn mt-4">Change Picture</button>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="row align-items-center">
-                                    <div class="col-md-7">
+                                    <div class="col-md-12">
                                         <h2 class="mb-1 editname"><?php echo $name ?></h2>
                                     </div>
                                 </div>
