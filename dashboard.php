@@ -27,7 +27,7 @@ $user_completed = null;
 $user_rated = null;
 
 $job = array();
-
+$applied = array();
 
 // query personal info
 $sqlSelect = "SELECT * FROM users WHERE id = " . $_SESSION["userId"];
@@ -44,7 +44,6 @@ if ($result->num_rows > 0) {
         $picture = $row['picture'];
     }
 } else {
-    // $orderCnt = 0;
     echo "0 results from user";
 }
 
@@ -72,6 +71,19 @@ if ($result->num_rows > 0) {
 } else {
     $orderCnt = 0;
     // echo "0 results from active orders";
+}
+
+//query 4 applied jobs
+$sqlUser = "SELECT b.name, b.details,a.serial FROM job b JOIN application a ON b.id = a.job_id WHERE a.applied_id =" . $_SESSION["userId"];
+$result = $conn->query($sqlUser);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $temp = array("serial" => $row["serial"], "name" => $row["name"], "details" => $row["details"]);
+        array_push($applied, $temp);
+    }
+} else {
+    $orderCnt = 0;
+    // echo "0 results from applied orders";
 }
 
 $conn->close();
@@ -224,21 +236,24 @@ $conn->close();
                                     </div>
                                     <div class="accordion-content">
                                         <!-- nested accordion -->
-                                        <div>
-                                            <div class="overview-nested-content__bg">
-                                                <input type="checkbox" name="status-nested-accordion" id="skill1" class="accordion__input">
-                                                <div class="overview-label flex">
-                                                    <label for="skill1" class="accordion__label flex">E.</label>
-                                                    <i class='bx bxs-right-arrow'></i>
-                                                </div>
-                                                <div class="accordion-content">
-                                                    E.
+                                        <?php
+                                        foreach ($applied as $temp) {
+                                        ?>
+                                            <div>
+                                                <div class="overview-nested-content__bg">
+                                                    <input type="checkbox" name="status-nested-accordion" id="applied<?php echo $temp["serial"] ?>" class="accordion__input">
+                                                    <div class="overview-label flex">
+                                                        <label for="applied<?php echo $temp["serial"] ?>" class="accordion__label flex"><?php echo $temp["name"] ?></label>
+                                                        <i class='bx bxs-right-arrow'></i>
+                                                    </div>
+                                                    <div class="accordion-content">
+                                                        <?php echo $temp["details"] ?>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div>
 
-                                        </div>
+                                        <?php } ?>
+                    
                                     </div>
                                 </div>
                             </div>

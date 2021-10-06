@@ -2,12 +2,28 @@
 session_start();
 $isLoggedIn = 1;
 $active = "explore";
+$sApplied = 0;
+if (array_key_exists("isApplied", $_SESSION)) {
+    $isApplied = $_SESSION["isApplied"];
+    $_SESSION["isApplied"] = 0;
+}
+
 if ($_SESSION["isLoggedIn"] != 1) {
     $isLoggedIn = 0;
     header("Location: http://localhost/JobseekerWeb/signin.php");
 }
 
 include "dbconnection.php";
+
+$applied_jobs = array();
+// query for applied jobs 
+$sqlApplied = "SELECT job_id FROM application WHERE applied_id = " . $_SESSION["userId"];
+$result = $conn->query($sqlApplied);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        array_push($applied_jobs, $row["job_id"]);
+    }
+}
 
 //query for profile picture
 $sqlPicture = "SELECT picture FROM users WHERE id = " . $_SESSION['userId'];
@@ -251,10 +267,19 @@ $conn->close();
                                     <div class="description">
                                         <p><?php echo $card['details'] ?></p>
                                     </div>
-                                    <form action="productDetails.php" method="GET">
-                                        <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                        <button class="card-button">See More</button>
-                                    </form>
+                                    <?php
+                                    if (!in_Array($card["id"], $applied_jobs)) {
+                                    ?>
+                                        <form action="productDetails.php" method="GET">
+                                            <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
+                                            <button class="card-button">See More</button>
+                                        </form>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="card-button">Applied!</div>
+                                    <?php
+                                    } ?>
                                 </div>
                             </div>
                         <?php
@@ -267,6 +292,18 @@ $conn->close();
     </div>
     <!-- -----------------------Toast------------------------- -->
     <!-- -----------------Toast------------------------- -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastApplied" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <h4 class="me-auto mb-0">Job Application Successful</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>You will be notified when you<br> get accepted by the hirer</h3>
+            </div>
+        </div>
+    </div>
+
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToastNoCard" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
@@ -287,6 +324,11 @@ $conn->close();
         <?php
         if ($cardCnt === 0) {
             echo "var toastLiveExample = document.getElementById('liveToastNoCard');
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    toast.show();";
+        }
+        if ($isApplied === 1) {
+            echo "var toastLiveExample = document.getElementById('liveToastApplied');
                     var toast = new bootstrap.Toast(toastLiveExample);
                     toast.show();";
         }

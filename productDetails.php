@@ -70,7 +70,7 @@ if ($result->num_rows > 0) {
 }
 
 //query 4 fetching sample files
-$sqlSelect = $sqlSelect = "SELECT sample_files FROM jobfiles WHERE id =" . $_GET["job_id"];
+$sqlSelect = "SELECT sample_files FROM jobfiles WHERE id =" . $_GET["job_id"];
 $result = $conn->query($sqlSelect);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -78,6 +78,16 @@ if ($result->num_rows > 0) {
     }
 }
 
+//query 5 applying for job
+if (isset($_POST["apply"])) {
+    $sqlApply = "INSERT INTO application (job_id, applied_id) VALUES (" . $_GET["job_id"] . "," . $_SESSION["userId"] . ")";
+    if ($conn->query($sqlApply) === TRUE) {
+        $_SESSION["isApplied"]=1;
+        header("Location: http://localhost/JobseekerWeb/explore.php");
+    } else {
+        echo "Oops the job has already been accepted";
+    }
+}
 $conn->close();
 
 ?>
@@ -244,14 +254,6 @@ $conn->close();
                                     <i class="fas fa-download"></i>
                                 </button>
                             <?php } ?>
-                            <!-- <button class="download-file-btn flex">
-                            <span>File#.jpg</span>
-                            <i class="fas fa-download"></i>
-                        </button>
-                        <button class="download-file-btn flex">
-                            <span>File#.jpg</span>
-                            <i class="fas fa-download"></i>
-                        </button> -->
                         </div>
                     <?php } else {
                         echo "<h4>There are no sample files for this job.</h4>";
@@ -264,7 +266,10 @@ $conn->close();
                     <h2>Hurry Up!</h2>
                     <p>Only few applications left for this job!</p>
                     <p>If you have what it takes, what are you waiting for?</p>
-                    <button>Apply now</button>
+                    <form action="" method="POST">
+                        <input type="hidden" value="1" name="apply"/>
+                        <button>Apply now</button>
+                    </form>
                     <h3>By clicking the apply button, I agree to all the terms and conditions</h3>
                 </div>
             </section>
