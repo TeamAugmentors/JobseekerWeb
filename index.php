@@ -207,7 +207,7 @@ if ($result->num_rows > 0) {
                 </div>
                 <div class="col-lg-12">
                     <button class="my-button outline w-50 d-block mx-auto vm-100 button-earn">
-                        I want to start earning!
+                        <a href="explore.php">I want to start earning! </a>
                     </button>
                     <h1 class="header-text-2 text-center vm-100 ">
                         Curious? Check out who <a href="team.php" class="a-custom" style="text-decoration: none;">we are</a>
