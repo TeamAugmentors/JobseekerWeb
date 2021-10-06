@@ -942,7 +942,7 @@ main {
 /* nested overview accordion  */
 
 .overview-nested-content__bg {
-    border: 2px solid var(--dark_green);
+    border: 1px solid var(--dark_green);
     border-radius: 12px;
     margin-top: 2em;
 }

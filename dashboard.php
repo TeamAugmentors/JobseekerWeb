@@ -215,15 +215,15 @@ $conn->close();
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div>
+                            <div>
                                 <div class="overview-content__bg">
                                     <input type="checkbox" name="status-accordion" id="current-skills" class="accordion__input">
                                     <div class="overview-label flex">
-                                        <label for="current-skills" class="accordion__label flex">Current Skills</label>
+                                        <label for="current-skills" class="accordion__label flex">Applied Jobs</label>
                                         <i class='bx bxs-right-arrow'></i>
                                     </div>
                                     <div class="accordion-content">
-                                        nested accordion
+                                        <!-- nested accordion -->
                                         <div>
                                             <div class="overview-nested-content__bg">
                                                 <input type="checkbox" name="status-nested-accordion" id="skill1" class="accordion__input">
@@ -241,7 +241,7 @@ $conn->close();
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </li>
 
