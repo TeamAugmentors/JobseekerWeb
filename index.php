@@ -1,11 +1,31 @@
 <?php
 session_start();
+include "dbconnection.php";
 
 $active = 'home';
 $isLoggedIn = 0;
 if (!empty($_SESSION)) {
     $isLoggedIn = $_SESSION["isLoggedIn"];
 }
+
+$sqlForCards = "SELECT id, posted_by, category, name, salary, duration, details, negotiable FROM job order by salary desc LIMIT 4";
+$result = $conn->query($sqlForCards);
+$jobCards = array();
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $cards = array();
+        $cards = array();
+        $cards['id'] = $row['id'];
+        $cards['name'] = $row['name'];
+        $cards['salary'] = $row['salary'];
+        $cards['duration'] = $row['duration'];
+        $cards['negotiable'] = $row['negotiable'];
+        $cards['details'] = $row['details'];
+        array_push($jobCards, $cards);
+    }
+}
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,7 +35,7 @@ if (!empty($_SESSION)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <?php include 'headLinks.php'?>
+    <?php include 'headLinks.php' ?>
     <link rel="stylesheet" href="css/home_style.css">
     <title>JobSeeker</title>
 
@@ -94,202 +114,75 @@ if (!empty($_SESSION)) {
                 <h1 class="header-text color-black text-center vm-100">
                     Pick one which is right for you.
                 </h1>
+                <!-- ------------------ -->
+                <?php
+                foreach ($jobCards as $card) {
+                ?>
+                    <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
+                        <div class="new-card-container">
+                            <div class="inside-container pt-4 bg-black">
+                                <h3 class="color-white card-logo-text text-center m-0">
+                                    <?php echo $card['name']; ?>
+                                </h3>
 
-                <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
-                    <div class="new-card-container">
-                        <div class="inside-container pt-4 bg-black">
-                            <h3 class="color-white card-logo-text text-center m-0">
-                                Illustrator
-                            </h3>
-
-                            <h3 class="color-white text-center card-salary-text mt-3">
-                                <img src="images/taka-bw.svg" width="35px">
-                                3500
-                            </h3>
-                        </div>
-
-                        <div class="inside-container h-100 bg-light d-flex flex-column">
-                            <div class="card-section d-flex justify-content-between mt-4">
-                                <h4 class="inside-section-text ">
-                                    Duration
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    2 Days
-                                </h4>
-                            </div>
-                            <div class="card-section d-flex justify-content-between">
-                                <h4 class="inside-section-text">
-                                    Revisions
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    4 times
-                                </h4>
-                            </div>
-                            <div class="card-section d-flex justify-content-between">
-                                <h4 class="inside-section-text">
-                                    Negotiable
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    Yes
-                                </h4>
+                                <h3 class="color-white text-center card-salary-text mt-3">
+                                    <img src="images/taka-bw.svg" width="35px">
+                                    <?php echo $card['salary']; ?>
+                                </h3>
                             </div>
 
-                            <div class="card-details color-white">
-                                Looking for someone to do some illustrator work.
-                            </div>
+                            <div class="inside-container h-100 bg-light d-flex flex-column">
+                                <div class="card-section d-flex justify-content-between mt-4">
+                                    <h4 class="inside-section-text ">
+                                        Duration
+                                    </h4>
+                                    <h4 class="inside-section-text">
+                                        <?php
+                                        $interval = date_diff(date_create(date('Y-m-d')), date_create($card['duration']));
+                                        echo $interval->format('%a Days');
+                                        ?>
+                                    </h4>
+                                </div>
+                                <div class="card-section d-flex justify-content-between">
+                                    <h4 class="inside-section-text">
+                                        Revisions
+                                    </h4>
+                                    <h4 class="inside-section-text">
+                                        4 times
+                                    </h4>
+                                </div>
+                                <div class="card-section d-flex justify-content-between">
+                                    <h4 class="inside-section-text">
+                                        <?php
+                                        if ($card['negotiable'] === 1) {
+                                            echo "Yes";
+                                        } else {
+                                            echo "No";
+                                        }
+                                        ?>
+                                    </h4>
+                                    <h4 class="inside-section-text">
+                                        Yes
+                                    </h4>
+                                </div>
 
-                            <div class="card-apply">
-                                Apply
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
-                    <div class="new-card-container">
-                        <div class="inside-container pt-4 bg-black">
-                            <h3 class="color-white card-logo-text text-center m-0">
-                                Illustrator
-                            </h3>
-
-                            <h3 class="color-white text-center card-salary-text mt-3">
-                                <img src="images/taka-bw.svg" width="35px">
-                                3500
-                            </h3>
-                        </div>
-
-                        <div class="inside-container h-100 bg-light d-flex flex-column">
-                            <div class="card-section d-flex justify-content-between mt-4">
-                                <h4 class="inside-section-text ">
-                                    Duration
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    2 Days
-                                </h4>
-                            </div>
-                            <div class="card-section d-flex justify-content-between">
-                                <h4 class="inside-section-text">
-                                    Revisions
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    4 times
-                                </h4>
-                            </div>
-                            <div class="card-section d-flex justify-content-between">
-                                <h4 class="inside-section-text">
-                                    Negotiable
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    Yes
-                                </h4>
-                            </div>
-
-                            <div class="card-details color-white">
-                                Looking for someone to do some illustrator work.
-                            </div>
-
-                            <div class="card-apply">
-                                Apply
+                                <div class="card-details color-white">
+                                    Looking for someone to do some illustrator work.
+                                </div>
+                                <form class="card-apply" action="productDetails.php" method="GET">
+                                    <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
+                                    <button class="apply-button">Apply</button>
+                                </form>
+                                <!-- <div class="card-apply">
+                                    Apply
+                                </div> -->
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
-                    <div class="new-card-container">
-                        <div class="inside-container pt-4 bg-black">
-                            <h3 class="color-white card-logo-text text-center m-0">
-                                Illustrator
-                            </h3>
-
-                            <h3 class="color-white text-center card-salary-text mt-3">
-                                <img src="images/taka-bw.svg" width="35px">
-                                3500
-                            </h3>
-                        </div>
-                        <div class="inside-container h-100 bg-light d-flex flex-column">
-                            <div class="card-section d-flex justify-content-between mt-4">
-                                <h4 class="inside-section-text ">
-                                    Duration
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    2 Days
-                                </h4>
-                            </div>
-                            <div class="card-section d-flex justify-content-between">
-                                <h4 class="inside-section-text">
-                                    Revisions
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    4 times
-                                </h4>
-                            </div>
-                            <div class="card-section d-flex justify-content-between">
-                                <h4 class="inside-section-text">
-                                    Negotiable
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    Yes
-                                </h4>
-                            </div>
-
-                            <div class="card-details color-white">
-                                Looking for someone to do some illustrator work.
-                            </div>
-
-                            <div class="card-apply">
-                                Apply
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xxl-3 d-grid justify-content-center vm-100">
-                    <div class="new-card-container">
-                        <div class="inside-container pt-4 bg-black">
-                            <h3 class="color-white card-logo-text text-center m-0">
-                                Illustrator
-                            </h3>
-
-                            <h3 class="color-white text-center card-salary-text mt-3">
-                                <img src="images/taka-bw.svg" width="35px">
-                                3500
-                            </h3>
-                        </div>
-                        <div class="inside-container h-100 bg-light d-flex flex-column">
-                            <div class="card-section d-flex justify-content-between mt-4">
-                                <h4 class="inside-section-text ">
-                                    Duration
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    2 Days
-                                </h4>
-                            </div>
-                            <div class="card-section d-flex justify-content-between">
-                                <h4 class="inside-section-text">
-                                    Revisions
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    4 times
-                                </h4>
-                            </div>
-                            <div class="card-section d-flex justify-content-between">
-                                <h4 class="inside-section-text">
-                                    Negotiable
-                                </h4>
-                                <h4 class="inside-section-text">
-                                    Yes
-                                </h4>
-                            </div>
-
-                            <div class="card-details color-white">
-                                Looking for someone to do some illustrator work.
-                            </div>
-
-                            <div class="card-apply">
-                                Apply
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <?php
+                }
+                ?>
+                <!-- ------------------------ -->
                 <h1 class="header-text-2 color-black text-center vm-100 ">
                     <a href="signup.php" style="text-decoration: none;">Sign up</a> to explore your potential
                 </h1>
@@ -314,7 +207,7 @@ if (!empty($_SESSION)) {
                 </div>
                 <div class="col-lg-12">
                     <button class="my-button outline w-50 d-block mx-auto vm-100 button-earn">
-                        I want to start earning!
+                        <a href="explore.php">I want to start earning! </a>
                     </button>
                     <h1 class="header-text-2 text-center vm-100 ">
                         Curious? Check out who <a href="team.php" class="a-custom" style="text-decoration: none;">we are</a>

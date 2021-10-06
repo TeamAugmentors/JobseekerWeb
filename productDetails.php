@@ -126,7 +126,7 @@ $conn->close();
             <section class="job-info-section flex">
                 <div class="job-info__details special--container">
                     <div class="job-details flex">
-                        <h3>Duration</h3>
+                        <h3>Deadline</h3>
                         <h3><?php echo $duration ?></h3>
                     </div>
                     <div class="job-details flex">
