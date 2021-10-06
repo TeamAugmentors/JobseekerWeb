@@ -17,9 +17,7 @@ if (document.URL.includes("team.php")) {
   });
 
   new fullpage('#team-fullpage', {
-    anchors: ['intro', 'sanjid', 'atikur', 'tanim'],
-    navigation: true,
-    navigationTooltips: ['Intro', 'Sanjid Islam Chowdhury', 'Md. Atikur Rahman', 'Ahmed Saad Tanim'],
+    navigation: true
   });
 
   let i = 0;
@@ -33,7 +31,6 @@ if (document.URL.includes("team.php")) {
     }
   }
   typeWriter();
-
 }
 else if (document.URL.includes("signin.php")) {
   // =====================Sign inpage back button===============================
@@ -65,47 +62,11 @@ else if (document.URL.includes("explore.php")) {
   const inputTkMax = document.querySelector(".input-amount .input-tk-max");
   console.log(inputTkMin);
   console.log(inputTkMax);
-  //   const jobCard = `<div class="job-card">
-  //   <div class="job-card-header">
-  //       <h1 class="catagory">Graphics & design</h1>
-  //       <h1 class="job-name">Illustration</h1>
-  //       <div class="amount-div">
-  //           <div class="tk-icon">
-  //               <img src="images/taka3.svg" alt="">
-  //           </div>
-  //           <h1 class="amount">3000</h1>
-  //       </div>
-  //       <div class="line"></div>
-  //       <div class="details">
-  //           <div class="duration">
-  //               <div class="details-left">Duration</div>
-  //               <div class="details-right">2 Days</div>
-  //           </div>
-  //           <div class="revisions">
-  //               <div class="details-left">revisions</div>
-  //               <div class="details-right">4</div>
-  //           </div>
-  //           <div class="negotiable">
-  //               <div class="details-left">Negotiable</div>
-  //               <div class="details-right">No</div>
-  //           </div>
-  //       </div>
-  //       <div class="description">
-  //           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident ipsum
-  //               perferendis autem, aliquid eos voluptatibus id suscipit, odio temporibus sed et
-  //               nam
-  //               repellendus eaque numquam cum reprehenderit nemo repudiandae rerum!</p>
-  //       </div>
-  //       <button class="card-button">See More</button>
-  //   </div>
-  // </div>`;
-  //   // for (let i = 1; i <= -1; i++) {
-  //   //   jobCardContainer.innerHTML += jobCard;
-  //   // }
   let isLeftThumb = false;
   let isRightThumb = false;
   let thumbposLeft = 2;
   let thumbposRight = 98;
+
   function initSliders() {
     leftThumb.style.left = `${thumbposLeft}%`;
     selectedTrack.style.left = `${thumbposLeft}%`;

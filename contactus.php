@@ -14,174 +14,11 @@ if (!empty($_SESSION)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <?php include 'headLinks.php'?>
+    <?php include 'headLinks.php' ?>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
-    <style>
-        .main-container {
-            min-height: 100vh;
-        }
+    <link href="css/contact_us.css" rel="stylesheet">
 
-        .contact-section {
-            position: relative;
-            min-height: 70%;
-            background-color: rgb(18, 18, 18);
-            background-image: url('images/map-2.png');
-        }
-
-        .below-contact-section {
-            min-height: 30%;
-            background-color: rgb(15, 15, 15);
-        }
-
-        .w-75 {
-            width: 75% !important;
-        }
-
-
-        .header-text {
-            position: absolute;
-            bottom: 0;
-            color: white;
-            font-size: 9rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .button-map {
-            border: none;
-            padding: 10px 20px;
-            font-size: 2rem;
-            background-color: transparent;
-            border: 2px solid white;
-            border-radius: 5px;
-            color: white;
-            opacity: 0.6;
-            margin-top: 55px;
-            transition: all 0.3s;
-        }
-
-        .button-map:hover {
-            opacity: 1;
-            transform: translateY(-10px);
-        }
-
-        .form-container {
-            height: fit-content;
-            max-width: 550px;
-            background-color: white;
-            border-radius: 10px;
-            top: 100px;
-            padding: 50px;
-            left: 200px;
-            box-shadow: 3px 2px 10px -4px rgba(0, 0, 0, 0.33);
-        }
-
-        .feedback-text {
-            font-family: 'fresh';
-            opacity: 0.4;
-            font-size: 2.2rem;
-        }
-
-        input[type="text"] {
-            font-size: 2.7rem;
-            border: none;
-            border-bottom: 2px solid black;
-            opacity: 0.3;
-            margin-top: 55px;
-            transition: all 0.3s;
-        }
-
-        input[type="text"]:focus {
-            box-shadow: none;
-            opacity: 1;
-            border-bottom: 4px solid black;
-        }
-
-        input[type="text"]:focus-visible {
-            outline: none;
-        }
-
-        input[type="submit"] {
-            border: none;
-            padding: 10px 20px;
-            font-size: 2rem;
-            background-color: transparent;
-            border: 2px solid black;
-            border-radius: 5px;
-            color: black;
-            opacity: 0.6;
-            margin-top: 55px;
-            transition: all 0.3s;
-        }
-
-        input[type="submit"]:hover {
-            opacity: 1;
-            background-color: black;
-            color: white;
-        }
-
-        .footer-title {
-            font-family: 'fresh';
-            color: white;
-            font-size: 2rem;
-            opacity: 0.6;
-        }
-
-        .footer-text {
-            color: white;
-            font-size: 1.6rem;
-            line-height: 24px;
-        }
-
-        @media (max-width: 1400px) {
-            .button-map {
-                display: block;
-                margin-top: 30px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .form-container {
-                margin: 30px 0;
-                width: 100%;
-                padding: 10%;
-                margin-top: 10%;
-                text-align: center;
-            }
-
-            .header-text {
-                display: none;
-            }
-
-            .footer-title {
-                font-size: clamp(12px, 2.4vw, 2.4rem) !important;
-            }
-
-            .footer-text {
-                font-size: clamp(10px, 2vw, 2.2rem) !important;
-            }
-
-            input[type="text"] {
-                font-size: clamp(16px, 2vw, 2.7rem) !important;
-                margin-top: clamp(16px, 6vw, 55px) !important;
-            }
-
-            input[type="submit"] {
-                font-size: clamp(14px, 2vw, 2rem);
-            }
-
-        }
-
-        @media (max-width: 400px) {
-            .w-75 {
-                width: 100% !important;
-            }
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-    </style>
 </head>
 
 <body>
@@ -246,6 +83,30 @@ if (!empty($_SESSION)) {
             </div>
         </div>
     </div>
+
+
+
 </body>
+
+<script>
+    $('.button-map').click(() => {
+        console.log($(window).width())
+
+        if ($(window).width() < 900) {
+            window.open('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2582.5410447349577!2d90.40990819101722!3d23.737943019051567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8f52f0cd403%3A0x967de59de993fe2c!2s36%20Garage%20goli%2C%20Dhaka%201205!5e0!3m2!1sen!2sbd!4v1633490753672!5m2!1sen!2sbd')
+        } else {
+            $('body').prepend(`<div class="iframe-container">   
+        <button id="close" style="float: right; width:15px; height:15px;">X</button>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2582.5410447349577!2d90.40990819101722!3d23.737943019051567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8f52f0cd403%3A0x967de59de993fe2c!2s36%20Garage%20goli%2C%20Dhaka%201205!5e0!3m2!1sen!2sbd!4v1633490753672!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>`)
+
+            $('#close').click(() => {
+                console.log("hello")
+                $('.iframe-container').remove()
+            })
+        }
+
+    })
+</script>
 
 </html>
