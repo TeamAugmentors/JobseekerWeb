@@ -6,6 +6,54 @@ $isLoggedIn = 0;
 if (!empty($_SESSION)) {
     $isLoggedIn = $_SESSION["isLoggedIn"];
 }
+
+$name = null;
+$email = null;
+$phone = null;
+$message = null;
+
+include "dbconnection.php";
+
+ini_set('display_errors', '0');
+
+$recaptcha = $_POST['g-recaptcha-response'];
+$res = reCaptcha($recaptcha);
+if(!$res['success']){
+  // Error
+} else {
+    if (!empty($_POST)) {
+        $name = $_POST["Name"];
+        $email = $_POST["Email"];
+        $phone = $_POST["Phone"];
+        $message =  $_POST["Message"];
+    
+        $query = "INSERT INTO feedback(name, email, phone, message) VALUES ('".$name."','".$email."','".$phone."','".$message."')";
+    
+        if ($conn->query($query) === TRUE) {
+        } else {
+            echo "Something went wrong";
+        }
+        $conn->close(); 
+    }
+}
+
+function reCaptcha($recaptcha){
+    $secret = "6LfHOrEcAAAAAPF4FmqUZrBvABpidqM2gVz9XnZ7";
+    $ip = $_SERVER['REMOTE_ADDR'];
+  
+    $postvars = array("secret"=>$secret, "response"=>$recaptcha, "remoteip"=>$ip);
+    $url = "https://www.google.com/recaptcha/api/siteverify";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
+    $data = curl_exec($ch);
+    curl_close($ch);
+  
+    return json_decode($data, true);
+  }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,6 +63,7 @@ if (!empty($_SESSION)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <?php include 'headLinks.php' ?>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
     <link href="css/contact_us.css" rel="stylesheet">
@@ -37,13 +86,20 @@ if (!empty($_SESSION)) {
                     </div>
                     <div class="col-xxl-6 d-grid justify-content-center align-items-center">
                         <div class="form-container">
-                            <form action="http://127.0.0.1:3000/" method="GET">
+                            <form method="POST" action="">
                                 <h1 class="feedback-text">Feedback Card</h1>
-                                <input type="text" class="w-100" placeholder="Name">
-                                <input type="text" class="w-100" placeholder="Email">
-                                <input type="text" class="w-100" placeholder="Phone">
-                                <input type="text" class="w-100" placeholder="Message">
-                                <input type="submit" value="Submit" id="submit">
+                                <input type="text" class="w-100" placeholder="Name" name="Name" required>
+                                <input type="email" class="w-100" placeholder="Email" name="Email" required>
+                                <input type="text" class="w-100" placeholder="Phone" name="Phone" required>
+                                <textarea  class="w-100"  placeholder="Message" name="Message"></textarea>
+                                <div class="g-recaptcha brochure__form__captcha mt-4" data-sitekey="6LfHOrEcAAAAAFG1OLI4XyXCZLUylmSXa-whltWM"></div> 
+                                <?php 
+                                    if (!$res['success']){
+                                        echo "<h5>Please check the captcha box</h5>";
+                                    }
+                                ?>
+                                <input type="submit" value="Submit" id="submit" required>
+ 
                             </form>
                         </div>
                     </div>
