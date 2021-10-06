@@ -37,13 +37,13 @@ if (!empty($_SESSION)) {
                     </div>
                     <div class="col-xxl-6 d-grid justify-content-center align-items-center">
                         <div class="form-container">
-                            <form>
+                            <form action="http://127.0.0.1:3000/" method="GET">
                                 <h1 class="feedback-text">Feedback Card</h1>
                                 <input type="text" class="w-100" placeholder="Name">
                                 <input type="text" class="w-100" placeholder="Email">
                                 <input type="text" class="w-100" placeholder="Phone">
                                 <input type="text" class="w-100" placeholder="Message">
-                                <input type="submit" value="Submit">
+                                <input type="submit" value="Submit" id="submit">
                             </form>
                         </div>
                     </div>
@@ -83,12 +83,14 @@ if (!empty($_SESSION)) {
             </div>
         </div>
     </div>
-
-
-
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+
 <script>
+
+
     $('.button-map').click(() => {
         console.log($(window).width())
 
