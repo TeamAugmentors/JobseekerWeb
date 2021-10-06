@@ -82,7 +82,7 @@ if ($result->num_rows > 0) {
 if (isset($_POST["apply"])) {
     $sqlApply = "INSERT INTO application (job_id, applied_id) VALUES (" . $_GET["job_id"] . "," . $_SESSION["userId"] . ")";
     if ($conn->query($sqlApply) === TRUE) {
-        $_SESSION["isApplied"]=1;
+        $_SESSION["isApplied"] = 1;
         header("Location: http://localhost/JobseekerWeb/explore.php");
     } else {
         echo "Oops the job has already been accepted";
@@ -118,7 +118,7 @@ $conn->close();
                 <h2><?php echo $name ?>.</h2>
                 <div class="taka flex">
                     <div class="taka-logo flex">
-                        <img src="images/taka3.svg" alt="taka">
+                        <img src="images/taka-bw.svg" alt="taka">
                     </div>
                     <div class="taka-amount"><?php echo $salary ?></div>
                 </div>
@@ -267,7 +267,7 @@ $conn->close();
                     <p>Only few applications left for this job!</p>
                     <p>If you have what it takes, what are you waiting for?</p>
                     <form action="" method="POST">
-                        <input type="hidden" value="1" name="apply"/>
+                        <input type="hidden" value="1" name="apply" />
                         <button>Apply now</button>
                     </form>
                     <h3>By clicking the apply button, I agree to all the terms and conditions</h3>

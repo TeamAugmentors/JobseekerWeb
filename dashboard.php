@@ -199,7 +199,11 @@ $conn->close();
                         <div class="overview-content">
                             <div>
                                 <div class="overview-content__bg">
-                                    <input type="checkbox" name="status-accordion" id="active-orders" class="accordion__input" checked>
+                                    <input type="checkbox" name="status-accordion" id="active-orders" class="accordion__input" <?php
+                                                                                                                                if (!empty($job)) {
+                                                                                                                                    echo "checked";
+                                                                                                                                }
+                                                                                                                                ?>>
                                     <div class="overview-label flex">
                                         <label for="active-orders" class="accordion__label flex">Active Orders</label>
                                         <i class='bx bxs-right-arrow'></i>
@@ -253,7 +257,7 @@ $conn->close();
                                             </div>
 
                                         <?php } ?>
-                    
+
                                     </div>
                                 </div>
                             </div>

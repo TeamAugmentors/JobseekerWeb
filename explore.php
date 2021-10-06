@@ -39,23 +39,23 @@ if ($result->num_rows > 0) {
 $sqlCards = null;
 $cardCnt = 0;
 if (empty($_GET)) {
-    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
+    $sqlCards = "SELECT id, posted_by, category, name, salary, duration, details, negotiable FROM job";
     // echo 1;
 } else if (array_key_exists("category", $_GET) && strcmp($_GET['category'], "None") === 0) {
-    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job";
+    $sqlCards = "SELECT id, posted_by, category, name, salary, duration, details, negotiable FROM job";
     // echo 2;
     goto HERE;
 }
 if (array_key_exists("category", $_GET)) {
-    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE category ='" . $_GET['category'] . "'";
+    $sqlCards = "SELECT id, posted_by, category, name, salary, duration, details, negotiable FROM job WHERE category ='" . $_GET['category'] . "'";
     // echo 3;
 }
 if (array_key_exists("tk_min", $_GET) && array_key_exists("tk_max", $_GET)) {
-    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE salary >=" . $_GET['tk_min'] . " AND salary<=" . $_GET['tk_max'];
+    $sqlCards = "SELECT id, posted_by, category, name, salary, duration, details, negotiable FROM job WHERE salary >=" . $_GET['tk_min'] . " AND salary<=" . $_GET['tk_max'];
     // echo 4;
 }
 if (array_key_exists("tk_min", $_GET) && array_key_exists("tk_max", $_GET) && array_key_exists("category", $_GET)) {
-    $sqlCards = "SELECT id, category, name, salary, duration, details, negotiable FROM job WHERE salary >=" . $_GET['tk_min'] . " AND salary<=" . $_GET['tk_max'] . " AND category ='" . $_GET['category'] . "'";
+    $sqlCards = "SELECT id, posted_by, category, name, salary, duration, details, negotiable FROM job WHERE salary >=" . $_GET['tk_min'] . " AND salary<=" . $_GET['tk_max'] . " AND category ='" . $_GET['category'] . "'";
     // echo 5;
 }
 HERE:
@@ -63,6 +63,7 @@ unset($_GET);
 // echo $sqlCards;
 $result = $conn->query($sqlCards);
 $allCards = array();
+$myCards = array();
 if ($result->num_rows > 0) {
     $cardCnt = 1;
     while ($row = $result->fetch_assoc()) {
@@ -77,7 +78,11 @@ if ($result->num_rows > 0) {
 
         $datetime = new DateTime($rowItems['duration']);
         $rowItems['duration'] =  $datetime->format('Y-m-d');
-        array_push($allCards, $rowItems);
+        if ($row['posted_by'] != $_SESSION['userId']) {
+            array_push($allCards, $rowItems);
+        } else {
+            array_push($myCards, $rowItems);
+        }
     }
 } else {
     $cardCnt = 0;
@@ -219,74 +224,143 @@ $conn->close();
                 </div>
             </div>
             <div class="right">
-                <div class="custom-container">
-                    <div class="header">
-                        <h1>Explore</h1>
-                        <div class="line"></div>
-                    </div>
-                    <div class="job-card-container">
-                        <?php
-                        foreach ($allCards as $card) {
-                        ?>
-                            <div class="job-card">
-                                <div class="job-card-header">
-                                    <h1 class="catagory"><?php echo $card['category'] ?></h1>
-                                    <h1 class="job-name"><?php echo $card['name'] ?></h1>
-                                    <div class="amount-div">
-                                        <div class="tk-icon">
-                                            <img src="images/taka3.svg" alt="">
+                <?php
+                if (!empty($allCards)) {
+                ?>
+                    <div class="custom-container">
+                        <div class="header">
+                            <h1>Explore</h1>
+                            <div class="line"></div>
+                        </div>
+                        <div class="job-card-container">
+                            <?php
+                            foreach ($allCards as $card) {
+                            ?>
+                                <div class="job-card">
+                                    <div class="job-card-header">
+                                        <h1 class="catagory"><?php echo $card['category'] ?></h1>
+                                        <h1 class="job-name"><?php echo $card['name'] ?></h1>
+                                        <div class="amount-div">
+                                            <div class="tk-icon">
+                                                <img src="images/taka-bw.svg" alt="">
+                                            </div>
+                                            <h1 class="amount"><?php echo $card['salary'] ?></h1>
                                         </div>
-                                        <h1 class="amount"><?php echo $card['salary'] ?></h1>
-                                    </div>
-                                    <div class="line"></div>
-                                    <div class="details">
-                                        <div class="duration">
-                                            <div class="details-left">Duration</div>
-                                            <div class="details-right"><?php
-                                                                        $interval = date_diff(date_create(date('Y-m-d')), date_create($card['duration']));
-                                                                        echo $interval->format('%a Days');
-                                                                        ?>
+                                        <div class="line"></div>
+                                        <div class="details">
+                                            <div class="duration">
+                                                <div class="details-left">Duration</div>
+                                                <div class="details-right"><?php
+                                                                            $interval = date_diff(date_create(date('Y-m-d')), date_create($card['duration']));
+                                                                            echo $interval->format('%a Days');
+                                                                            ?>
+                                                </div>
+                                            </div>
+                                            <div class="revisions">
+                                                <div class="details-left">revisions</div>
+                                                <div class="details-right">4</div>
+                                            </div>
+                                            <div class="negotiable">
+                                                <div class="details-left">Negotiable</div>
+                                                <div class="details-right"><?php
+                                                                            if ($card['negotiable'] === 1) {
+                                                                                echo "Yes";
+                                                                            } else {
+                                                                                echo "No";
+                                                                            }
+                                                                            ?>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="revisions">
-                                            <div class="details-left">revisions</div>
-                                            <div class="details-right">4</div>
+                                        <div class="description">
+                                            <p><?php echo $card['details'] ?></p>
                                         </div>
-                                        <div class="negotiable">
-                                            <div class="details-left">Negotiable</div>
-                                            <div class="details-right"><?php
-                                                                        if ($card['negotiable'] === 1) {
-                                                                            echo "Yes";
-                                                                        } else {
-                                                                            echo "No";
-                                                                        }
-                                                                        ?>
-                                            </div>
-                                        </div>
+                                        <?php
+                                        if (!in_Array($card["id"], $applied_jobs)) {
+                                        ?>
+                                            <form action="productDetails.php" method="GET">
+                                                <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
+                                                <button class="card-button">See More</button>
+                                            </form>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <div class="card-button">Applied!</div>
+                                        <?php
+                                        } ?>
                                     </div>
-                                    <div class="description">
-                                        <p><?php echo $card['details'] ?></p>
-                                    </div>
-                                    <?php
-                                    if (!in_Array($card["id"], $applied_jobs)) {
-                                    ?>
-                                        <form action="productDetails.php" method="GET">
-                                            <input type="hidden" class="card-button" value="<?php echo $card['id'] ?>" name="job_id" />
-                                            <button class="card-button">See More</button>
-                                        </form>
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <div class="card-button">Applied!</div>
-                                    <?php
-                                    } ?>
                                 </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
-                </div>
+                <?php
+                }
+                ?>
+                <!-- --------------------my job cards----------------------- -->
+                <?php
+                if (!empty($myCards)) {
+                ?>
+                    <div class="custom-container">
+                        <div class="header">
+                            <h1>My posts</h1>
+                            <div class="line"></div>
+                        </div>
+                        <div class="job-card-container">
+                            <?php
+                            foreach ($myCards as $card) {
+                            ?>
+                                <div class="job-card">
+                                    <div class="job-card-header">
+                                        <h1 class="catagory"><?php echo $card['category'] ?></h1>
+                                        <h1 class="job-name"><?php echo $card['name'] ?></h1>
+                                        <div class="amount-div">
+                                            <div class="tk-icon">
+                                                <img src="images/taka-bw.svg" alt="">
+                                            </div>
+                                            <h1 class="amount"><?php echo $card['salary'] ?></h1>
+                                        </div>
+                                        <div class="line"></div>
+                                        <div class="details">
+                                            <div class="duration">
+                                                <div class="details-left">Duration</div>
+                                                <div class="details-right"><?php
+                                                                            $interval = date_diff(date_create(date('Y-m-d')), date_create($card['duration']));
+                                                                            echo $interval->format('%a Days');
+                                                                            ?>
+                                                </div>
+                                            </div>
+                                            <div class="revisions">
+                                                <div class="details-left">revisions</div>
+                                                <div class="details-right">4</div>
+                                            </div>
+                                            <div class="negotiable">
+                                                <div class="details-left">Negotiable</div>
+                                                <div class="details-right"><?php
+                                                                            if ($card['negotiable'] === 1) {
+                                                                                echo "Yes";
+                                                                            } else {
+                                                                                echo "No";
+                                                                            }
+                                                                            ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="description">
+                                            <p><?php echo $card['details'] ?></p>
+                                        </div>
+                                        <div class="mt-5"></div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
