@@ -104,20 +104,20 @@ if (!empty($_POST)) {
                 <div class="signin-header">
                     <h1>Sign in to Job Seeker</h1>
                 </div>
-                <button class="signin-with-google-button">
+                <!-- <button class="signin-with-google-button">
                     <i class="google-icon fab fa-google"></i>
                     Sign in with Google
-                </button>
+                </button> -->
                 <div class="or-with-line">
-                    <p>Or</p>
+                    <p></p>
                 </div>
                 <form method="POST" class="custom-form">
-                    <div class="custom-form-group">
+                    <div class="custom-form-group my-5">
                         <label class="form-label" for="username">Username or Email Address</label>
                         <input type="text" class="custom-input" name="username" id="username" aria-describedby="emailHelp" placeholder="ani.atikur99@gmail.com" required>
                         <div class="line"></div>
                     </div>
-                    <div class="custom-form-group">
+                    <div class="custom-form-group my-5">
                         <label class="form-label" for="password">Password</label>
                         <input type="password" class="custom-input" id="password" name="password" aria-describedby="passwordHelp" required>
                         <div class="line"></div>

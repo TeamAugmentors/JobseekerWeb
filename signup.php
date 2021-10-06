@@ -60,7 +60,7 @@ function insertId($id, $conn)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'headLinks.php'?>
+    <?php include 'headLinks.php' ?>
     <title>Sign-up</title>
 </head>
 
@@ -105,8 +105,7 @@ function insertId($id, $conn)
                     <h1>Sign up to Job Seeker</h1>
                 </div>
                 <button class="signup-with-google-button">
-                    <i class="google-icon fab fa-google"></i>
-                    Sign up with Google
+                    Already a member, sign in <a href="signin.php">here</a>
                 </button>
                 <div class="or-with-line">
                     <p>Or</p>

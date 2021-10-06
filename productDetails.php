@@ -26,6 +26,8 @@ $hirer_hired = null;
 $hirer_rated = null;
 $hirer_picture = null;
 
+$isApplied = 0;
+
 
 // query 
 $sqlSelect = "SELECT * FROM job WHERE id = " . $_GET["job_id"];
@@ -57,7 +59,7 @@ if ($result->num_rows > 0) {
         $hirer_picture = $row["picture"];
     }
 } else {
-    echo "0 results from hirer";
+    // echo "0 results from hirer";
 }
 
 //query 3 fetching sample images
@@ -81,11 +83,13 @@ if ($result->num_rows > 0) {
 //query 5 applying for job
 if (isset($_POST["apply"])) {
     $sqlApply = "INSERT INTO application (job_id, applied_id) VALUES (" . $_GET["job_id"] . "," . $_SESSION["userId"] . ")";
+    // echo $sqlApply;
     if ($conn->query($sqlApply) === TRUE) {
         $_SESSION["isApplied"] = 1;
         header("Location: http://localhost/JobseekerWeb/explore.php");
     } else {
-        echo "Oops the job has already been accepted";
+        $isApplied = 1;
+        // echo "Oops the job has already been accepted";
     }
 }
 $conn->close();
@@ -275,6 +279,17 @@ $conn->close();
             </section>
         </div>
     </main>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToastApplication" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <h4 class="me-auto mb-0">Application failed</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <h3>This job has been already accepted</h3>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -282,6 +297,15 @@ $conn->close();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
     <script src="js/script.js"></script>
+    <script type="text/javascript">
+        <?php
+        if ($isApplied === 1) {
+            echo "var toastLiveExample = document.getElementById('liveToastApplication');
+            var toast = new bootstrap.Toast(toastLiveExample);
+            toast.show();";
+        }
+        ?>
+    </script>
 </body>
 
 </html>
